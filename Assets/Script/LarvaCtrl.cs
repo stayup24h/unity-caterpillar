@@ -35,8 +35,8 @@ public class LarvaCtrl : MonoBehaviour
         {
             bone_rb[i] = bone[i].GetComponent<Rigidbody2D>();
         }
-        head = bone[0]; tail = bone[5];
-        head_rb = bone_rb[0]; tail_rb = bone_rb[5];
+        head = bone[0]; tail = bone[6];
+        head_rb = bone_rb[0]; tail_rb = bone_rb[6];
     }
 
     void FixedUpdate()

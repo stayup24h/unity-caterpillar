@@ -230,7 +230,7 @@ Transform:
   m_GameObject: {fileID: 54062529}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.3, y: -1.47, z: 10}
+  m_LocalPosition: {x: 3.6400003, y: -1.1899998, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -291,7 +291,7 @@ MonoBehaviour:
   - 1
   - 1
   moveSpeed: 10
-  upForceScale: 2
+  upForceScale: 1
   rightForceScale: -1
 --- !u!1 &175282475
 GameObject:
@@ -322,7 +322,7 @@ Transform:
   m_GameObject: {fileID: 175282475}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.38, y: -1.52, z: 10.0765705}
+  m_LocalPosition: {x: -5.2799997, y: -1.2399998, z: 10.0765705}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -459,10 +459,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targets:
-  - {fileID: 913159743}
+  - {fileID: 1053145154}
   - {fileID: 1407194078}
   maxDistances:
-  - 3
+  - 2
   - 1
   moveSpeed: 10
   upForceScale: 0
@@ -981,7 +981,7 @@ Transform:
   m_GameObject: {fileID: 546763717}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.97, y: -1.47, z: 10.0765705}
+  m_LocalPosition: {x: 2.31, y: -1.19, z: 10.0765705}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1008,7 +1008,7 @@ MonoBehaviour:
   - 1
   - 1
   moveSpeed: 10
-  upForceScale: 3
+  upForceScale: 2
   rightForceScale: -1
 --- !u!1 &642889571
 GameObject:
@@ -1201,7 +1201,7 @@ Transform:
   m_GameObject: {fileID: 684251673}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.5, y: -1.5, z: 10.0765705}
+  m_LocalPosition: {x: -0.15999985, y: -1.2199998, z: 10.0765705}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1347,7 +1347,7 @@ MonoBehaviour:
   - 1
   moveSpeed: 10
   upForceScale: 2
-  rightForceScale: 0
+  rightForceScale: 1
 --- !u!1 &804685112
 GameObject:
   m_ObjectHideFlags: 0
@@ -1684,9 +1684,9 @@ GameObject:
   - component: {fileID: 913159746}
   - component: {fileID: 913159745}
   - component: {fileID: 913159744}
-  - component: {fileID: 913159748}
+  - component: {fileID: 913159747}
   m_Layer: 0
-  m_Name: Tail (5)
+  m_Name: Circle (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1701,7 +1701,7 @@ Transform:
   m_GameObject: {fileID: 913159742}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.24, y: -1.49, z: 10.0765705}
+  m_LocalPosition: {x: -1.4200001, y: -1.2099998, z: 10.0765705}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1742,7 +1742,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Radius: 0.45
 --- !u!50 &913159745
 Rigidbody2D:
   serializedVersion: 5
@@ -1815,7 +1815,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1825,7 +1825,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &913159748
+--- !u!114 &913159747
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1834,10 +1834,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 913159742}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e21f90ec9c1e014ca42f9f174f6315a, type: 3}
+  m_Script: {fileID: 11500000, guid: cd498a817d4398748980b97c6378dd4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAttach: 0
+  targets:
+  - {fileID: 1927249416}
+  - {fileID: 684251674}
+  - {fileID: 1053145154}
+  maxDistances:
+  - 5
+  - 1
+  - 1
+  moveSpeed: 10
+  upForceScale: 1
+  rightForceScale: 1
 --- !u!1 &938553508
 GameObject:
   m_ObjectHideFlags: 0
@@ -1952,9 +1962,9 @@ GameObject:
   - component: {fileID: 1053145157}
   - component: {fileID: 1053145156}
   - component: {fileID: 1053145155}
-  - component: {fileID: 1053145159}
+  - component: {fileID: 1053145158}
   m_Layer: 0
-  m_Name: Circle (6)
+  m_Name: Tail (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1969,7 +1979,7 @@ Transform:
   m_GameObject: {fileID: 1053145153}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.07, y: -1.57, z: 10.0765705}
+  m_LocalPosition: {x: -2.5899997, y: -1.2899998, z: 10.0765705}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2010,7 +2020,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.45
+  m_Radius: 0.5
 --- !u!50 &1053145156
 Rigidbody2D:
   serializedVersion: 5
@@ -2083,7 +2093,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2093,7 +2103,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1053145159
+--- !u!114 &1053145158
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2102,18 +2112,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1053145153}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd498a817d4398748980b97c6378dd4e, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e21f90ec9c1e014ca42f9f174f6315a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targets:
-  - {fileID: 913159743}
-  - {fileID: 1407194078}
-  maxDistances:
-  - 1
-  - 1
-  moveSpeed: 10
-  upForceScale: 0
-  rightForceScale: 0
+  isAttach: 0
 --- !u!1 &1199394672
 GameObject:
   m_ObjectHideFlags: 0
@@ -2125,7 +2127,7 @@ GameObject:
   - component: {fileID: 1199394674}
   - component: {fileID: 1199394675}
   m_Layer: 0
-  m_Name: Larva
+  m_Name: Caterpillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2400,7 +2402,7 @@ Transform:
   m_GameObject: {fileID: 1407194077}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.79, y: -1.54, z: 10.0765705}
+  m_LocalPosition: {x: -3.87, y: -1.2599998, z: 10.0765705}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2537,11 +2539,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targets:
-  - {fileID: 913159743}
   - {fileID: 1053145154}
   - {fileID: 175282476}
   maxDistances:
-  - 2
   - 1
   - 1
   moveSpeed: 10
@@ -2727,7 +2727,7 @@ Transform:
   m_GameObject: {fileID: 1927249412}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.62, y: -1.46, z: 10.0765705}
+  m_LocalPosition: {x: 4.96, y: -1.1799998, z: 10.0765705}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2792,7 +2792,7 @@ DistanceJoint2D:
   m_Enabled: 1
   serializedVersion: 4
   m_EnableCollision: 1
-  m_ConnectedRigidBody: {fileID: 913159745}
+  m_ConnectedRigidBody: {fileID: 1053145156}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_BreakAction: 3
@@ -2800,7 +2800,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 0
-  m_Distance: 5.03009
+  m_Distance: 6
   m_MaxDistanceOnly: 1
 --- !u!1 &2078624294
 GameObject:
@@ -2831,7 +2831,7 @@ Transform:
   m_GameObject: {fileID: 2078624294}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.69, y: -1.48, z: 10.0765705}
+  m_LocalPosition: {x: 1.0299997, y: -1.1999998, z: 10.0765705}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
