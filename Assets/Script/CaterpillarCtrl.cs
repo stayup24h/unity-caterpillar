@@ -12,6 +12,7 @@ public class CaterpillarCtrl : MonoBehaviour
     private GameObject head, tail;
     private Rigidbody2D head_rb, tail_rb;
 
+    public InputCtrl inputCtrl;
     public Joystick joyStick;
     public CameraCtrl cameraCtrl;
 
@@ -20,7 +21,9 @@ public class CaterpillarCtrl : MonoBehaviour
 
     bool isRunning_head;
     bool isRunning_tail;
-    private float speed = 4.0f;       // 머리와 꼬리 이동 속도
+
+    public float speed_KeyBoard = 1.0f;
+    public float speed_JoyStick = 4.0f;       // 머리와 꼬리 이동 속도
 
     Vector2 antiGravityForce;
 
@@ -54,11 +57,13 @@ public class CaterpillarCtrl : MonoBehaviour
         }
         else if (state == State.head)
         {
-            MoveHead();
+            //MoveHead_JoyStick();
+            MoveHead_KeyBoard();
         }
         else
         {
-            MoveTail();
+            //MoveTail_JoyStick();
+            MoveTail_KeyBoard();
         }
     }
 
@@ -105,23 +110,45 @@ public class CaterpillarCtrl : MonoBehaviour
         isHeadTurn = !isHeadTurn;
     }
 
-    void MoveHead()
+    void MoveHead_KeyBoard()
     {
         head_rb.constraints = RigidbodyConstraints2D.None;
         head.transform.rotation = Quaternion.identity;
 
         // 조이스틱 방향에 따라 머리를 이동
-        Vector3 move = new Vector3(joyStick.Direction.x, joyStick.Direction.y, 0) * speed * Time.deltaTime;
+        Vector3 move = inputCtrl.GetMove() * speed_KeyBoard * Time.deltaTime;
         head.transform.Translate(move);
         head_rb.AddForce(antiGravityForce); //중력 상쇄
     }
 
-    void MoveTail()
+    void MoveTail_KeyBoard()
     {
         tail_rb.constraints = RigidbodyConstraints2D.None;
         tail.transform.rotation = Quaternion.identity;
+
+        // 키보드 방향에 따라 꼬리를 이동
+        Vector3 move = inputCtrl.GetMove() * speed_KeyBoard * Time.deltaTime;
+        tail.transform.Translate(move);
+        tail_rb.AddForce(antiGravityForce); //중력 상쇄
+    }
+    void MoveHead_JoyStick()
+    {
+        head_rb.constraints = RigidbodyConstraints2D.None;
+        head.transform.rotation = Quaternion.identity;
+
+        // 조이스틱 방향에 따라 머리를 이동
+        Vector3 move = new Vector3(joyStick.Direction.x, joyStick.Direction.y, 0) * speed_JoyStick * Time.deltaTime;
+        head.transform.Translate(move);
+        head_rb.AddForce(antiGravityForce); //중력 상쇄
+    }
+
+    void MoveTail_JoyStick()
+    {
+        tail_rb.constraints = RigidbodyConstraints2D.None;
+        tail.transform.rotation = Quaternion.identity;
+
         // 조이스틱 방향에 따라 꼬리를 이동
-        Vector3 move = new Vector3(joyStick.Direction.x, joyStick.Direction.y, 0) * speed * Time.deltaTime;
+        Vector3 move = new Vector3(joyStick.Direction.x, joyStick.Direction.y, 0) * speed_JoyStick * Time.deltaTime;
         tail.transform.Translate(move);
         tail_rb.AddForce(antiGravityForce); //중력 상쇄
     }

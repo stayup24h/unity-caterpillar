@@ -661,7 +661,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a343db1f68dbbfc48959af5569dbffa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  caterpillarCtrl: {fileID: 0}
+  caterpillarCtrl: {fileID: 1199394675}
 --- !u!4 &323130880
 Transform:
   m_ObjectHideFlags: 0
@@ -2445,9 +2445,12 @@ MonoBehaviour:
   - {fileID: 1053145153}
   - {fileID: 1407194077}
   - {fileID: 175282475}
+  inputCtrl: {fileID: 323130879}
   joyStick: {fileID: 513793586}
   cameraCtrl: {fileID: 519420033}
   state: 0
+  speed_KeyBoard: 4
+  speed_JoyStick: 4
 --- !u!1 &1232864551
 GameObject:
   m_ObjectHideFlags: 0
