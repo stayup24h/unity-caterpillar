@@ -13,6 +13,7 @@ public class CaterpillarCtrl : MonoBehaviour
     private Rigidbody2D head_rb, tail_rb;
 
     public Joystick joyStick;
+    public CameraCtrl cameraCtrl;
 
     static public State state;
     static private bool isHeadTurn;   // 머리와 꼬리 순서를 번갈아가며 처리
@@ -70,8 +71,6 @@ public class CaterpillarCtrl : MonoBehaviour
             if (_head.isAttach) break;
             yield return null;
         }
-
-        Debug.Log("헤드 고정");
         head_rb.constraints = RigidbodyConstraints2D.FreezeAll;
         isRunning_head = false;
     }
@@ -79,12 +78,14 @@ public class CaterpillarCtrl : MonoBehaviour
     IEnumerator FixTail()
     {
         isRunning_tail = true;
+        bool flag = isHeadTurn;
         Head_Tail _tail = tail.GetComponent<Head_Tail>();
         while (!_tail.isAttach)
         {
             yield return new WaitForFixedUpdate();
         }
-        Debug.Log("꼬리 고정");
+
+        if(flag) cameraCtrl.Start();
         tail_rb.constraints = RigidbodyConstraints2D.FreezeAll;
         isRunning_tail = false;
     }
