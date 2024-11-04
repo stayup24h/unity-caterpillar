@@ -21,4 +21,12 @@ public class Head_Tail : MonoBehaviour
             isAttach = false;
         }
     }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Object"))
+        {
+            isAttach = true;
+        }
+    }
 }
