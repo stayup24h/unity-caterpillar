@@ -5,6 +5,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Bone : MonoBehaviour
 {
+    public CaterpillarCtrl caterpillarCtrl;
     public Transform[] targets;           // 이동할 목표 오브젝트들
     public float[] maxDistances;          // 각 타겟에 대한 최대 허용 거리
     public float moveSpeed = 10.0f;       // 이동 속도
@@ -42,17 +43,17 @@ public class Bone : MonoBehaviour
         }
 
         // LarvaCtrl 상태에 따라 중력 스케일 조정
-        if (CaterpillarCtrl.state == CaterpillarCtrl.State.head || CaterpillarCtrl.state == CaterpillarCtrl.State.tail)
+        if (caterpillarCtrl.state == CaterpillarCtrl.State.head || caterpillarCtrl.state == CaterpillarCtrl.State.tail)
         {
             rb.gravityScale = 0f;
         }
-        else if (CaterpillarCtrl.state == CaterpillarCtrl.State.none || CaterpillarCtrl.state == CaterpillarCtrl.State.wait)
+        else if (caterpillarCtrl.state == CaterpillarCtrl.State.none || caterpillarCtrl.state == CaterpillarCtrl.State.wait)
         {
             rb.gravityScale = 0.05f;
         }
 
         // 상향 이동을 위한 힘 추가
-        if (CaterpillarCtrl.state == CaterpillarCtrl.State.tail)
+        if (caterpillarCtrl.state == CaterpillarCtrl.State.tail)
         {
             // 타겟을 바라보는 방향으로 회전
             Vector2 direction = targets[0].position - transform.position;

@@ -15,8 +15,8 @@ public class CaterpillarCtrl : MonoBehaviour
     public Joystick joyStick;
     public CameraCtrl cameraCtrl;
 
-    static public State state;
-    static private bool isHeadTurn;   // 머리와 꼬리 순서를 번갈아가며 처리
+    public State state;
+    private bool isHeadTurn;   // 머리와 꼬리 순서를 번갈아가며 처리
 
     bool isRunning_head;
     bool isRunning_tail;
@@ -90,7 +90,7 @@ public class CaterpillarCtrl : MonoBehaviour
         isRunning_tail = false;
     }
 
-    static public void TurnStart()
+    public void TurnStart()
     {
         if (isHeadTurn)
         {
@@ -99,7 +99,7 @@ public class CaterpillarCtrl : MonoBehaviour
         else state = State.tail;
     }
 
-    static public void TurnEnd()
+    public void TurnEnd()
     {
         state = State.none;
         isHeadTurn = !isHeadTurn;

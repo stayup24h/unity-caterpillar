@@ -60,7 +60,6 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     public virtual void OnPointerDown(PointerEventData eventData)
     {
         OnDrag(eventData);
-        CaterpillarCtrl.TurnStart();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -134,7 +133,6 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     {
         input = Vector2.zero;
         handle.anchoredPosition = Vector2.zero;
-        CaterpillarCtrl.TurnEnd();
     }
 
     protected Vector2 ScreenPointToAnchoredPosition(Vector2 screenPosition)

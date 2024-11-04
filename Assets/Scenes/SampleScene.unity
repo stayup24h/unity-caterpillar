@@ -284,6 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd498a817d4398748980b97c6378dd4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  caterpillarCtrl: {fileID: 1199394675}
   targets:
   - {fileID: 1927249416}
   - {fileID: 546763721}
@@ -458,6 +459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd498a817d4398748980b97c6378dd4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  caterpillarCtrl: {fileID: 1199394675}
   targets:
   - {fileID: 1053145154}
   - {fileID: 1407194078}
@@ -629,6 +631,250 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -36.835}
+--- !u!1 &323130878
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 323130880}
+  - component: {fileID: 323130879}
+  - component: {fileID: 323130881}
+  m_Layer: 0
+  m_Name: InputCtrl
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &323130879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323130878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a343db1f68dbbfc48959af5569dbffa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  caterpillarCtrl: {fileID: 0}
+--- !u!4 &323130880
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323130878}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.297497, y: 3.3010578, z: -0.12996961}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &323130881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323130878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c95b2375-e6d9-4b88-9c4c-c5e76515df4b
+    m_ActionName: 'UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7607c7b6-cd76-4816-beef-bd0341cfe950
+    m_ActionName: 'UI/Submit[/Keyboard/enter]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 15cef263-9014-4fd5-94d9-4e4a6234a6ef
+    m_ActionName: 'UI/Cancel[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 32b35790-4ed0-4e9a-aa41-69ac6d629449
+    m_ActionName: 'UI/Point[/Mouse/position]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3c7022bf-7922-4f7c-a998-c437916075ad
+    m_ActionName: 'UI/Click[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 44b200b1-1557-4083-816c-b22cbdf77ddf
+    m_ActionName: 'UI/RightClick[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: dad70c86-b58c-4b17-88ad-f5e53adf419e
+    m_ActionName: 'UI/MiddleClick[/Mouse/middleButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0489e84a-4833-4c40-bfae-cea84b696689
+    m_ActionName: 'UI/ScrollWheel[/Mouse/scroll]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 24908448-c609-4bc3-a128-ea258674378a
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
+    m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 323130879}
+        m_TargetAssemblyTypeName: InputCtrl, Assembly-CSharp
+        m_MethodName: KeyStateChange
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3fbb03ab-f4a7-42e1-acdd-eaa441cb4d44
+    m_ActionName: Player/W
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 323130879}
+        m_TargetAssemblyTypeName: InputCtrl, Assembly-CSharp
+        m_MethodName: KeyStateChange
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4bb8c796-5fd9-4805-af55-face5ff974b9
+    m_ActionName: Player/A
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 323130879}
+        m_TargetAssemblyTypeName: InputCtrl, Assembly-CSharp
+        m_MethodName: KeyStateChange
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1a1b48c2-3da2-4d2e-9419-4e32aaac266d
+    m_ActionName: Player/S
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 323130879}
+        m_TargetAssemblyTypeName: InputCtrl, Assembly-CSharp
+        m_MethodName: KeyStateChange
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 60298d41-1866-4bb9-9b74-3e0b78ec7eb4
+    m_ActionName: Player/D
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 323130879}
+        m_TargetAssemblyTypeName: InputCtrl, Assembly-CSharp
+        m_MethodName: KeyStateChange
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 9bb7cdea-9fed-4b46-ae50-be4c0bb33085
+    m_ActionName: Player/UpArrow
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 323130879}
+        m_TargetAssemblyTypeName: InputCtrl, Assembly-CSharp
+        m_MethodName: KeyStateChange
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: dc04b42c-cc6d-4bf7-b44b-133771846951
+    m_ActionName: Player/LeftArrow
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 323130879}
+        m_TargetAssemblyTypeName: InputCtrl, Assembly-CSharp
+        m_MethodName: KeyStateChange
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1128db92-c749-4312-a577-a793a1abca66
+    m_ActionName: Player/DownArrow
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 323130879}
+        m_TargetAssemblyTypeName: InputCtrl, Assembly-CSharp
+        m_MethodName: KeyStateChange
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a87f14b3-982f-4a54-8ff4-18d57c3d6087
+    m_ActionName: Player/RightArrow
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1001 &513793584
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -850,6 +1096,7 @@ MonoBehaviour:
   target: {fileID: 1927249416}
   offset: {x: 0, y: 0, z: -10}
   moveSpeed: 5
+  isRunning_Camera: 0
 --- !u!1 &546763717
 GameObject:
   m_ObjectHideFlags: 0
@@ -1015,6 +1262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd498a817d4398748980b97c6378dd4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  caterpillarCtrl: {fileID: 1199394675}
   targets:
   - {fileID: 1927249416}
   - {fileID: 54062533}
@@ -1353,6 +1601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd498a817d4398748980b97c6378dd4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  caterpillarCtrl: {fileID: 1199394675}
   targets:
   - {fileID: 1927249416}
   - {fileID: 2078624295}
@@ -1853,6 +2102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd498a817d4398748980b97c6378dd4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  caterpillarCtrl: {fileID: 1199394675}
   targets:
   - {fileID: 1927249416}
   - {fileID: 684251674}
@@ -2197,6 +2447,7 @@ MonoBehaviour:
   - {fileID: 175282475}
   joyStick: {fileID: 513793586}
   cameraCtrl: {fileID: 519420033}
+  state: 0
 --- !u!1 &1232864551
 GameObject:
   m_ObjectHideFlags: 0
@@ -2555,6 +2806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd498a817d4398748980b97c6378dd4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  caterpillarCtrl: {fileID: 1199394675}
   targets:
   - {fileID: 1053145154}
   - {fileID: 175282476}
@@ -2984,6 +3236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd498a817d4398748980b97c6378dd4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  caterpillarCtrl: {fileID: 1199394675}
   targets:
   - {fileID: 1927249416}
   - {fileID: 546763721}
@@ -3009,3 +3262,4 @@ SceneRoots:
   - {fileID: 1199394674}
   - {fileID: 938553512}
   - {fileID: 1448696953}
+  - {fileID: 323130880}
