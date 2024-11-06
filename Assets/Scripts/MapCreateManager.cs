@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MapCreateManager : MonoBehaviour
 {
-    [SerializeField] private Transform target; // ¾Ö¹ú·¹ ¸Ó¸® À§Ä¡
+    [SerializeField] private Transform target; // ï¿½Ö¹ï¿½ï¿½ï¿½ ï¿½Ó¸ï¿½ ï¿½ï¿½Ä¡
     [SerializeField] private float distance;
     [SerializeField] private int maxPatternCnt;
 
@@ -45,6 +45,6 @@ public class MapCreateManager : MonoBehaviour
 
     public void SelectMap()
     {
-        CreateMap(patterns[Random.Range(0, patterns.Length)]); // ÃßÈÄ ·£´ý ¼±ÅÃ¾Ë°í¸®Áò ³ª¿À¸é Ãß°¡
+        CreateMap(patterns[Random.Range(0, patterns.Length)]); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ã¾Ë°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
     }
 }

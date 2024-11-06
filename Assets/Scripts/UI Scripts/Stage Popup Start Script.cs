@@ -7,8 +7,9 @@ public class StagePopupStartScript : MonoBehaviour
 , IPointerClickHandler
 
 {
+    public GameObject stagePanel;
     public void OnPointerClick(PointerEventData eventData)
     {
-        //Stage POPup Start
+        stagePanel.SetActive(true);
     }
 }
