@@ -150,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distance: 3
   patternPrefab: {fileID: 4247122869145236938, guid: b8df74a4eb493c148985034ddd2953bf, type: 3}
+  maxPatternCnt: 4
 --- !u!4 &598266745
 Transform:
   m_ObjectHideFlags: 0
