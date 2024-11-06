@@ -29,6 +29,5 @@ public class MovePlatformGimmick : MonoBehaviour
     {
         float delta = Mathf.Sin(Time.time / displacement.magnitude * speed - Mathf.PI / 2);
         transform.position = vertexAveragePos + new Vector3(delta * deltaX, delta * deltaY, 0);
-        
     }
 }
