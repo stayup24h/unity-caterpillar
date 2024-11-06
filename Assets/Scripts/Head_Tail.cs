@@ -5,12 +5,14 @@ using UnityEngine;
 public class Head_Tail : MonoBehaviour
 {
     public bool isAttach = false;
+    public GameObject attachedObject;
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Object"))
         {
             isAttach = true;
+            attachedObject = collision.gameObject;
         }
     }
 
@@ -19,6 +21,7 @@ public class Head_Tail : MonoBehaviour
         if (collision.gameObject.CompareTag("Object"))
         {
             isAttach = false;
+            attachedObject = null;
         }
     }
 
@@ -27,6 +30,7 @@ public class Head_Tail : MonoBehaviour
         if (collision.gameObject.CompareTag("Object"))
         {
             isAttach = true;
+            attachedObject = collision.gameObject;
         }
     }
 }
