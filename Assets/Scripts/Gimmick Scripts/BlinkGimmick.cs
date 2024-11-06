@@ -3,36 +3,64 @@ using UnityEngine;
 
 public class BlinkGimmick : MonoBehaviour
 {
-    [SerializeField] private GameObject platform1;
-    [SerializeField] private GameObject platform2;
     [SerializeField] private float targetTime; // On/Off 전환 시간
 
-    private float time;
-    private Coroutine runningCoroutine;
+    private GameObject[] platforms;
+    private bool[] isFlicking;
 
+    private float time;
+
+    void Start()
+    {
+        platforms = new GameObject[transform.childCount];
+        isFlicking = new bool[transform.childCount];
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            platforms[i] = transform.GetChild(i).gameObject;
+        }
+    }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        time += Time.deltaTime;
+        time += Time.fixedDeltaTime;
+        if (time > targetTime - 1)
+        {
+            for (int i = 0; i < platforms.Length; i++)
+            {
+                if (platforms[i].activeSelf && !isFlicking[i])
+                {
+                    isFlicking[i] = true;
+                    StartCoroutine(Flicker(i));
+                }
+            }
+        }
         if (time >= targetTime)
         {
-            platform1.SetActive(!platform1.activeSelf);
-            platform2.SetActive(!platform2.activeSelf);
+            foreach (GameObject platform in platforms)
+            {
+                platform.SetActive(!platform.activeSelf);
+            }
             time = 0;
         }
     }
 
-    IEnumerator Flicker(GameObject go) // 깜빡임 효과 수정 필요
+    IEnumerator Flicker(int idx) // 깜빡임 효과 수정 필요
     {
+        GameObject platform = platforms[idx];
         int cnt = 0;
 
         while (cnt < 2)
         {
-            go.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
+            platform.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
             yield return new WaitForSeconds(0.05f);
-            go.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
-            yield return new WaitForSeconds(0.5f);
+            platform.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+            yield return new WaitForSeconds(0.45f);
+
+            cnt++;
         }
+
+        isFlicking[idx] = false;
     }
 }
