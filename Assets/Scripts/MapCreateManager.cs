@@ -14,6 +14,10 @@ public class MapCreateManager : MonoBehaviour
     void Start()
     {
         patterns = Resources.LoadAll<GameObject>("Prefabs/Map Prefab");
+        SelectMap();
+        SelectMap();
+        SelectMap();
+        SelectMap();
     }
 
     void Update()
@@ -36,6 +40,6 @@ public class MapCreateManager : MonoBehaviour
 
     public void SelectMap()
     {
-        CreateMap(patterns[Random.Range(0, patterns.Length)]); // ÃßÈÄ ·£´ý ¼±ÅÃ¾Ë°í¸®Áò ³ª¿À¸é Ãß°¡
+        CreateMap(patterns[Random.Range(0, patterns.Length)]); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ã¾Ë°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
     }
 }
