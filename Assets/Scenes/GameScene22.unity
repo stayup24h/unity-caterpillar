@@ -339,7 +339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: 65286b34bee6f5640a45117eceb9b8bd, type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -407,7 +407,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 3fbb03ab-f4a7-42e1-acdd-eaa441cb4d44
-    m_ActionName: Player/W
+    m_ActionName: 'Player/W[/Keyboard/w]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 323130879}
@@ -423,7 +423,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 4bb8c796-5fd9-4805-af55-face5ff974b9
-    m_ActionName: Player/A
+    m_ActionName: 'Player/A[/Keyboard/a]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 323130879}
@@ -439,7 +439,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 1a1b48c2-3da2-4d2e-9419-4e32aaac266d
-    m_ActionName: Player/S
+    m_ActionName: 'Player/S[/Keyboard/s]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 323130879}
@@ -455,7 +455,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 60298d41-1866-4bb9-9b74-3e0b78ec7eb4
-    m_ActionName: Player/D
+    m_ActionName: 'Player/D[/Keyboard/d]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 323130879}
@@ -471,7 +471,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 9bb7cdea-9fed-4b46-ae50-be4c0bb33085
-    m_ActionName: Player/UpArrow
+    m_ActionName: 'Player/UpArrow[/Keyboard/upArrow]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 323130879}
@@ -487,7 +487,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: dc04b42c-cc6d-4bf7-b44b-133771846951
-    m_ActionName: Player/LeftArrow
+    m_ActionName: 'Player/LeftArrow[/Keyboard/leftArrow]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 323130879}
@@ -503,7 +503,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 1128db92-c749-4312-a577-a793a1abca66
-    m_ActionName: Player/DownArrow
+    m_ActionName: 'Player/DownArrow[/Keyboard/downArrow]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 323130879}
@@ -519,7 +519,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: a87f14b3-982f-4a54-8ff4-18d57c3d6087
-    m_ActionName: Player/RightArrow
+    m_ActionName: 'Player/RightArrow[/Keyboard/rightArrow]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
