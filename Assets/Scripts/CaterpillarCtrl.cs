@@ -42,7 +42,7 @@ public class CaterpillarCtrl : MonoBehaviour
         head = bone[0]; tail = bone[6];
         head_rb = bone_rb[0]; tail_rb = bone_rb[6];
 
-        //tail_rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        tail_rb.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
     void FixedUpdate()
