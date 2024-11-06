@@ -12,8 +12,10 @@ public class MovePlatformGimmick : MonoBehaviour
     private float deltaY; // y축 이동 최대값
     private int dirX; // x축 이동 방향
     private int dirY; // y축 이동 방향
-
     private Vector3 vertexAveragePos;
+
+    private Transform caterpillar;
+    private bool isAttach;
 
     void Start()
     {
@@ -29,5 +31,24 @@ public class MovePlatformGimmick : MonoBehaviour
     {
         float delta = Mathf.Sin(Time.time / displacement.magnitude * speed - Mathf.PI / 2);
         transform.position = vertexAveragePos + new Vector3(delta * deltaX, delta * deltaY, 0);
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+            isAttach = true;
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+            isAttach = true;
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+            isAttach = false;
     }
 }

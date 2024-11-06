@@ -40,6 +40,7 @@ public class BlinkGimmick : MonoBehaviour
         {
             foreach (GameObject platform in platforms)
             {
+                platform.GetComponent<BlinkPlatform>().PlatformDisappear();
                 platform.SetActive(!platform.activeSelf);
             }
             time = 0;
