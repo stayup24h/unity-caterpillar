@@ -83,7 +83,7 @@ MonoBehaviour:
     - line: '|   m_SplashScreenLogos:'
     - line: '|   - logo: {fileID: -7352339073622421304, guid: 58666cc6c5762184db416036d42ce17a,
         type: 3}'
-    - line: '|     duration: 2'
+    - line: '|     duration: 3'
     - line: '|   m_VirtualRealitySplashScreen: {instanceID: 0}'
     - line: '|   m_HolographicTrackingLossScreen: {instanceID: 0}'
     - line: '|   defaultScreenWidth: 1920'
