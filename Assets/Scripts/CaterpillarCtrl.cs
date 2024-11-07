@@ -8,6 +8,7 @@ public class CaterpillarCtrl : MonoBehaviour
 
     public GameObject[] bone = new GameObject[9];
     private Rigidbody2D[] bone_rb = new Rigidbody2D[9];
+    public GameObject eye;
 
     private GameObject head, tail;
     private Rigidbody2D head_rb, tail_rb;
@@ -16,19 +17,32 @@ public class CaterpillarCtrl : MonoBehaviour
     public Joystick joyStick;
     public CameraCtrl cameraCtrl;
 
+    public GameObject DefeatPanel;
+    public GameObject ClearPanel;
+
+    Head_Tail _head, _tail;
+
     public State state;
-    private bool isHeadTurn;   // ¸Ó¸®¿Í ²¿¸® ¼ø¼­¸¦ ¹ø°¥¾Æ°¡¸ç Ã³¸®
+    private bool isHeadTurn;   // ï¿½Ó¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 
     bool isRunning_head;
     bool isRunning_tail;
 
     public float speed_KeyBoard = 1.0f;
-    public float speed_JoyStick = 4.0f;       // ¸Ó¸®¿Í ²¿¸® ÀÌµ¿ ¼Óµµ
+    public float speed_JoyStick = 4.0f;       // ï¿½Ó¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½Óµï¿½
 
     Vector2 antiGravityForce;
+    public float rotationSpeed;
 
-    void Start()
+    bool isDefeat, isClear;
+
+    public SoundCtrl soundCtrl;
+    void Awake()
     {
+        isDefeat = false;
+        isClear = false;
+        rotationSpeed = 90f;
+
         antiGravityForce = -Physics2D.gravity;
         isRunning_head = false;
         isRunning_tail = false;
@@ -43,6 +57,9 @@ public class CaterpillarCtrl : MonoBehaviour
         head_rb = bone_rb[0]; tail_rb = bone_rb[6];
 
         tail_rb.constraints = RigidbodyConstraints2D.FreezeAll;
+
+        _head = head.GetComponent<Head_Tail>();
+        _tail = tail.GetComponent<Head_Tail>();
     }
 
     void FixedUpdate()
@@ -61,21 +78,37 @@ public class CaterpillarCtrl : MonoBehaviour
         {
             //MoveHead_JoyStick();
             MoveHead_KeyBoard();
+            soundCtrl.StartMoveSound();
         }
         else
         {
             //MoveTail_JoyStick();
             MoveTail_KeyBoard();
+            soundCtrl.StartMoveSound();
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (isDefeat) return;
+        if (isClear) return;
+        if(_head.dead || _tail.dead)
+        {
+            Defeat();
+        }
+        if(_head.clear)
+        {
+            Clear();
         }
     }
 
     IEnumerator FixHead()
     {
         isRunning_head = true;
-        Head_Tail _head = head.GetComponent<Head_Tail>();
-        while (true)
+        _head = head.GetComponent<Head_Tail>();
+        while (!_head.isAttach)
         {
-            if (_head.isAttach) break;
+            head.transform.rotation = Quaternion.identity;
             yield return null;
         }
         head_rb.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -86,10 +119,11 @@ public class CaterpillarCtrl : MonoBehaviour
     {
         isRunning_tail = true;
         bool flag = isHeadTurn;
-        Head_Tail _tail = tail.GetComponent<Head_Tail>();
+        _tail = tail.GetComponent<Head_Tail>();
         while (!_tail.isAttach)
         {
-            yield return new WaitForFixedUpdate();
+            tail.transform.rotation = Quaternion.identity;
+            yield return null;
         }
 
         if(flag) cameraCtrl.Start();
@@ -117,10 +151,25 @@ public class CaterpillarCtrl : MonoBehaviour
         head_rb.constraints = RigidbodyConstraints2D.None;
         head.transform.rotation = Quaternion.identity;
 
-        // Á¶ÀÌ½ºÆ½ ¹æÇâ¿¡ µû¶ó ¸Ó¸®¸¦ ÀÌµ¿
-        Vector3 move = inputCtrl.GetMove() * speed_KeyBoard * Time.deltaTime;
+        Vector3 move = inputCtrl.GetMove();
+
+        //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        if (move != Vector3.zero)
+        {
+            // ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+            float targetAngle = Mathf.Atan2(move.y, move.x) * Mathf.Rad2Deg;
+
+            // ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ÃµÃµï¿½ï¿½ È¸ï¿½ï¿½
+            float angle = Mathf.MoveTowardsAngle(eye.transform.eulerAngles.z, targetAngle, rotationSpeed * Time.deltaTime);
+
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ È¸ï¿½ï¿½
+            eye.transform.rotation = Quaternion.Euler(0, 0, angle);
+        }
+
+        // Å°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¸ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
+        move = move * speed_KeyBoard * Time.deltaTime;
         head.transform.Translate(move);
-        head_rb.AddForce(antiGravityForce); //Áß·Â »ó¼â
+        head_rb.AddForce(antiGravityForce); //ï¿½ß·ï¿½ ï¿½ï¿½ï¿½
     }
 
     void MoveTail_KeyBoard()
@@ -128,20 +177,20 @@ public class CaterpillarCtrl : MonoBehaviour
         tail_rb.constraints = RigidbodyConstraints2D.None;
         tail.transform.rotation = Quaternion.identity;
 
-        // Å°º¸µå ¹æÇâ¿¡ µû¶ó ²¿¸®¸¦ ÀÌµ¿
+        // Å°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
         Vector3 move = inputCtrl.GetMove() * speed_KeyBoard * Time.deltaTime;
         tail.transform.Translate(move);
-        tail_rb.AddForce(antiGravityForce); //Áß·Â »ó¼â
+        tail_rb.AddForce(antiGravityForce); //ï¿½ß·ï¿½ ï¿½ï¿½ï¿½
     }
     void MoveHead_JoyStick()
     {
         head_rb.constraints = RigidbodyConstraints2D.None;
         head.transform.rotation = Quaternion.identity;
 
-        // Á¶ÀÌ½ºÆ½ ¹æÇâ¿¡ µû¶ó ¸Ó¸®¸¦ ÀÌµ¿
+        // ï¿½ï¿½ï¿½Ì½ï¿½Æ½ ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¸ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
         Vector3 move = new Vector3(joyStick.Direction.x, joyStick.Direction.y, 0) * speed_JoyStick * Time.deltaTime;
         head.transform.Translate(move);
-        head_rb.AddForce(antiGravityForce); //Áß·Â »ó¼â
+        head_rb.AddForce(antiGravityForce); //ï¿½ß·ï¿½ ï¿½ï¿½ï¿½
     }
 
     void MoveTail_JoyStick()
@@ -149,9 +198,23 @@ public class CaterpillarCtrl : MonoBehaviour
         tail_rb.constraints = RigidbodyConstraints2D.None;
         tail.transform.rotation = Quaternion.identity;
 
-        // Á¶ÀÌ½ºÆ½ ¹æÇâ¿¡ µû¶ó ²¿¸®¸¦ ÀÌµ¿
+        // ï¿½ï¿½ï¿½Ì½ï¿½Æ½ ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
         Vector3 move = new Vector3(joyStick.Direction.x, joyStick.Direction.y, 0) * speed_JoyStick * Time.deltaTime;
         tail.transform.Translate(move);
-        tail_rb.AddForce(antiGravityForce); //Áß·Â »ó¼â
+        tail_rb.AddForce(antiGravityForce); //ï¿½ß·ï¿½ ï¿½ï¿½ï¿½
+    }
+
+    public void Defeat()
+    {
+        isDefeat = true;
+        soundCtrl.StartDefeatSound();
+        DefeatPanel.SetActive(true);
+    }
+
+    public void Clear()
+    {
+        isClear = true;
+        soundCtrl.StartClearSound();
+        ClearPanel.SetActive(true);
     }
 }

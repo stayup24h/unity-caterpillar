@@ -4,14 +4,25 @@ using UnityEngine;
 
 public class Head_Tail : MonoBehaviour
 {
+    public bool dead;
+    public bool clear;
     public bool isAttach = false;
+    public GameObject attachedObject;
+
+    void Awake()
+    {
+        dead = false;
+    }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Object"))
         {
             isAttach = true;
+            attachedObject = collision.gameObject;
         }
+        if (collision.gameObject.CompareTag("Defeat")) { dead = true; }
+        if (collision.gameObject.CompareTag("Clear")) { clear = true; }
     }
 
     void OnCollisionExit2D(Collision2D collision)
@@ -19,6 +30,7 @@ public class Head_Tail : MonoBehaviour
         if (collision.gameObject.CompareTag("Object"))
         {
             isAttach = false;
+            attachedObject = null;
         }
     }
 
@@ -27,6 +39,7 @@ public class Head_Tail : MonoBehaviour
         if (collision.gameObject.CompareTag("Object"))
         {
             isAttach = true;
+            attachedObject = collision.gameObject;
         }
     }
 }

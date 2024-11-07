@@ -8,6 +8,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Title.unity
+    guid: 4a9d95137f6f9e5479bcd45bf5076b35
+  - enabled: 1
+    path: Assets/Scenes/Stage 01.unity
+    guid: 682b654f8ad73074f89f50818f198182
+  - enabled: 1
+    path: Assets/Scenes/Stage 02.unity
+    guid: 82afc1037fd77fc44b33b7059996ac78
+  - enabled: 1
+    path: Assets/Scenes/Stage 10.unity
+    guid: e9e02a97d70e41b4b909304e9892d7b8
+  - enabled: 1
+    path: Assets/Scenes/REMIX MODE.unity
+    guid: 2ddfca1d499fcdb42b13fa524c00d064
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
   m_UseUCBPForAssetBundles: 0
