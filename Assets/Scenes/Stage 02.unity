@@ -1209,9 +1209,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8707559468597613100, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
+      propertyPath: ClearPanel
+      value: 
+      objectReference: {fileID: 1978674697}
+    - target: {fileID: 8707559468597613100, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
       propertyPath: cameraCtrl
       value: 
       objectReference: {fileID: 1463097990}
+    - target: {fileID: 8707559468597613100, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
+      propertyPath: DefeatPanel
+      value: 
+      objectReference: {fileID: 1896655649}
     - target: {fileID: 8850275227876137014, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.24

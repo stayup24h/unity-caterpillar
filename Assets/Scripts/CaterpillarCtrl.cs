@@ -17,16 +17,19 @@ public class CaterpillarCtrl : MonoBehaviour
     public Joystick joyStick;
     public CameraCtrl cameraCtrl;
 
+    public GameObject DefeatPanel;
+    public GameObject ClearPanel;
+
     Head_Tail _head, _tail;
 
     public State state;
-    private bool isHeadTurn;   // ¸Ó¸®¿Í ²¿¸® ¼ø¼­¸¦ ¹ø°¥¾Æ°¡¸ç Ã³¸®
+    private bool isHeadTurn;   // ï¿½Ó¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 
     bool isRunning_head;
     bool isRunning_tail;
 
     public float speed_KeyBoard = 1.0f;
-    public float speed_JoyStick = 4.0f;       // ¸Ó¸®¿Í ²¿¸® ÀÌµ¿ ¼Óµµ
+    public float speed_JoyStick = 4.0f;       // ï¿½Ó¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½Óµï¿½
 
     Vector2 antiGravityForce;
     public float rotationSpeed;
@@ -150,23 +153,23 @@ public class CaterpillarCtrl : MonoBehaviour
 
         Vector3 move = inputCtrl.GetMove();
 
-        //´« ¿òÁ÷ÀÓ
+        //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (move != Vector3.zero)
         {
-            // Á¤±ÔÈ­µÈ º¤ÅÍÀÇ °¢µµ¸¦ °è»ê
+            // ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
             float targetAngle = Mathf.Atan2(move.y, move.x) * Mathf.Rad2Deg;
 
-            // ÇöÀç È¸Àü °¢µµ¿¡¼­ ¸ñÇ¥ °¢µµ·Î ÃµÃµÈ÷ È¸Àü
+            // ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ÃµÃµï¿½ï¿½ È¸ï¿½ï¿½
             float angle = Mathf.MoveTowardsAngle(eye.transform.eulerAngles.z, targetAngle, rotationSpeed * Time.deltaTime);
 
-            // ¿ÀºêÁ§Æ®¸¦ È¸Àü
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ È¸ï¿½ï¿½
             eye.transform.rotation = Quaternion.Euler(0, 0, angle);
         }
 
-        // Å°º¸µå ¹æÇâ¿¡ µû¶ó ¸Ó¸®¸¦ ÀÌµ¿
+        // Å°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¸ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
         move = move * speed_KeyBoard * Time.deltaTime;
         head.transform.Translate(move);
-        head_rb.AddForce(antiGravityForce); //Áß·Â »ó¼â
+        head_rb.AddForce(antiGravityForce); //ï¿½ß·ï¿½ ï¿½ï¿½ï¿½
     }
 
     void MoveTail_KeyBoard()
@@ -174,20 +177,20 @@ public class CaterpillarCtrl : MonoBehaviour
         tail_rb.constraints = RigidbodyConstraints2D.None;
         tail.transform.rotation = Quaternion.identity;
 
-        // Å°º¸µå ¹æÇâ¿¡ µû¶ó ²¿¸®¸¦ ÀÌµ¿
+        // Å°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
         Vector3 move = inputCtrl.GetMove() * speed_KeyBoard * Time.deltaTime;
         tail.transform.Translate(move);
-        tail_rb.AddForce(antiGravityForce); //Áß·Â »ó¼â
+        tail_rb.AddForce(antiGravityForce); //ï¿½ß·ï¿½ ï¿½ï¿½ï¿½
     }
     void MoveHead_JoyStick()
     {
         head_rb.constraints = RigidbodyConstraints2D.None;
         head.transform.rotation = Quaternion.identity;
 
-        // Á¶ÀÌ½ºÆ½ ¹æÇâ¿¡ µû¶ó ¸Ó¸®¸¦ ÀÌµ¿
+        // ï¿½ï¿½ï¿½Ì½ï¿½Æ½ ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¸ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
         Vector3 move = new Vector3(joyStick.Direction.x, joyStick.Direction.y, 0) * speed_JoyStick * Time.deltaTime;
         head.transform.Translate(move);
-        head_rb.AddForce(antiGravityForce); //Áß·Â »ó¼â
+        head_rb.AddForce(antiGravityForce); //ï¿½ß·ï¿½ ï¿½ï¿½ï¿½
     }
 
     void MoveTail_JoyStick()
@@ -195,23 +198,23 @@ public class CaterpillarCtrl : MonoBehaviour
         tail_rb.constraints = RigidbodyConstraints2D.None;
         tail.transform.rotation = Quaternion.identity;
 
-        // Á¶ÀÌ½ºÆ½ ¹æÇâ¿¡ µû¶ó ²¿¸®¸¦ ÀÌµ¿
+        // ï¿½ï¿½ï¿½Ì½ï¿½Æ½ ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
         Vector3 move = new Vector3(joyStick.Direction.x, joyStick.Direction.y, 0) * speed_JoyStick * Time.deltaTime;
         tail.transform.Translate(move);
-        tail_rb.AddForce(antiGravityForce); //Áß·Â »ó¼â
+        tail_rb.AddForce(antiGravityForce); //ï¿½ß·ï¿½ ï¿½ï¿½ï¿½
     }
 
     public void Defeat()
     {
         isDefeat = true;
         soundCtrl.StartDefeatSound();
-        Debug.Log("ÆÐ¹è");
+        DefeatPanel.SetActive(true);
     }
 
     public void Clear()
     {
         isClear = true;
         soundCtrl.StartClearSound();
-        Debug.Log("½Â¸®");
+        ClearPanel.SetActive(true);
     }
 }

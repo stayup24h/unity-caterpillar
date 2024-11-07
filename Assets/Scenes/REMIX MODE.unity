@@ -1429,6 +1429,10 @@ PrefabInstance:
       propertyPath: cameraCtrl
       value: 
       objectReference: {fileID: 1166769657}
+    - target: {fileID: 8707559468597613100, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
+      propertyPath: DefeatPanel
+      value: 
+      objectReference: {fileID: 882683602}
     - target: {fileID: 8850275227876137014, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
