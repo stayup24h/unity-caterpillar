@@ -275,8 +275,8 @@ Transform:
   m_GameObject: {fileID: 176399723}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.31593487, w: 0.9487809}
-  m_LocalPosition: {x: 45.7, y: 21.02, z: 0}
-  m_LocalScale: {x: 1.2588441, y: 17.458765, z: 1}
+  m_LocalPosition: {x: 16.11, y: 2.6, z: 0}
+  m_LocalScale: {x: -1.6030121, y: 17.458765, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1321,6 +1321,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1557651786 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2008477087398709590, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
+  m_PrefabInstance: {fileID: 6287112313941888894}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1927249416 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4119562742079524231, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
@@ -1334,9 +1339,37 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1997584479529756980, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997584479529756980, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997584479529756980, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2796582725873979396, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
+      propertyPath: clearSound
+      value: 
+      objectReference: {fileID: 1557651786}
     - target: {fileID: 3540678468045745715, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
       propertyPath: m_Name
       value: Caterpillar
+      objectReference: {fileID: 0}
+    - target: {fileID: 6460880440723278957, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6460880440723278957, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6460880440723278957, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8707559468597613100, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
       propertyPath: joyStick

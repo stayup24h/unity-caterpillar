@@ -78,13 +78,11 @@ public class CaterpillarCtrl : MonoBehaviour
         {
             //MoveHead_JoyStick();
             MoveHead_KeyBoard();
-            soundCtrl.StartMoveSound();
         }
         else
         {
             //MoveTail_JoyStick();
             MoveTail_KeyBoard();
-            soundCtrl.StartMoveSound();
         }
     }
 
@@ -144,6 +142,7 @@ public class CaterpillarCtrl : MonoBehaviour
     {
         state = State.none;
         isHeadTurn = !isHeadTurn;
+        soundCtrl.StartMoveSound();
     }
 
     void MoveHead_KeyBoard()
