@@ -65,6 +65,8 @@ public class Bone : MonoBehaviour
             //transform.rotation = Quaternion.Euler(0, 0, angle);
             if (Vector3.Distance(head.position, tail.position) <= 5.9f)
                 movePosition += normalV * upForce * Time.deltaTime;
+            else
+                movePosition += normalV * 0.5f * Time.deltaTime;
 
             if(position < 6)
             movePosition += (currentTailPosition - lastTailPosition) * 0.1f * position;

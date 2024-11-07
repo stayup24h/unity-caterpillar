@@ -8,6 +8,7 @@ public class CaterpillarCtrl : MonoBehaviour
 
     public GameObject[] bone = new GameObject[9];
     private Rigidbody2D[] bone_rb = new Rigidbody2D[9];
+    public GameObject eye;
 
     private GameObject head, tail;
     private Rigidbody2D head_rb, tail_rb;
@@ -26,9 +27,12 @@ public class CaterpillarCtrl : MonoBehaviour
     public float speed_JoyStick = 4.0f;       // 머리와 꼬리 이동 속도
 
     Vector2 antiGravityForce;
+    public float rotationSpeed;
 
     void Start()
     {
+        rotationSpeed = 90f;
+
         antiGravityForce = -Physics2D.gravity;
         isRunning_head = false;
         isRunning_tail = false;
@@ -73,9 +77,9 @@ public class CaterpillarCtrl : MonoBehaviour
     {
         isRunning_head = true;
         Head_Tail _head = head.GetComponent<Head_Tail>();
-        while (true)
+        while (!_head.isAttach)
         {
-            if (_head.isAttach) break;
+            head.transform.rotation = Quaternion.identity;
             yield return null;
         }
         head_rb.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -89,7 +93,8 @@ public class CaterpillarCtrl : MonoBehaviour
         Head_Tail _tail = tail.GetComponent<Head_Tail>();
         while (!_tail.isAttach)
         {
-            yield return new WaitForFixedUpdate();
+            tail.transform.rotation = Quaternion.identity;
+            yield return null;
         }
 
         if(flag) cameraCtrl.Start();
@@ -117,8 +122,23 @@ public class CaterpillarCtrl : MonoBehaviour
         head_rb.constraints = RigidbodyConstraints2D.None;
         head.transform.rotation = Quaternion.identity;
 
-        // 조이스틱 방향에 따라 머리를 이동
-        Vector3 move = inputCtrl.GetMove() * speed_KeyBoard * Time.deltaTime;
+        Vector3 move = inputCtrl.GetMove();
+
+        //눈 움직임
+        if (move != Vector3.zero)
+        {
+            // 정규화된 벡터의 각도를 계산
+            float targetAngle = Mathf.Atan2(move.y, move.x) * Mathf.Rad2Deg;
+
+            // 현재 회전 각도에서 목표 각도로 천천히 회전
+            float angle = Mathf.MoveTowardsAngle(eye.transform.eulerAngles.z, targetAngle, rotationSpeed * Time.deltaTime);
+
+            // 오브젝트를 회전
+            eye.transform.rotation = Quaternion.Euler(0, 0, angle);
+        }
+
+        // 키보드 방향에 따라 머리를 이동
+        move = move * speed_KeyBoard * Time.deltaTime;
         head.transform.Translate(move);
         head_rb.AddForce(antiGravityForce); //중력 상쇄
     }
