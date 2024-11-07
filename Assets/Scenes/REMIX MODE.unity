@@ -342,7 +342,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 000
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c07e8bb0d1805eb43bbe0ac86ee3f45f, type: 2}
   m_sharedMaterial: {fileID: 1995141010542875239, guid: c07e8bb0d1805eb43bbe0ac86ee3f45f, type: 2}
@@ -557,6 +557,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 713484439}
   m_CullTransparentMesh: 1
+--- !u!1 &811911987
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 811911988}
+  m_Layer: 0
+  m_Name: Map Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &811911988
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 811911987}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 815.1478, y: 968.6023, z: -2.504479}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &835202781 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4119562742079524231, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
@@ -1457,7 +1488,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f665910111f5e444da4e39784fccf936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  mapPool: {fileID: 811911988}
+  target: {fileID: 835202781}
   distance: 5
   maxPatternCnt: 4
 --- !u!4 &2016118980
@@ -1487,7 +1519,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcf135b914150ae4c9eea202f1807598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScoreIndicator: {fileID: 319644859}
+  mapPool: {fileID: 811911988}
+  caterpillarHead: {fileID: 835202781}
+  scoreText: {fileID: 319644861}
 --- !u!1001 &2092631799
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1562,6 +1596,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1166769660}
+  - {fileID: 811911988}
   - {fileID: 2092631799}
   - {fileID: 1366928471}
   - {fileID: 1853757700}
