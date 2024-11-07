@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class GotoMainScript : MonoBehaviour
+public class StageButton031Script : MonoBehaviour
 , IPointerClickHandler
 
 {
