@@ -20,6 +20,7 @@ public class MovePlatformGimmick : MonoBehaviour
     private Rigidbody2D head_rb;
     private Rigidbody2D tail_rb;
     private Vector3 prevPosition;
+    private CameraCtrl cameraCtrl;
 
     void Start()
     {
@@ -36,6 +37,8 @@ public class MovePlatformGimmick : MonoBehaviour
         head_rb = head.GetComponent<Rigidbody2D>();
         tail_rb = tail.GetComponent<Rigidbody2D>();
         prevPosition = transform.position;
+
+        cameraCtrl = Camera.main.GetComponent<CameraCtrl>();
     }
 
     void Update()
@@ -44,26 +47,33 @@ public class MovePlatformGimmick : MonoBehaviour
         transform.position = vertexAveragePos + new Vector3(delta * deltaX, delta * deltaY, 0);
 
         Vector3 deltaMove = transform.position - prevPosition;
-        if (head.attachedObject == gameObject)
+
+        bool headAttached = ReferenceEquals(head.attachedObject, gameObject);
+        bool tailAttached = ReferenceEquals(tail.attachedObject, gameObject);
+        if (headAttached || tailAttached)
         {
-            head.transform.position += deltaMove;
-        }
-        if (tail.attachedObject == gameObject)
-        {
-            tail.transform.position += deltaMove;
+            if (headAttached)
+            {
+                head.transform.position += deltaMove;
+            }
+            if (tailAttached)
+            {
+                tail.transform.position += deltaMove;
+            }
+            cameraCtrl.Start();
         }
         prevPosition = transform.position;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.transform.parent.CompareTag("Player"))
         {
-            if (head.attachedObject != gameObject)
+            if (!ReferenceEquals(head.attachedObject, gameObject))
             {
                 head_rb.constraints = RigidbodyConstraints2D.None;
             }
-            if (tail.attachedObject != gameObject)
+            if (!ReferenceEquals(tail.attachedObject, gameObject))
             {
                 tail_rb.constraints = RigidbodyConstraints2D.None;
             }

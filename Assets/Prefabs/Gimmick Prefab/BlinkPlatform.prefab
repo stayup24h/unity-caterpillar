@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -4702432664362629515}
   m_Layer: 0
   m_Name: BlinkPlatform
-  m_TagString: Untagged
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,7 +101,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e4f067e9d0003641831fe0c84d779d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAttach: 0
 --- !u!61 &-4702432664362629515
 BoxCollider2D:
   m_ObjectHideFlags: 0

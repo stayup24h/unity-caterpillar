@@ -216,7 +216,7 @@ public class CaterpillarCtrl : MonoBehaviour
     {
         isClear = true;
         soundCtrl.StartClearSound();
-        bestScoreManager.SetBestScore();
+        bestScoreManager.SetBestScore(true);
         ClearPanel.SetActive(true);
     }
 }

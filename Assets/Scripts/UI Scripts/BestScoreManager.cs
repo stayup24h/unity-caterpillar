@@ -15,6 +15,7 @@ public class BestScoreManager : MonoBehaviour
         {
             ShowBestScore();
         }
+        //ResetScore();
     }
 
     private void ShowBestScore()
@@ -25,9 +26,9 @@ public class BestScoreManager : MonoBehaviour
         remixBestScore.text = "BEST\n" + PlayerPrefs.GetInt("Remix", 0).ToString();
     }
 
-    public void SetBestScore()
+    public void SetBestScore(bool isClear = false)
     {
-        if (SceneManager.GetActiveScene().name.Contains("stage", StringComparison.OrdinalIgnoreCase))
+        if (isClear && SceneManager.GetActiveScene().name.Contains("stage", StringComparison.OrdinalIgnoreCase))
             SetStageBestScore();
         else if (SceneManager.GetActiveScene().name.Contains("remix", StringComparison.OrdinalIgnoreCase))
             SetRemixBestScore();
