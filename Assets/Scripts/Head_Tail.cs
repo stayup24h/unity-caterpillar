@@ -5,6 +5,7 @@ using UnityEngine;
 public class Head_Tail : MonoBehaviour
 {
     public bool dead;
+    public bool clear;
     public bool isAttach = false;
     public GameObject attachedObject;
 
@@ -20,10 +21,8 @@ public class Head_Tail : MonoBehaviour
             isAttach = true;
             attachedObject = collision.gameObject;
         }
-        if (collision.gameObject.CompareTag("Defeat"))
-        {
-            dead = true;
-        }
+        if (collision.gameObject.CompareTag("Defeat")) { dead = true; }
+        if (collision.gameObject.CompareTag("Clear")) { clear = true; }
     }
 
     void OnCollisionExit2D(Collision2D collision)

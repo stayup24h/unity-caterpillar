@@ -31,12 +31,13 @@ public class CaterpillarCtrl : MonoBehaviour
     Vector2 antiGravityForce;
     public float rotationSpeed;
 
-    public bool isDefeat;
+    bool isDefeat, isClear;
 
     public SoundCtrl soundCtrl;
     void Awake()
     {
         isDefeat = false;
+        isClear = false;
         rotationSpeed = 90f;
 
         antiGravityForce = -Physics2D.gravity;
@@ -87,9 +88,14 @@ public class CaterpillarCtrl : MonoBehaviour
     private void LateUpdate()
     {
         if (isDefeat) return;
+        if (isClear) return;
         if(_head.dead || _tail.dead)
         {
             Defeat();
+        }
+        if(_head.clear)
+        {
+            Clear();
         }
     }
 
@@ -200,5 +206,12 @@ public class CaterpillarCtrl : MonoBehaviour
         isDefeat = true;
         soundCtrl.StartDefeatSound();
         Debug.Log("ÆÐ¹è");
+    }
+
+    public void Clear()
+    {
+        isClear = true;
+        soundCtrl.StartClearSound();
+        Debug.Log("½Â¸®");
     }
 }

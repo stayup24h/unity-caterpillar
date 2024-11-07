@@ -40,4 +40,9 @@ public class SoundCtrl : MonoBehaviour
     {
         defeatSound.Play();
     }
+
+    public void StartClearSound()
+    {
+        clearSound.Play();
+    }
 }
