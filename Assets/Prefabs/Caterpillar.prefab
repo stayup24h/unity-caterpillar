@@ -541,7 +541,7 @@ GameObject:
   - component: {fileID: 2136956221250323406}
   m_Layer: 0
   m_Name: Tail (6)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -885,7 +885,7 @@ GameObject:
   - component: {fileID: 2796582725873979396}
   m_Layer: 0
   m_Name: Caterpillar
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -951,6 +951,7 @@ MonoBehaviour:
   speed_JoyStick: 4
   rotationSpeed: 0
   soundCtrl: {fileID: 2796582725873979396}
+  bestScoreManager: {fileID: 0}
 --- !u!114 &2796582725873979396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2077,7 +2078,7 @@ GameObject:
   - component: {fileID: 6740350397178829317}
   m_Layer: 0
   m_Name: Head (0)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
