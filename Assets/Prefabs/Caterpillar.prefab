@@ -692,6 +692,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dead: 0
+  clear: 0
   isAttach: 0
   attachedObject: {fileID: 0}
 --- !u!1 &3355744172608971117
@@ -943,11 +944,12 @@ MonoBehaviour:
   inputCtrl: {fileID: 2294961216283530818}
   joyStick: {fileID: 0}
   cameraCtrl: {fileID: 0}
+  DefeatPanel: {fileID: 0}
+  ClearPanel: {fileID: 0}
   state: 0
   speed_KeyBoard: 4
   speed_JoyStick: 4
   rotationSpeed: 0
-  isDefeat: 0
   soundCtrl: {fileID: 2796582725873979396}
 --- !u!114 &2796582725873979396
 MonoBehaviour:
@@ -963,7 +965,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSound: {fileID: 7675552725606826151}
   defeatSound: {fileID: 8485227198940065727}
-  clearSound: {fileID: 0}
+  clearSound: {fileID: 2008477087398709590}
   delayTime: 0.5
   isRunning_MoveSound: 0
 --- !u!1 &3627759574812194613
@@ -2403,6 +2405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dead: 0
+  clear: 0
   isAttach: 0
   attachedObject: {fileID: 0}
 --- !u!232 &6740350397178829317
