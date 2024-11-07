@@ -642,6 +642,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 287738669}
   m_CullTransparentMesh: 1
+--- !u!1 &411763659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 411763661}
+  - component: {fileID: 411763660}
+  m_Layer: 0
+  m_Name: UI Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &411763660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411763659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b7669aef961ca14b9ec43aadda1924d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stageBestScore: {fileID: 0}
+  remixBestScore: {fileID: 0}
+  scoreText: {fileID: 252339760}
+--- !u!4 &411763661
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411763659}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &515323569
 GameObject:
   m_ObjectHideFlags: 0
@@ -1220,6 +1267,10 @@ PrefabInstance:
       propertyPath: DefeatPanel
       value: 
       objectReference: {fileID: 1896655649}
+    - target: {fileID: 8707559468597613100, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
+      propertyPath: bestScoreManager
+      value: 
+      objectReference: {fileID: 411763660}
     - target: {fileID: 8850275227876137014, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.24
@@ -2441,3 +2492,4 @@ SceneRoots:
   - {fileID: 1443229022}
   - {fileID: 692231928}
   - {fileID: 7146311281913986709}
+  - {fileID: 411763661}

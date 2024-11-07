@@ -173,7 +173,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      lego3_0: -7746479403157360359
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
