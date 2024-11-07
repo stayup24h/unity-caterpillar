@@ -342,7 +342,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: 000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c07e8bb0d1805eb43bbe0ac86ee3f45f, type: 2}
   m_sharedMaterial: {fileID: 1995141010542875239, guid: c07e8bb0d1805eb43bbe0ac86ee3f45f, type: 2}
@@ -913,37 +913,6 @@ Transform:
   - {fileID: 83151865}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1179574267
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1179574268}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1179574268
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1179574267}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.7905426, y: -2.591224, z: 0.5668592}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1182141668
 GameObject:
   m_ObjectHideFlags: 0
@@ -1031,37 +1000,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1203764583
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1203764584}
-  m_Layer: 0
-  m_Name: Map Pool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1203764584
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1203764583}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1366928468
 GameObject:
   m_ObjectHideFlags: 0
@@ -1519,12 +1457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f665910111f5e444da4e39784fccf936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-  mapPool: {fileID: 1203764584}
-=======
-  mapPool: {fileID: 1179574268}
->>>>>>> d117420c5ef99670b85e93b1640619eaab77e784
-  target: {fileID: 835202781}
+  target: {fileID: 0}
   distance: 5
   maxPatternCnt: 4
 --- !u!4 &2016118980
@@ -1536,7 +1469,7 @@ Transform:
   m_GameObject: {fileID: 2016118978}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 768.2869, y: 440.17538, z: -12.113377}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1554,13 +1487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcf135b914150ae4c9eea202f1807598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-  mapPool: {fileID: 1203764584}
-=======
-  mapPool: {fileID: 1179574268}
->>>>>>> d117420c5ef99670b85e93b1640619eaab77e784
-  caterpillarHead: {fileID: 835202781}
-  scoreText: {fileID: 319644861}
+  ScoreIndicator: {fileID: 319644859}
 --- !u!1001 &2092631799
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1569,22 +1496,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2008477087398709590, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: 24300002, guid: b8ef59b9ea7a60f4f8bb944345d844a4, type: 2}
     - target: {fileID: 3540678468045745715, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
       propertyPath: m_Name
       value: Caterpillar
       objectReference: {fileID: 0}
-    - target: {fileID: 7675552725606826151, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: 24300002, guid: b8ef59b9ea7a60f4f8bb944345d844a4, type: 2}
-    - target: {fileID: 8485227198940065727, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: 24300002, guid: b8ef59b9ea7a60f4f8bb944345d844a4, type: 2}
     - target: {fileID: 8707559468597613100, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
       propertyPath: joyStick
       value: 
@@ -1647,9 +1562,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1166769660}
-  - {fileID: 1203764584}
   - {fileID: 2092631799}
   - {fileID: 1366928471}
   - {fileID: 1853757700}
   - {fileID: 2016118980}
-  - {fileID: 1179574268}
