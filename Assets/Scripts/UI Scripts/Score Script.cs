@@ -3,17 +3,27 @@ using TMPro;
 
 public class ScoreScript : MonoBehaviour
 {
-    TextMeshProUGUI ScoreText;
-    public GameObject ScoreIndicator;
+    [SerializeField] private Transform mapPool;
+    [SerializeField] private Transform caterpillarHead;
+    [SerializeField] private TextMeshProUGUI scoreText;
+
+    private Transform prevScorePoint;
 
     void Awake()
     {
-        ScoreText = ScoreIndicator.GetComponent<TextMeshProUGUI>();
+        if (caterpillarHead == null) caterpillarHead = GameObject.Find("Caterpillar").transform;
     }
 
     void Update()
     {
-//        ScoreText.text = ;
-       // 여기에 글자 업뎃 코드 넣기
+        Transform currentScorePoint = mapPool.GetChild(1).Find("Start Point");
+        if (prevScorePoint != currentScorePoint)
+        {
+            if (caterpillarHead.position.x > currentScorePoint.position.x)
+            {
+                scoreText.text = (int.Parse(scoreText.text)+1).ToString();
+                prevScorePoint = currentScorePoint;
+            }
+        }
     }
 }
