@@ -29,6 +29,8 @@ public class CaterpillarCtrl : MonoBehaviour
     Vector2 antiGravityForce;
     public float rotationSpeed;
 
+
+    public SoundCtrl soundCtrl;
     void Start()
     {
         rotationSpeed = 90f;
@@ -65,11 +67,13 @@ public class CaterpillarCtrl : MonoBehaviour
         {
             //MoveHead_JoyStick();
             MoveHead_KeyBoard();
+            soundCtrl.StartMoveSound();
         }
         else
         {
             //MoveTail_JoyStick();
             MoveTail_KeyBoard();
+            soundCtrl.StartMoveSound();
         }
     }
 
