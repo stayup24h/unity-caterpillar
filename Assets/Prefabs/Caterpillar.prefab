@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2522739975228486466}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: -3, z: 0}
+  m_LocalPosition: {x: 2, y: 0, z: 0}
   m_LocalScale: {x: 0.33, y: 0.33, z: 0.33}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -166,17 +166,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caterpillarCtrl: {fileID: 8707559468597613100}
+  position: 4
+  head: {fileID: 4119562742079524231}
+  tail: {fileID: 4130649764868430469}
   targets:
   - {fileID: 4119562742079524231}
   - {fileID: 8431441716922168995}
   - {fileID: 4695441060219340122}
+  - {fileID: 4130649764868430469}
   maxDistances:
   - 4
   - 1
   - 1
+  - 2
   moveSpeed: 10
-  upForceScale: 3
-  rightForceScale: -1
+  upForce: 5
 --- !u!1 &2667549539251260497
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,7 +297,7 @@ Transform:
   m_GameObject: {fileID: 3269861791901913796}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: -3, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.34, y: 0.34, z: 0.34}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -430,6 +434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAttach: 0
+  attachedObject: {fileID: 0}
 --- !u!1 &3355744172608971117
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,7 +464,7 @@ Transform:
   m_GameObject: {fileID: 3355744172608971117}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3, y: -3, z: 0}
+  m_LocalPosition: {x: -2, y: 0, z: 0}
   m_LocalScale: {x: 0.32, y: 0.32, z: 0.32}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -596,6 +601,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caterpillarCtrl: {fileID: 8707559468597613100}
+  position: 8
+  head: {fileID: 4119562742079524231}
+  tail: {fileID: 4130649764868430469}
   targets:
   - {fileID: 4130649764868430469}
   - {fileID: 1550951285694240055}
@@ -603,8 +611,7 @@ MonoBehaviour:
   - 2
   - 1
   moveSpeed: 10
-  upForceScale: 0
-  rightForceScale: 0
+  upForce: 0
 --- !u!1 &3540678468045745715
 GameObject:
   m_ObjectHideFlags: 0
@@ -703,7 +710,7 @@ Transform:
   m_GameObject: {fileID: 4224535652467143314}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3, y: -3, z: 0}
+  m_LocalPosition: {x: 4, y: 0, z: 0}
   m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -840,17 +847,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caterpillarCtrl: {fileID: 8707559468597613100}
+  position: 2
+  head: {fileID: 4119562742079524231}
+  tail: {fileID: 4130649764868430469}
   targets:
   - {fileID: 4119562742079524231}
   - {fileID: 7997248898740081064}
   - {fileID: 8431441716922168995}
+  - {fileID: 4130649764868430469}
   maxDistances:
   - 2
   - 1
   - 1
+  - 4
   moveSpeed: 10
-  upForceScale: 3
-  rightForceScale: 1
+  upForce: 5
 --- !u!1 &5052563307416625831
 GameObject:
   m_ObjectHideFlags: 0
@@ -880,7 +891,7 @@ Transform:
   m_GameObject: {fileID: 5052563307416625831}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2, y: -3, z: 0}
+  m_LocalPosition: {x: 3, y: 0, z: 0}
   m_LocalScale: {x: 0.33, y: 0.33, z: 0.33}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1017,17 +1028,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caterpillarCtrl: {fileID: 8707559468597613100}
+  position: 3
+  head: {fileID: 4119562742079524231}
+  tail: {fileID: 4130649764868430469}
   targets:
   - {fileID: 4119562742079524231}
   - {fileID: 8003614277655804349}
   - {fileID: 2098299806171720495}
+  - {fileID: 4130649764868430469}
   maxDistances:
   - 3
   - 1
   - 1
+  - 3
   moveSpeed: 10
-  upForceScale: 4
-  rightForceScale: 0
+  upForce: 7
 --- !u!1 &5169432405961830094
 GameObject:
   m_ObjectHideFlags: 0
@@ -1057,7 +1072,7 @@ Transform:
   m_GameObject: {fileID: 5169432405961830094}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4, y: -3, z: 0}
+  m_LocalPosition: {x: 5, y: 0, z: 0}
   m_LocalScale: {x: 0.37, y: 0.37, z: 0.37}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1194,15 +1209,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caterpillarCtrl: {fileID: 8707559468597613100}
+  position: 1
+  head: {fileID: 4119562742079524231}
+  tail: {fileID: 4130649764868430469}
   targets:
   - {fileID: 4119562742079524231}
   - {fileID: 8003614277655804349}
+  - {fileID: 4130649764868430469}
   maxDistances:
   - 1
   - 1
+  - 5
   moveSpeed: 10
-  upForceScale: 2
-  rightForceScale: -1
+  upForce: 3
 --- !u!1 &5173750149676662868
 GameObject:
   m_ObjectHideFlags: 0
@@ -1319,7 +1338,7 @@ Transform:
   m_GameObject: {fileID: 5631043078580385347}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -3, z: 0}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
   m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1456,6 +1475,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caterpillarCtrl: {fileID: 8707559468597613100}
+  position: 5
+  head: {fileID: 4119562742079524231}
+  tail: {fileID: 4130649764868430469}
   targets:
   - {fileID: 4119562742079524231}
   - {fileID: 2098299806171720495}
@@ -1465,8 +1487,7 @@ MonoBehaviour:
   - 1
   - 1
   moveSpeed: 10
-  upForceScale: 2
-  rightForceScale: 1
+  upForce: 3
 --- !u!1 &5985761217275641568
 GameObject:
   m_ObjectHideFlags: 0
@@ -1497,7 +1518,7 @@ Transform:
   m_GameObject: {fileID: 5985761217275641568}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5, y: -3, z: 0}
+  m_LocalPosition: {x: 6, y: 0, z: 0}
   m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -1636,6 +1657,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAttach: 0
+  attachedObject: {fileID: 0}
 --- !u!232 &6740350397178829317
 DistanceJoint2D:
   m_ObjectHideFlags: 0
@@ -1685,7 +1707,7 @@ Transform:
   m_GameObject: {fileID: 8567406561758107718}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2, y: -3, z: 0}
+  m_LocalPosition: {x: -1, y: 0, z: 0}
   m_LocalScale: {x: 0.33, y: 0.33, z: 0.33}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1822,6 +1844,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caterpillarCtrl: {fileID: 8707559468597613100}
+  position: 7
+  head: {fileID: 4119562742079524231}
+  tail: {fileID: 4130649764868430469}
   targets:
   - {fileID: 4130649764868430469}
   - {fileID: 6345196543674415904}
@@ -1829,5 +1854,4 @@ MonoBehaviour:
   - 1
   - 1
   moveSpeed: 10
-  upForceScale: 0
-  rightForceScale: 0
+  upForce: 0
