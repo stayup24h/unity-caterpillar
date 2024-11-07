@@ -16,24 +16,7 @@ public class SoundCtrl : MonoBehaviour
 
     public void StartMoveSound()
     {
-        if(!isRunning_MoveSound) StartCoroutine(PlayMoveSound());
-    }
-
-    IEnumerator PlayMoveSound()
-    {
-        isRunning_MoveSound=true;
-        while (true)
-        {
-            if (!moveSound.isPlaying)
-            {
-                moveSound.Play();
-                yield return new WaitForSeconds(moveSound.clip.length + delayTime);
-            }
-            else
-            {
-                yield return null;
-            }
-        }
+        moveSound.Play();
     }
 
     public void StartDefeatSound()

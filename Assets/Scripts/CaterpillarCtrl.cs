@@ -36,7 +36,8 @@ public class CaterpillarCtrl : MonoBehaviour
 
     bool isDefeat, isClear;
 
-    public SoundCtrl soundCtrl;
+    [SerializeField] private SoundCtrl soundCtrl;
+    [SerializeField] private BestScoreManager bestScoreManager;
     void Awake()
     {
         isDefeat = false;
@@ -78,13 +79,11 @@ public class CaterpillarCtrl : MonoBehaviour
         {
             //MoveHead_JoyStick();
             MoveHead_KeyBoard();
-            soundCtrl.StartMoveSound();
         }
         else
         {
             //MoveTail_JoyStick();
             MoveTail_KeyBoard();
-            soundCtrl.StartMoveSound();
         }
     }
 
@@ -144,6 +143,7 @@ public class CaterpillarCtrl : MonoBehaviour
     {
         state = State.none;
         isHeadTurn = !isHeadTurn;
+        soundCtrl.StartMoveSound();
     }
 
     void MoveHead_KeyBoard()
@@ -208,6 +208,7 @@ public class CaterpillarCtrl : MonoBehaviour
     {
         isDefeat = true;
         soundCtrl.StartDefeatSound();
+        bestScoreManager.SetBestScore();
         DefeatPanel.SetActive(true);
     }
 
@@ -215,6 +216,7 @@ public class CaterpillarCtrl : MonoBehaviour
     {
         isClear = true;
         soundCtrl.StartClearSound();
+        bestScoreManager.SetBestScore();
         ClearPanel.SetActive(true);
     }
 }
