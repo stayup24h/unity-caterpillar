@@ -17,6 +17,8 @@ public class CaterpillarCtrl : MonoBehaviour
     public Joystick joyStick;
     public CameraCtrl cameraCtrl;
 
+    Head_Tail _head, _tail;
+
     public State state;
     private bool isHeadTurn;   // 머리와 꼬리 순서를 번갈아가며 처리
 
@@ -29,8 +31,12 @@ public class CaterpillarCtrl : MonoBehaviour
     Vector2 antiGravityForce;
     public float rotationSpeed;
 
-    void Start()
+    public bool isDefeat;
+
+    public SoundCtrl soundCtrl;
+    void Awake()
     {
+        isDefeat = false;
         rotationSpeed = 90f;
 
         antiGravityForce = -Physics2D.gravity;
@@ -47,6 +53,9 @@ public class CaterpillarCtrl : MonoBehaviour
         head_rb = bone_rb[0]; tail_rb = bone_rb[6];
 
         tail_rb.constraints = RigidbodyConstraints2D.FreezeAll;
+
+        _head = head.GetComponent<Head_Tail>();
+        _tail = tail.GetComponent<Head_Tail>();
     }
 
     void FixedUpdate()
@@ -65,18 +74,29 @@ public class CaterpillarCtrl : MonoBehaviour
         {
             //MoveHead_JoyStick();
             MoveHead_KeyBoard();
+            soundCtrl.StartMoveSound();
         }
         else
         {
             //MoveTail_JoyStick();
             MoveTail_KeyBoard();
+            soundCtrl.StartMoveSound();
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (isDefeat) return;
+        if(_head.dead || _tail.dead)
+        {
+            Defeat();
         }
     }
 
     IEnumerator FixHead()
     {
         isRunning_head = true;
-        Head_Tail _head = head.GetComponent<Head_Tail>();
+        _head = head.GetComponent<Head_Tail>();
         while (!_head.isAttach)
         {
             head.transform.rotation = Quaternion.identity;
@@ -90,7 +110,7 @@ public class CaterpillarCtrl : MonoBehaviour
     {
         isRunning_tail = true;
         bool flag = isHeadTurn;
-        Head_Tail _tail = tail.GetComponent<Head_Tail>();
+        _tail = tail.GetComponent<Head_Tail>();
         while (!_tail.isAttach)
         {
             tail.transform.rotation = Quaternion.identity;
@@ -173,5 +193,12 @@ public class CaterpillarCtrl : MonoBehaviour
         Vector3 move = new Vector3(joyStick.Direction.x, joyStick.Direction.y, 0) * speed_JoyStick * Time.deltaTime;
         tail.transform.Translate(move);
         tail_rb.AddForce(antiGravityForce); //중력 상쇄
+    }
+
+    public void Defeat()
+    {
+        isDefeat = true;
+        soundCtrl.StartDefeatSound();
+        Debug.Log("패배");
     }
 }

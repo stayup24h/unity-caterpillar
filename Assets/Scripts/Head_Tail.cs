@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class Head_Tail : MonoBehaviour
 {
+    public bool dead;
     public bool isAttach = false;
     public GameObject attachedObject;
+
+    void Awake()
+    {
+        dead = false;
+    }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -13,6 +19,10 @@ public class Head_Tail : MonoBehaviour
         {
             isAttach = true;
             attachedObject = collision.gameObject;
+        }
+        if (collision.gameObject.CompareTag("Defeat"))
+        {
+            dead = true;
         }
     }
 
