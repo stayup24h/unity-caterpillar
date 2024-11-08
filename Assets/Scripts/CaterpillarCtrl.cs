@@ -36,7 +36,8 @@ public class CaterpillarCtrl : MonoBehaviour
 
     bool isDefeat, isClear;
 
-    public SoundCtrl soundCtrl;
+    [SerializeField] private SoundCtrl soundCtrl;
+    [SerializeField] private BestScoreManager bestScoreManager;
     void Awake()
     {
         isDefeat = false;
@@ -207,6 +208,7 @@ public class CaterpillarCtrl : MonoBehaviour
     {
         isDefeat = true;
         soundCtrl.StartDefeatSound();
+        bestScoreManager.SetBestScore();
         DefeatPanel.SetActive(true);
     }
 
@@ -214,6 +216,7 @@ public class CaterpillarCtrl : MonoBehaviour
     {
         isClear = true;
         soundCtrl.StartClearSound();
+        bestScoreManager.SetBestScore(true);
         ClearPanel.SetActive(true);
     }
 }

@@ -11,7 +11,7 @@ public class ScoreScript : MonoBehaviour
 
     void Awake()
     {
-        if (caterpillarHead == null) caterpillarHead = GameObject.Find("Caterpillar").transform;
+        if (caterpillarHead == null) caterpillarHead = GameObject.Find("Caterpillar").transform.GetChild(0);
     }
 
     void Update()
