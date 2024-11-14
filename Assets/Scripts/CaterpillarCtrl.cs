@@ -25,8 +25,13 @@ public class CaterpillarCtrl : MonoBehaviour
     public State state;
     private bool isHeadTurn;   // �Ӹ��� ���� ������ �����ư��� ó��
 
-    bool isRunning_head;
-    bool isRunning_tail;
+    private bool isRunning_head;
+    public bool IsRunning_head { get => isRunning_head; }
+    private bool isRunning_tail;
+    public bool IsRunning_tail { get => isRunning_tail; }
+
+    private bool isHeadCoroutineRun = false;
+    private bool isTailCoroutineRun = false;
 
     public float speed_KeyBoard = 1.0f;
     public float speed_JoyStick = 4.0f;       // �Ӹ��� ���� �̵� �ӵ�
@@ -67,8 +72,8 @@ public class CaterpillarCtrl : MonoBehaviour
     {
         if (state == State.none)
         {
-            if (!isRunning_head) StartCoroutine(FixHead());
-            if (!isRunning_tail) StartCoroutine(FixTail());
+            if (!isHeadCoroutineRun) StartCoroutine(FixHead());
+            if (!isTailCoroutineRun) StartCoroutine(FixTail());
             state = State.wait;
         }
         else if (state == State.wait)
@@ -103,7 +108,7 @@ public class CaterpillarCtrl : MonoBehaviour
 
     IEnumerator FixHead()
     {
-        isRunning_head = true;
+        isHeadCoroutineRun = true;
         _head = head.GetComponent<Head_Tail>();
         while (!_head.isAttach)
         {
@@ -111,12 +116,14 @@ public class CaterpillarCtrl : MonoBehaviour
             yield return null;
         }
         head_rb.constraints = RigidbodyConstraints2D.FreezeAll;
+
+        isHeadCoroutineRun = false;
         isRunning_head = false;
     }
 
     IEnumerator FixTail()
     {
-        isRunning_tail = true;
+        isTailCoroutineRun = true;
         bool flag = isHeadTurn;
         _tail = tail.GetComponent<Head_Tail>();
         while (!_tail.isAttach)
@@ -127,6 +134,8 @@ public class CaterpillarCtrl : MonoBehaviour
 
         if(flag) cameraCtrl.Start();
         tail_rb.constraints = RigidbodyConstraints2D.FreezeAll;
+
+        isTailCoroutineRun = false;
         isRunning_tail = false;
     }
 
@@ -148,6 +157,8 @@ public class CaterpillarCtrl : MonoBehaviour
 
     void MoveHead_KeyBoard()
     {
+        isRunning_head = true;
+
         head_rb.constraints = RigidbodyConstraints2D.None;
         head.transform.rotation = Quaternion.identity;
 
@@ -174,6 +185,8 @@ public class CaterpillarCtrl : MonoBehaviour
 
     void MoveTail_KeyBoard()
     {
+        isRunning_tail = true;
+
         tail_rb.constraints = RigidbodyConstraints2D.None;
         tail.transform.rotation = Quaternion.identity;
 
