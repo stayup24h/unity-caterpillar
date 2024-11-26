@@ -16,6 +16,7 @@ public class Spine : MonoBehaviour
 
     CircleCollider2D circleCollider;
     DistanceJoint2D distanceJoint;
+    DistanceJoint2D distanceJoint_HeadTail;
 
     Coroutine chainingCoroutine;
     Coroutine fixCoroutine;
@@ -25,13 +26,19 @@ public class Spine : MonoBehaviour
     {
         interval = 0.5f;
         circleCollider = GetComponent<CircleCollider2D>();
-        distanceJoint = GetComponent<DistanceJoint2D>();
+        DistanceJoint2D[] joints = GetComponents<DistanceJoint2D>();
+        if(joints.Length > 1)
+        {
+            distanceJoint_HeadTail = joints[1];
+        }
 
+        distanceJoint = joints[0];
         distanceJoint.distance = interval;
     }
 
     void Start()
     {
+        if(distanceJoint_HeadTail != null) distanceJoint_HeadTail.enabled = false;
         if(front != null) target = front.transform;
         isHeadTurn = GameManager.isHeadTurn;
 
@@ -44,7 +51,7 @@ public class Spine : MonoBehaviour
         if (isHeadTurn != GameManager.isHeadTurn)
         {
             isHeadTurn = GameManager.isHeadTurn;
-            TurnChange();
+            TurnChange(isHeadTurn);
         }
     }
 
@@ -68,13 +75,13 @@ public class Spine : MonoBehaviour
         yield return new WaitForFixedUpdate();
     }
 
-    void TurnChange()
+    void TurnChange(bool isHeadTurn)
     {
-        print("턴 바뀜     헤드 턴: " + GameManager.isHeadTurn);
+        print("턴 바뀜     헤드 턴: " + isHeadTurn);
 
         if (isBetween)
         {
-            if (GameManager.isHeadTurn)
+            if (isHeadTurn)
             {
                 target = front.transform;
                 distanceJoint.connectedBody = front.GetComponent<Rigidbody2D>();
@@ -89,15 +96,17 @@ public class Spine : MonoBehaviour
 
         else if (Head)
         {
-            if (GameManager.isHeadTurn)
+            if (isHeadTurn)
             {
                 distanceJoint.enabled = false;
-                if(chainingCoroutine != null) 
+                distanceJoint_HeadTail.enabled = false;
+                if (chainingCoroutine != null) 
                     StopCoroutine(chainingCoroutine);
             }
             else
             {
                 distanceJoint.enabled = true;
+                distanceJoint_HeadTail.enabled = true;
                 if (chainingCoroutine == null)
                     chainingCoroutine = StartCoroutine(Chaining());
             }
@@ -106,15 +115,17 @@ public class Spine : MonoBehaviour
 
         else if (Tail)
         {
-            if (!GameManager.isHeadTurn)
+            if (!isHeadTurn)
             {
                 distanceJoint.enabled = false;
+                distanceJoint_HeadTail.enabled = false;
                 if (chainingCoroutine != null) 
                     StopCoroutine(chainingCoroutine);
             }
             else
             {
                 distanceJoint.enabled = true;
+                distanceJoint_HeadTail.enabled = true;
                 if (chainingCoroutine == null)
                     chainingCoroutine = StartCoroutine(Chaining());
             }
