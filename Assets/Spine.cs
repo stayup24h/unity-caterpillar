@@ -14,6 +14,8 @@ public class Spine : MonoBehaviour
 
     public bool isBetween;
 
+    bool isCollision;
+
     CircleCollider2D circleCollider;
     DistanceJoint2D distanceJoint;
     DistanceJoint2D distanceJoint_HeadTail;
@@ -72,7 +74,26 @@ public class Spine : MonoBehaviour
 
     IEnumerator Fix()
     {
-        yield return new WaitForFixedUpdate();
+        while(isCollision != false)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Object")
+        {
+            isCollision = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Object")
+        {
+            isCollision = false;
+        }
     }
 
     void TurnChange(bool isHeadTurn)
@@ -96,14 +117,14 @@ public class Spine : MonoBehaviour
 
         else if (Head)
         {
-            if (isHeadTurn)
+            if (isHeadTurn)         //헤드턴일때
             {
                 distanceJoint.enabled = false;
                 distanceJoint_HeadTail.enabled = false;
                 if (chainingCoroutine != null) 
                     StopCoroutine(chainingCoroutine);
             }
-            else
+            else                    //헤드턴이 아닐때
             {
                 distanceJoint.enabled = true;
                 distanceJoint_HeadTail.enabled = true;
@@ -115,14 +136,14 @@ public class Spine : MonoBehaviour
 
         else if (Tail)
         {
-            if (!isHeadTurn)
+            if (!isHeadTurn)        //헤드턴이 아닐때
             {
                 distanceJoint.enabled = false;
                 distanceJoint_HeadTail.enabled = false;
                 if (chainingCoroutine != null) 
                     StopCoroutine(chainingCoroutine);
             }
-            else
+            else                    //헤드턴일때
             {
                 distanceJoint.enabled = true;
                 distanceJoint_HeadTail.enabled = true;

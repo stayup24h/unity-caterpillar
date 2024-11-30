@@ -1,92 +1,84 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class Chain : MonoBehaviour
 {
-    public int CaterpillarLenth = 7;
-    public int headIndex = 0;
-    public int tailIndex = 5;
-    public bool IsHeadTurn;
-    public GameObject[] spines;
+    DistanceJoint2D distanceJoint;
+    CircleCollider2D circleCollider;
+    public float radius;
+    public bool fixRotation;
 
-    Transform headTransform, tailTransform;
+    public GameObject front;
+    public GameObject back;
+    GameObject target;
+    Rigidbody2D targetRigidbody;
 
-    Transform[] chainLinks;
-    Rigidbody2D[] spineRBs;
-    DistanceJoint2D[] spineDistanceJoints;
-    HingeJoint2D[] spineHingeJoints;
-    [SerializeField]
-    Vector3[] positions;
 
-    LineRenderer lineRenderer;
 
+    Coroutine chainCoroutine;
     void Awake()
     {
-        IsHeadTurn = true;
-        Application.targetFrameRate = 30;
+        distanceJoint = GetComponent<DistanceJoint2D>();
+        circleCollider = GetComponent<CircleCollider2D>();
+        distanceJoint.distance = radius * 2;
 
-        chainLinks = new Transform[CaterpillarLenth];
-        spineRBs = new Rigidbody2D[CaterpillarLenth];
-        spineDistanceJoints = new DistanceJoint2D[CaterpillarLenth];
-        spineHingeJoints = new HingeJoint2D[CaterpillarLenth];
-        positions = new Vector3[CaterpillarLenth];
+        if (front != null)
+            target = front;
+        else if (back != null)
+            target = back;
+        else return;
+        targetRigidbody = target.GetComponent<Rigidbody2D>();
+        distanceJoint.connectedBody = targetRigidbody;
+
+        StartChain();
     }
 
-    void Start()
+    public void StartChain()
     {
-        lineRenderer = GetComponent<LineRenderer>();
+        if (chainCoroutine == null)
+            chainCoroutine = StartCoroutine(Chaining());
+    }
 
-        for (int i = 0; i < CaterpillarLenth; i++)
+    [ContextMenu("stop")]
+    public void StopChain()
+    {
+        if(chainCoroutine != null)
+            StopCoroutine(chainCoroutine);
+    }
+
+    public void ChangeTarget(bool isFront)
+    {
+        if (isFront && front != null)
         {
-            chainLinks[i] = spines[i].GetComponent<Transform>();
-            spineRBs[i] = spines[i].GetComponent<Rigidbody2D>();
-            spineDistanceJoints[i] = spines[i].GetComponent<DistanceJoint2D>();
-            spineHingeJoints[i] = spines[i].GetComponent<HingeJoint2D>();
+            target = front;
+            targetRigidbody = target.GetComponent<Rigidbody2D>();
+            distanceJoint.connectedBody = targetRigidbody;
         }
-
-        headTransform = chainLinks[0].transform;
-        tailTransform = chainLinks[tailIndex].transform;
-    }
-
-    void Update()
-    {
-        UpdateChain(1f);
-        UpdateLine();
-    }
-
-    void UpdateChain(float stiffness)
-    {
-        Vector3 previousPosition = headTransform.position;
-
-        for (int i = 1; i < CaterpillarLenth; i++)
+        else if (!isFront && back != null)
         {
-            Transform link = chainLinks[i];
-            Vector3 direction = (previousPosition - link.position).normalized;
-            link.position = previousPosition - direction * stiffness;
-            previousPosition = link.position;
+            target = back;
+            targetRigidbody = target.GetComponent<Rigidbody2D>();
+            distanceJoint.connectedBody = targetRigidbody;
         }
     }
 
-    
-
-    void UpdateLine()
+    IEnumerator Chaining()
     {
-        for (int i = 0; i < CaterpillarLenth; i++)
+        while (true)
         {
-            positions[i] = chainLinks[i].position;
-        }
-        lineRenderer.SetPositions(positions);
-    }
+            // 방향 벡터 계산
+            Vector3 direction = (target.transform.position - transform.position).normalized;
 
-    void TurnChange()
-    {
-        if (IsHeadTurn)
-        {
-            spineDistanceJoints[headIndex].enabled = false;
-            for (int i = 1; i < CaterpillarLenth; i++)
-            {
-                spineDistanceJoints[i].connectedBody = spineRBs[i - 1];
-            }
+            // 객체를 target 방향으로 회전 (2D에서 Z축 기준)
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            if(fixRotation) 
+                transform.rotation = Quaternion.Euler(0, 0, angle);
+
+            // 위치 업데이트
+            transform.position = target.transform.position - direction * radius * 2;
+
+            yield return new WaitForFixedUpdate();
         }
     }
 }

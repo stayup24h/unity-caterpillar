@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
         isHeadTurn = true;
     }
 
+    
+
     [ContextMenu("CCCCC")]
     public void Change()
     {

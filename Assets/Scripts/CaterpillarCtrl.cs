@@ -23,7 +23,7 @@ public class CaterpillarCtrl : MonoBehaviour
     Head_Tail _head, _tail;
 
     public State state;
-    private bool isHeadTurn;   // �Ӹ��� ���� ������ �����ư��� ó��
+    private bool isHeadTurn;   //  Ӹ                     ư    ó  
 
     private bool isRunning_head;
     public bool IsRunning_head { get => isRunning_head; }
@@ -34,7 +34,7 @@ public class CaterpillarCtrl : MonoBehaviour
     private bool isTailCoroutineRun = false;
 
     public float speed_KeyBoard = 1.0f;
-    public float speed_JoyStick = 4.0f;       // �Ӹ��� ���� �̵� �ӵ�
+    public float speed_JoyStick = 4.0f;       //  Ӹ          ̵   ӵ 
 
     Vector2 antiGravityForce;
     public float rotationSpeed;
@@ -97,11 +97,11 @@ public class CaterpillarCtrl : MonoBehaviour
     {
         if (isDefeat) return;
         if (isClear) return;
-        if(_head.dead || _tail.dead)
+        if (_head.dead || _tail.dead)
         {
             Defeat();
         }
-        if(_head.clear)
+        if (_head.clear)
         {
             Clear();
         }
@@ -133,7 +133,7 @@ public class CaterpillarCtrl : MonoBehaviour
             yield return null;
         }
 
-        if(flag) cameraCtrl.Start();
+        if (flag) cameraCtrl.Start();
         tail_rb.constraints = RigidbodyConstraints2D.FreezeAll;
 
         isTailCoroutineRun = false;
@@ -165,23 +165,23 @@ public class CaterpillarCtrl : MonoBehaviour
 
         Vector3 move = inputCtrl.GetMove();
 
-        //�� ������
+        //         
         if (move != Vector3.zero)
         {
-            // ����ȭ�� ������ ������ ���
+            //     ȭ                    
             float targetAngle = Mathf.Atan2(move.y, move.x) * Mathf.Rad2Deg;
 
-            // ���� ȸ�� �������� ��ǥ ������ õõ�� ȸ��
+            //      ȸ              ǥ        õõ   ȸ  
             float angle = Mathf.MoveTowardsAngle(eye.transform.eulerAngles.z, targetAngle, rotationSpeed * Time.deltaTime);
 
-            // ������Ʈ�� ȸ��
+            //       Ʈ   ȸ  
             eye.transform.rotation = Quaternion.Euler(0, 0, angle);
         }
 
-        // Ű���� ���⿡ ���� �Ӹ��� �̵�
+        // Ű        ⿡       Ӹ     ̵ 
         move = move * speed_KeyBoard * Time.deltaTime;
         head.transform.Translate(move);
-        head_rb.AddForce(antiGravityForce); //�߷� ���
+        head_rb.AddForce(antiGravityForce); // ߷     
     }
 
     void MoveTail_KeyBoard()
@@ -191,20 +191,20 @@ public class CaterpillarCtrl : MonoBehaviour
         tail_rb.constraints = RigidbodyConstraints2D.None;
         tail.transform.rotation = Quaternion.identity;
 
-        // Ű���� ���⿡ ���� ������ �̵�
+        // Ű        ⿡              ̵ 
         Vector3 move = inputCtrl.GetMove() * speed_KeyBoard * Time.deltaTime;
         tail.transform.Translate(move);
-        tail_rb.AddForce(antiGravityForce); //�߷� ���
+        tail_rb.AddForce(antiGravityForce); // ߷     
     }
     void MoveHead_JoyStick()
     {
         head_rb.constraints = RigidbodyConstraints2D.None;
         head.transform.rotation = Quaternion.identity;
 
-        // ���̽�ƽ ���⿡ ���� �Ӹ��� �̵�
+        //    ̽ ƽ    ⿡       Ӹ     ̵ 
         Vector3 move = new Vector3(joyStick.Direction.x, joyStick.Direction.y, 0) * speed_JoyStick * Time.deltaTime;
         head.transform.Translate(move);
-        head_rb.AddForce(antiGravityForce); //�߷� ���
+        head_rb.AddForce(antiGravityForce); // ߷     
     }
 
     void MoveTail_JoyStick()
@@ -212,10 +212,10 @@ public class CaterpillarCtrl : MonoBehaviour
         tail_rb.constraints = RigidbodyConstraints2D.None;
         tail.transform.rotation = Quaternion.identity;
 
-        // ���̽�ƽ ���⿡ ���� ������ �̵�
+        //    ̽ ƽ    ⿡              ̵ 
         Vector3 move = new Vector3(joyStick.Direction.x, joyStick.Direction.y, 0) * speed_JoyStick * Time.deltaTime;
         tail.transform.Translate(move);
-        tail_rb.AddForce(antiGravityForce); //�߷� ���
+        tail_rb.AddForce(antiGravityForce); // ߷     
     }
 
     public void Defeat()
