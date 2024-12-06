@@ -54,7 +54,7 @@ public class MovePlatformGimmick : MonoBehaviour
         {
             head.transform.position += deltaMove;
             tail.transform.position += deltaMove;
-            cameraCtrl.Start();
+            cameraCtrl.MoveCameraToMidPos();
         }
         else if (headAttached || tailAttached)
         {
@@ -98,7 +98,7 @@ public class MovePlatformGimmick : MonoBehaviour
                     }
                 }
             }
-            cameraCtrl.Start();
+            cameraCtrl.MoveCameraToMidPos();
         }
         prevPosition = transform.position;
         if (caterpillarCtrl.IsRunning_head) headMoved = true;
