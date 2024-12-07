@@ -76,10 +76,11 @@ public class CaterpillarCtrl : MonoBehaviour
             if (!isHeadCoroutineRun) StartCoroutine(FixHead());
             if (!isTailCoroutineRun) StartCoroutine(FixTail());
             state = State.wait;
+            cameraCtrl.MoveCamera(isHeadTurn);
         }
         else if (state == State.wait)
         {
-            ;
+            if (isHeadCoroutineRun && isTailCoroutineRun) cameraCtrl.MoveCameraToMidPos();
         }
         else if (state == State.head)
         {
@@ -125,7 +126,6 @@ public class CaterpillarCtrl : MonoBehaviour
     IEnumerator FixTail()
     {
         isTailCoroutineRun = true;
-        bool flag = isHeadTurn;
         _tail = tail.GetComponent<Head_Tail>();
         while (!_tail.isAttach)
         {
@@ -133,7 +133,6 @@ public class CaterpillarCtrl : MonoBehaviour
             yield return null;
         }
 
-        if (flag) cameraCtrl.Start();
         tail_rb.constraints = RigidbodyConstraints2D.FreezeAll;
 
         isTailCoroutineRun = false;
