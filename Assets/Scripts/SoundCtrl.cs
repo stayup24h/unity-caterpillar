@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundCtrl : MonoBehaviour
@@ -16,6 +16,7 @@ public class SoundCtrl : MonoBehaviour
 
     public void StartMoveSound()
     {
+        moveSound.clip = GameManager.Instance.GetMoveSFX();
         moveSound.Play();
     }
 

@@ -42,7 +42,7 @@ public class Spine : MonoBehaviour
     {
         if(distanceJoint_HeadTail != null) distanceJoint_HeadTail.enabled = false;
         if(front != null) target = front.transform;
-        isHeadTurn = GameManager.isHeadTurn;
+        isHeadTurn = GameManager.Instance.isHeadTurn;
 
         fixCoroutine = StartCoroutine(Fix());
         chainingCoroutine = StartCoroutine(Chaining());
@@ -50,9 +50,9 @@ public class Spine : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isHeadTurn != GameManager.isHeadTurn)
+        if (isHeadTurn != GameManager.Instance.isHeadTurn)
         {
-            isHeadTurn = GameManager.isHeadTurn;
+            isHeadTurn = GameManager.Instance.isHeadTurn;
             TurnChange(isHeadTurn);
         }
     }
