@@ -181,6 +181,7 @@ GameObject:
   - component: {fileID: 1016247330}
   - component: {fileID: 1016247329}
   - component: {fileID: 1016247328}
+  - component: {fileID: 1016247331}
   m_Layer: 0
   m_Name: Square (1)
   m_TagString: Object
@@ -297,13 +298,29 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1016247327}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.0019531467, w: 0.9999981}
   m_LocalPosition: {x: -23.189999, y: 0.31, z: 0}
   m_LocalScale: {x: 13.633, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.224}
+--- !u!114 &1016247331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016247327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4146fa58eb3e2904490812494f424a28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  property:
+    positionOffset: {x: -0.1, y: -0.1, z: 0}
+    scaleOffset: 1
+    color: {r: 0, g: 0, b: 0, a: 0.3}
 --- !u!1001 &1732715142
 PrefabInstance:
   m_ObjectHideFlags: 0

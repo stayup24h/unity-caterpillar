@@ -38,7 +38,7 @@ public class ShadowEffect : MonoBehaviour
 
     void LateUpdate()
     {
-        shadow.transform.localPosition = property.positionOffset;
+        shadow.transform.position = transform.position + property.positionOffset;
         shadow.transform.localScale = new Vector3(property.scaleOffset, property.scaleOffset, 1);
         shadowSprite.material.color = property.color;
     }
