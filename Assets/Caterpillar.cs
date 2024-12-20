@@ -1,29 +1,47 @@
 using JetBrains.Annotations;
+using System.Collections;
+using TreeEditor;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 
+public enum TurnEnum : int { waitHead, head, waitTail, tail, end }
 public class Caterpillar : MonoBehaviour
 {
-    public enum TurnEnum { wait, head, tail, end}
-    public TurnEnum turnState;
+    public static TurnEnum turnState;
 
-    public GameObject[] bodies;
+    public GameObject[] spines;
+    Spine[] spineClass;
+
     public GameObject head, tail;
+    Rigidbody2D headRB, tailRB;
+    int tailNum = 6;
+
+    Vector2 input;
+    GameObject moveTarget;
+    Rigidbody2D moveTargetRB;
 
     LineRenderer lineRenderer;
 
     Chain[] bodyChains = new Chain[9];
 
+    Coroutine waitCoroutine;
+
     void Awake()
     {
+        Application.targetFrameRate = 60;
         AddDistanceJoint();
         InitializeLineRenderer();
-        for (int i = 0; i < bodies.Length; i++)
-        {
-            bodyChains[i] = bodies[i].GetComponent<Chain>();
-        }
 
-        turnState = TurnEnum.wait;
+        spineClass = new Spine[spines.Length];
+        for(int i = 0; i < spines.Length; i++)
+            spineClass[i] = spines[i].GetComponent<Spine>();
+
+        head = spines[0]; tail = spines[tailNum];
+        headRB = head.GetComponent<Rigidbody2D>();
+        tailRB = tail.GetComponent<Rigidbody2D>();
+        turnState = TurnEnum.waitHead;
     }
 
     void AddDistanceJoint()
@@ -41,42 +59,145 @@ public class Caterpillar : MonoBehaviour
         tailDistanceJoint.distance = 3.5f;
     }
 
-    void FixedUpdate()
+    public void OnMove(InputValue value)
+    {
+        input = value.Get<Vector2>();
+
+    }
+
+    void Update()
     {
         switch (turnState)
         {
-            case TurnEnum.wait:
+            case TurnEnum.waitHead:
                 {
+                    if (input != Vector2.zero)
+                    {
+                        for (int i = 0; i < spines.Length; i++)
+                        {
+                            if (i == 0) spineClass[i].TurnChange_Head(turnState);
+                            else if (i == tailNum) spineClass[i].TurnChange_Tail(turnState);
+                            else spineClass[i].TurnChange(turnState);
+                        }
+                        moveTarget = head;
+                        moveTargetRB = headRB;
+                        turnState = TurnEnum.head;
+                    }
                     break;
                 }
             case TurnEnum.head:
                 {
+                    if(input == Vector2.zero)
+                    {
+                        if (waitCoroutine == null)
+                        {
+                            waitCoroutine = StartCoroutine(Wait());
+                        }
+                    }
+                    else
+                    {
+                        if (waitCoroutine != null)
+                        {
+                            StopCoroutine(waitCoroutine);
+                            waitCoroutine = null;
+                        }
+                    }
+                    break;
+                }
+            case TurnEnum.waitTail:
+                {
+                    if (input != Vector2.zero)
+                    {
+                        for (int i = 0; i < spines.Length; i++)
+                        {
+                            if (i == 0) spineClass[i].TurnChange_Head(turnState);
+                            else if (i == tailNum) spineClass[i].TurnChange_Tail(turnState);
+                            else spineClass[i].TurnChange(turnState);
+                        }
+                        moveTarget = tail;
+                        moveTargetRB = tailRB;
+                        turnState = TurnEnum.tail;
+                    }
                     break;
                 }
             case TurnEnum.tail:
                 {
+                    if (input == Vector2.zero)
+                    {
+                        if (waitCoroutine == null)
+                        {
+                            waitCoroutine = StartCoroutine(Wait());
+                        }
+                            
+                    }
+                    else
+                    {
+                        if (waitCoroutine != null)
+                        {
+                            StopCoroutine(waitCoroutine);
+                            waitCoroutine = null;
+                        }
+                            
+                    }
                     break;
                 }
             case TurnEnum.end:
                 {
+                    turnState = TurnEnum.waitHead;
                     break;
                 }
         }
         
     }
 
+    void Move()
+    {
+        Vector2 targetVelocity = Vector2.zero;
+
+        // ÏûÖÎ†•Ïù¥ ÏûàÎäî Í≤ΩÏö∞ Ïù¥Îèô ÏÜçÎèÑ ÏÑ§Ï†ï
+        if (input != Vector2.zero)
+        {
+            targetVelocity = new Vector2(input.x, input.y) * 5f;
+            moveTargetRB.linearVelocity = targetVelocity; // linearVelocity ÎåÄÏã† velocity ÏÇ¨Ïö© (Rigidbody2DÏóêÏÑú)
+        }
+
+        // ÏûÖÎ†•Ïóê Îî∞Îùº Ï¶âÏãú ÌöåÏ†Ñ
+        if (turnState == TurnEnum.head && input != Vector2.zero)
+        {
+            float angle = Mathf.Atan2(targetVelocity.y, targetVelocity.x) * Mathf.Rad2Deg;
+            moveTarget.transform.rotation = Quaternion.Euler(0, 0, angle); // Ï¶âÏãú ÌöåÏ†Ñ
+        }
+    }
+
+
+
+
+    IEnumerator Wait()
+    {
+        Debug.Log("Waiting for 1 second...");
+        yield return new WaitForSeconds(1f);
+
+        turnState++;
+        Debug.Log($"Turn changed to: {turnState}");
+
+        waitCoroutine = null;
+    }
+
+
+
     void LateUpdate()
     {
         UpdateLineRenderer();
+        if (turnState == TurnEnum.head || turnState == TurnEnum.tail) Move(); 
     }
 
     void InitializeLineRenderer()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.positionCount = bodies.Length * 2 + 3;
-        lineRenderer.startWidth = 0.1f; // º±¿« Ω√¿€ µŒ≤≤
-        lineRenderer.endWidth = 0.1f;   // º±¿« ≥° µŒ≤≤
-        lineRenderer.material = new Material(Shader.Find("Sprites/Default")); // ±‚∫ª ºŒ¿Ã¥ı
+        lineRenderer.positionCount = spines.Length * 2 + 3;
+        lineRenderer.startWidth = 0.1f;
+        lineRenderer.endWidth = 0.1f;
+        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
         lineRenderer.startColor = Color.green;
         lineRenderer.endColor = Color.green;
     }
@@ -90,23 +211,23 @@ public class Caterpillar : MonoBehaviour
         newPoint = head.transform.position + head.transform.right * 0.25f;
         lineRenderer.SetPosition(newPosition++, newPoint);
 
-        for (int i = 0; i < bodies.Length; i++)
+        for (int i = 0; i < spines.Length; i++)
         {
-            if (bodies[i] != null)
+            if (spines[i] != null)
             {
-                newPoint = bodies[i].transform.position - bodies[i].transform.up * 0.25f;
+                newPoint = spines[i].transform.position - spines[i].transform.up * 0.25f;
                 lineRenderer.SetPosition(newPosition++, newPoint);
             }
         }
 
-        newPoint = bodies[bodies.Length - 1].transform.position - bodies[bodies.Length - 1].transform.right * 0.25f;
+        newPoint = spines[spines.Length - 1].transform.position - spines[spines.Length - 1].transform.right * 0.25f;
         lineRenderer.SetPosition(newPosition++, newPoint);
 
-        for (int i = bodies.Length - 1; i >= 0; i--)
+        for (int i = spines.Length - 1; i >= 0; i--)
         {
-            if (bodies[i] != null)
+            if (spines[i] != null)
             {
-                newPoint = bodies[i].transform.position + bodies[i].transform.up * 0.25f;
+                newPoint = spines[i].transform.position + spines[i].transform.up * 0.25f;
                 lineRenderer.SetPosition(newPosition++, newPoint);
             }
         }
@@ -114,10 +235,5 @@ public class Caterpillar : MonoBehaviour
         newPoint = head.transform.position + head.transform.right * 0.25f;
         lineRenderer.SetPosition(newPosition++, newPoint);
 
-    }
-
-
-    void Move()
-    {
     }
 }

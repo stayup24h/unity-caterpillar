@@ -4,7 +4,6 @@ using UnityEngine;
 public class Spine : MonoBehaviour
 {
     static public float interval;
-    public bool isHeadTurn;
 
     public bool Head, Tail;
 
@@ -42,19 +41,8 @@ public class Spine : MonoBehaviour
     {
         if(distanceJoint_HeadTail != null) distanceJoint_HeadTail.enabled = false;
         if(front != null) target = front.transform;
-        isHeadTurn = GameManager.Instance.isHeadTurn;
 
-        fixCoroutine = StartCoroutine(Fix());
         chainingCoroutine = StartCoroutine(Chaining());
-    }
-
-    void FixedUpdate()
-    {
-        if (isHeadTurn != GameManager.Instance.isHeadTurn)
-        {
-            isHeadTurn = GameManager.Instance.isHeadTurn;
-            TurnChange(isHeadTurn);
-        }
     }
 
     IEnumerator Chaining()
@@ -69,14 +57,6 @@ public class Spine : MonoBehaviour
 
             Vector3 direction = (target.position - transform.position).normalized;
             transform.position = target.transform.position - direction * interval;
-        }
-    }
-
-    IEnumerator Fix()
-    {
-        while(isCollision != false)
-        {
-            yield return new WaitForFixedUpdate();
         }
     }
 
@@ -96,60 +76,56 @@ public class Spine : MonoBehaviour
         }
     }
 
-    void TurnChange(bool isHeadTurn)
+    public void TurnChange(TurnEnum turn)
     {
-        print("턴 바뀜     헤드 턴: " + isHeadTurn);
-
-        if (isBetween)
+        if (turn == TurnEnum.waitHead)
         {
-            if (isHeadTurn)
-            {
-                target = front.transform;
-                distanceJoint.connectedBody = front.GetComponent<Rigidbody2D>();
-            }
-            else
+            target = front.transform;
+            distanceJoint.connectedBody = front.GetComponent<Rigidbody2D>();
+        }
+        else
+        {
+            if(back != null)
             {
                 target = back.transform;
                 distanceJoint.connectedBody = back.GetComponent<Rigidbody2D>();
             }
         }
+    }
 
-
-        else if (Head)
+    public void TurnChange_Head(TurnEnum turn)
+    {
+        if (turn == TurnEnum.waitHead)         //헤드턴일때
         {
-            if (isHeadTurn)         //헤드턴일때
-            {
-                distanceJoint.enabled = false;
-                distanceJoint_HeadTail.enabled = false;
-                if (chainingCoroutine != null) 
-                    StopCoroutine(chainingCoroutine);
-            }
-            else                    //헤드턴이 아닐때
-            {
-                distanceJoint.enabled = true;
-                distanceJoint_HeadTail.enabled = true;
-                if (chainingCoroutine == null)
-                    chainingCoroutine = StartCoroutine(Chaining());
-            }
+            distanceJoint.enabled = false;
+            distanceJoint_HeadTail.enabled = false;
+            if (chainingCoroutine != null)
+                StopCoroutine(chainingCoroutine);
         }
-
-
-        else if (Tail)
+        else if(turn == TurnEnum.waitTail)                   //헤드턴이 아닐때
         {
-            if (!isHeadTurn)        //헤드턴이 아닐때
-            {
-                distanceJoint.enabled = false;
-                distanceJoint_HeadTail.enabled = false;
-                if (chainingCoroutine != null) 
-                    StopCoroutine(chainingCoroutine);
-            }
-            else                    //헤드턴일때
-            {
-                distanceJoint.enabled = true;
-                distanceJoint_HeadTail.enabled = true;
-                if (chainingCoroutine == null)
-                    chainingCoroutine = StartCoroutine(Chaining());
-            }
+            distanceJoint.enabled = true;
+            distanceJoint_HeadTail.enabled = true;
+            if (chainingCoroutine == null)
+                chainingCoroutine = StartCoroutine(Chaining());
+        }
+    }
+
+    public void TurnChange_Tail(TurnEnum turn)
+    {
+        if (turn == TurnEnum.waitTail)
+        {
+            distanceJoint.enabled = false;
+            distanceJoint_HeadTail.enabled = false;
+            if (chainingCoroutine != null)
+                StopCoroutine(chainingCoroutine);
+        }
+        else if (turn == TurnEnum.waitHead)
+        {
+            distanceJoint.enabled = true;
+            distanceJoint_HeadTail.enabled = true;
+            if (chainingCoroutine == null)
+                chainingCoroutine = StartCoroutine(Chaining());
         }
     }
 }
