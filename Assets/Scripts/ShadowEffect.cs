@@ -2,7 +2,6 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(SpriteRenderer))]
-[ExecuteInEditMode]
 public class ShadowEffect : MonoBehaviour
 {
     [System.Serializable]
