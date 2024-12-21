@@ -22,6 +22,7 @@ public class ScoreScript : MonoBehaviour
             if (caterpillarHead.position.x > currentScorePoint.position.x)
             {
                 scoreText.text = (int.Parse(scoreText.text)+1).ToString();
+                GameManager.Instance.ChangeSoundType();
                 prevScorePoint = currentScorePoint;
             }
         }

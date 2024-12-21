@@ -776,9 +776,45 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1997584479529756980, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997584479529756980, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997584479529756980, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3540678468045745715, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
       propertyPath: m_Name
       value: Caterpillar
+      objectReference: {fileID: 0}
+    - target: {fileID: 6460880440723278957, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6460880440723278957, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6460880440723278957, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8375901758338535264, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8375901758338535264, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8375901758338535264, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8707559468597613100, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
       propertyPath: joyStick
