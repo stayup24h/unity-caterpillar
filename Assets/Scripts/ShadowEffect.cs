@@ -1,12 +1,14 @@
 using UnityEngine;
 
+
 [RequireComponent(typeof(SpriteRenderer))]
+[ExecuteInEditMode]
 public class ShadowEffect : MonoBehaviour
 {
     [System.Serializable]
     public class Property
     {
-        public Vector3 positionOffset = new Vector3(-0.1f, -0.1f);
+        public Vector3 positionOffset = new Vector3(0.1f, -0.1f);
         [Min(0)] public float scaleOffset = 1;
         public Color color = new Color(0, 0, 0, 0.3f);
     }
