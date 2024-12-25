@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 6958004744647323408}
   - component: {fileID: 1136817916265777254}
   - component: {fileID: 3972444715348171696}
+  - component: {fileID: 5432882364077754431}
   m_Layer: 0
   m_Name: cone2_0
   m_TagString: Untagged
@@ -240,6 +241,22 @@ PolygonCollider2D:
       - {x: 0.095, y: -1.895}
       - {x: 0.185, y: -1.865}
   m_UseDelaunayMesh: 0
+--- !u!114 &5432882364077754431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789373480368712307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4146fa58eb3e2904490812494f424a28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  property:
+    positionOffset: {x: -0.1, y: -0.1, z: 0}
+    scaleOffset: 1
+    color: {r: 0, g: 0, b: 0, a: 0.3}
 --- !u!1 &2349564422546134997
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,6 +268,7 @@ GameObject:
   - component: {fileID: 3700682656403059355}
   - component: {fileID: 2564841361160987321}
   - component: {fileID: 1563676017509744010}
+  - component: {fileID: 4025162600457809907}
   m_Layer: 0
   m_Name: cone2_0 (3)
   m_TagString: Untagged
@@ -449,6 +467,22 @@ PolygonCollider2D:
       - {x: 0.095, y: -1.895}
       - {x: 0.185, y: -1.865}
   m_UseDelaunayMesh: 0
+--- !u!114 &4025162600457809907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2349564422546134997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4146fa58eb3e2904490812494f424a28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  property:
+    positionOffset: {x: -0.1, y: -0.1, z: 0}
+    scaleOffset: 1
+    color: {r: 0, g: 0, b: 0, a: 0.3}
 --- !u!1 &4830317200774565128
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,6 +494,7 @@ GameObject:
   - component: {fileID: 3533948789016504624}
   - component: {fileID: 2995299082319519826}
   - component: {fileID: 3173416868223195340}
+  - component: {fileID: 8416677363556168417}
   m_Layer: 0
   m_Name: cone2_0 (1)
   m_TagString: Untagged
@@ -658,6 +693,22 @@ PolygonCollider2D:
       - {x: 0.095, y: -1.895}
       - {x: 0.185, y: -1.865}
   m_UseDelaunayMesh: 0
+--- !u!114 &8416677363556168417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4830317200774565128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4146fa58eb3e2904490812494f424a28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  property:
+    positionOffset: {x: -0.1, y: -0.1, z: 0}
+    scaleOffset: 1
+    color: {r: 0, g: 0, b: 0, a: 0.3}
 --- !u!1 &5585937813216382070
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,6 +720,7 @@ GameObject:
   - component: {fileID: 5049771538391076380}
   - component: {fileID: 8226391987908689186}
   - component: {fileID: 1961398275212835139}
+  - component: {fileID: 1358912532357972223}
   m_Layer: 0
   m_Name: cone2_0 (2)
   m_TagString: Untagged
@@ -867,6 +919,22 @@ PolygonCollider2D:
       - {x: 0.095, y: -1.895}
       - {x: 0.185, y: -1.865}
   m_UseDelaunayMesh: 0
+--- !u!114 &1358912532357972223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5585937813216382070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4146fa58eb3e2904490812494f424a28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  property:
+    positionOffset: {x: -0.1, y: -0.1, z: 0}
+    scaleOffset: 1
+    color: {r: 0, g: 0, b: 0, a: 0.3}
 --- !u!1 &6459425507037332775
 GameObject:
   m_ObjectHideFlags: 0
@@ -912,7 +980,6 @@ GameObject:
   - component: {fileID: 1292371097529432005}
   - component: {fileID: 5408848142516197747}
   - component: {fileID: 3443796658134676414}
-  - component: {fileID: 1775525204736713760}
   m_Layer: 0
   m_Name: Object
   m_TagString: Object
@@ -1021,22 +1088,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1775525204736713760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8297959341337186993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4146fa58eb3e2904490812494f424a28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  property:
-    positionOffset: {x: -0.1, y: -0.1, z: 0}
-    scaleOffset: 1
-    color: {r: 0, g: 0, b: 0, a: 0.3}
 --- !u!1 &9016416329034740950
 GameObject:
   m_ObjectHideFlags: 0
