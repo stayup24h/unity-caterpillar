@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      tetris_green_0: -3986142615014100587
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

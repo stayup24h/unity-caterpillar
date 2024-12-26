@@ -8,8 +8,11 @@ public class GameManager : MonoBehaviour
 
     public bool isHeadTurn { get; private set; }
 
-    public int prevSoundType  = -1;
     public List<AudioClip>[] moveSFXArr = new List<AudioClip>[3]; // 0->climb, 1->bubble, 2->jump
+    public List<AudioClip> bgmLst = new List<AudioClip>();
+
+    private int prevSFXType = -1;
+    private int prevBgmType = -1;
 
     void Awake()
     {
@@ -33,6 +36,11 @@ public class GameManager : MonoBehaviour
             else if (clip.name.Contains("bubble")) moveSFXArr[1].Add(clip);
             else if (clip.name.Contains("climb")) moveSFXArr[0].Add(clip);
         }
+
+        foreach (AudioClip clip in Resources.LoadAll<AudioClip>("Audio/BGM"))
+        {
+            bgmLst.Add(clip);
+        }
     }
 
     public void ChangeSoundType()
@@ -40,9 +48,22 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             int soundType = Random.Range(0, 3); // 0->climb, 1->bubble, 2->jump
-            if (soundType != prevSoundType)
+            if (soundType != prevSFXType)
             {
-                prevSoundType = soundType;
+                prevSFXType = soundType;
+                break;
+            }
+        }
+    }
+
+    public void ChangeAndGetBGM()
+    {
+        while (true)
+        {
+            int soundType = Random.Range(0, bgmLst.Count);
+            if (soundType != prevBgmType)
+            {
+                prevBgmType = soundType;
                 break;
             }
         }
@@ -51,7 +72,7 @@ public class GameManager : MonoBehaviour
     public AudioClip GetMoveSFX()
     {
         ChangeSoundType();//test¿ë
-        List<AudioClip> clips = moveSFXArr[prevSoundType];
+        List<AudioClip> clips = moveSFXArr[prevSFXType];
         return clips[Random.Range(0, clips.Count)];
     }
     

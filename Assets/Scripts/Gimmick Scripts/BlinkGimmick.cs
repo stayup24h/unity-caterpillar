@@ -19,6 +19,8 @@ public class BlinkGimmick : MonoBehaviour
         {
             platforms[i] = transform.GetChild(i).gameObject;
         }
+
+        time = 0;
     }
 
     // Update is called once per frame

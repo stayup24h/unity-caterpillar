@@ -1546,7 +1546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0673072d70b02ed408dda425fd7790d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prevSoundType: -1
+  bgmLst: []
 --- !u!4 &1151278580
 Transform:
   m_ObjectHideFlags: 0
