@@ -30,9 +30,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2870151967380207575}
-  - {fileID: 1776690335924226967}
-  - {fileID: 8147658603576120969}
-  - {fileID: 3345519959059561123}
   - {fileID: 3729898753102335983}
   - {fileID: 7530604383271880449}
   m_Father: {fileID: 0}
@@ -82,7 +79,7 @@ GameObject:
   - component: {fileID: 1326259461774670134}
   m_Layer: 0
   m_Name: neddle_hour_0
-  m_TagString: Untagged
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,11 +93,11 @@ Transform:
   m_GameObject: {fileID: 1674211032442869871}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.116364956, y: -0.050789833, z: 0.016519018}
+  m_LocalPosition: {x: -3.6173363, y: -10.795771, z: -0.006486643}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2944354700130370078}
+  m_Father: {fileID: 2870151967380207575}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3792507445608564982
 SpriteRenderer:
@@ -314,7 +311,10 @@ Transform:
   m_LocalPosition: {x: 3.7337012, y: 10.744981, z: 0.02300566}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1776690335924226967}
+  - {fileID: 8147658603576120969}
+  - {fileID: 3345519959059561123}
   m_Father: {fileID: 2944354700130370078}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &6490026608505537556
@@ -358,7 +358,7 @@ GameObject:
   - component: {fileID: 2632062341859927318}
   m_Layer: 0
   m_Name: neddle_hour_0 (1)
-  m_TagString: Untagged
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -372,11 +372,11 @@ Transform:
   m_GameObject: {fileID: 6274040332234968699}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.123701, y: -0.28786469, z: 0.016519018}
+  m_LocalPosition: {x: 4.39, y: -11.0328455, z: -0.006486643}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2944354700130370078}
+  m_Father: {fileID: 2870151967380207575}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2915223750666011373
 SpriteRenderer:
@@ -544,7 +544,7 @@ GameObject:
   - component: {fileID: 312441016473304702}
   m_Layer: 0
   m_Name: neddle_min_0
-  m_TagString: Untagged
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -558,11 +558,11 @@ Transform:
   m_GameObject: {fileID: 6614870607543559467}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.7084851, w: 0.7057258}
-  m_LocalPosition: {x: -3.5769362, y: -0.090789795, z: 0.016519018}
+  m_LocalPosition: {x: -7.310638, y: -10.835771, z: -0.006486643}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2944354700130370078}
+  m_Father: {fileID: 2870151967380207575}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90.224}
 --- !u!212 &5919348823604068406
 SpriteRenderer:
