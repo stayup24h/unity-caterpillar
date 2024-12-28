@@ -157,7 +157,7 @@ public class Caterpillar : MonoBehaviour
         // 입력이 있는 경우 이동 속도 설정
         if (input != Vector2.zero)
         {
-            targetVelocity = new Vector2(input.x, input.y) * 5f;
+            targetVelocity = new Vector2(input.x, input.y) * 1f;
             moveTargetRB.linearVelocity = targetVelocity; // linearVelocity 대신 velocity 사용 (Rigidbody2D에서)
         }
 
