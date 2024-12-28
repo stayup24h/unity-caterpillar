@@ -109,13 +109,13 @@ public class MovePlatformGimmick : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name.Contains("Head") && (caterpillarCtrl.state != CaterpillarCtrl.State.head || !caterpillarCtrl.IsRunning_head))
+        if (collision.gameObject.name.Contains("Head") && (CaterpillarCtrl.turn != State.head || !caterpillarCtrl.IsRunning_head))
         {
             head_rb.constraints = RigidbodyConstraints2D.FreezeAll;
             tail_rb.constraints = RigidbodyConstraints2D.None;
             headAttached = true;
         }
-        if (collision.gameObject.name.Contains("Tail") && (caterpillarCtrl.state != CaterpillarCtrl.State.tail || !caterpillarCtrl.IsRunning_tail))
+        if (collision.gameObject.name.Contains("Tail") && (CaterpillarCtrl.turn != State.tail || !caterpillarCtrl.IsRunning_tail))
         {
             head_rb.constraints = RigidbodyConstraints2D.None;
             tail_rb.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -125,8 +125,8 @@ public class MovePlatformGimmick : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.name.Contains("Head") && headMoved && (caterpillarCtrl.state != CaterpillarCtrl.State.head || !caterpillarCtrl.IsRunning_head)) headAttached = true;
-        if (collision.gameObject.name.Contains("Tail") && tailMoved && (caterpillarCtrl.state != CaterpillarCtrl.State.tail || !caterpillarCtrl.IsRunning_head)) tailAttached = true;
+        if (collision.gameObject.name.Contains("Head") && headMoved && (CaterpillarCtrl.turn != State.head || !caterpillarCtrl.IsRunning_head)) headAttached = true;
+        if (collision.gameObject.name.Contains("Tail") && tailMoved && (CaterpillarCtrl.turn != State.tail || !caterpillarCtrl.IsRunning_head)) tailAttached = true;
     }
 
     private void OnCollisionExit2D(Collision2D collision)

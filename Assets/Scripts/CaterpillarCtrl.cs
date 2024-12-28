@@ -1,29 +1,31 @@
 using JetBrains.Annotations;
+using NUnit.Framework.Interfaces;
 using System.Collections;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
+public enum State : int { start, wait_head, head, wait_tail, tail, end }
 public class CaterpillarCtrl : MonoBehaviour
 {
-    public enum State { none, wait, head, tail }
-
-    public GameObject[] bone = new GameObject[9];
-    private Rigidbody2D[] bone_rb = new Rigidbody2D[9];
+    public static State turn;
+    
     public GameObject eye;
 
-    private GameObject head, tail;
-    private Rigidbody2D head_rb, tail_rb;
+    public GameObject head, tail;
+    GameObject target;
+    Rigidbody2D head_rb, tail_rb;
+    Rigidbody2D target_rb;
 
-    public InputCtrl inputCtrl;
     public Joystick joyStick;
     public CameraCtrl cameraCtrl;
 
     public GameObject DefeatPanel;
     public GameObject ClearPanel;
-
     Head_Tail _head, _tail;
-
-    public State state;
-    private bool isHeadTurn;   //  Ӹ                     ư    ó  
+    
+    
+    private bool isHeadTurn;
 
     private bool isRunning_head;
     public bool IsRunning_head { get => isRunning_head; }
@@ -36,16 +38,20 @@ public class CaterpillarCtrl : MonoBehaviour
     public float speed_KeyBoard = 1.0f;
     public float speed_JoyStick = 4.0f;       //  Ӹ          ̵   ӵ 
 
+    Vector2 input;
     Vector2 antiGravityForce;
     public float rotationSpeed;
 
     bool isDefeat, isClear;
 
+    Coroutine waitCoroutine;
+    Coroutine fixHead, fixTail;
+
     [SerializeField] private SoundCtrl soundCtrl;
     [SerializeField] private BestScoreManager bestScoreManager;
     void Awake()
     {
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 30;
         isDefeat = false;
         isClear = false;
         rotationSpeed = 90f;
@@ -54,43 +60,156 @@ public class CaterpillarCtrl : MonoBehaviour
         isRunning_head = false;
         isRunning_tail = false;
         isHeadTurn = false;
-        state = State.none;
+        turn = State.start;
 
-        for (int i = 0; i < bone.Length; i++)
-        {
-            bone_rb[i] = bone[i].GetComponent<Rigidbody2D>();
-        }
-        head = bone[0]; tail = bone[6];
-        head_rb = bone_rb[0]; tail_rb = bone_rb[6];
-
-        tail_rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        head_rb = head.GetComponent<Rigidbody2D>();
+        tail_rb = tail.GetComponent<Rigidbody2D>();
 
         _head = head.GetComponent<Head_Tail>();
         _tail = tail.GetComponent<Head_Tail>();
+
+        input = Vector2.zero;
+
+
+        Bone.head = head.transform;
+        Bone.tail = tail.transform;
     }
 
-    void FixedUpdate()
+    public void OnMove(InputValue value)
     {
-        if (state == State.none)
+        input = value.Get<Vector2>();
+    }
+
+    void Update()
+    {
+        Bone.Calculate(input);
+        switch (turn)
         {
-            if (!isHeadCoroutineRun) StartCoroutine(FixHead());
-            if (!isTailCoroutineRun) StartCoroutine(FixTail());
-            state = State.wait;
-            cameraCtrl.MoveCamera(isHeadTurn);
+            case State.start:
+                {
+                    tail_rb.constraints = RigidbodyConstraints2D.FreezeAll;
+                    waitCoroutine = null; fixHead = null; fixTail = null;
+                    turn = State.wait_head;
+                    break;
+                }
+            case State.wait_head:
+                {
+                    tail_rb.gravityScale = 1f;
+                    if (input != Vector2.zero)
+                    {
+                        head_rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                        head.transform.rotation = Quaternion.identity;          
+                        turn = State.head;
+                        head_rb.gravityScale = 0f;
+
+                        target = head;
+                        target_rb = head_rb;
+                    }
+                    break;
+                }
+            case State.head:
+                {
+                    Move();
+                    if (input == Vector2.zero)
+                    {
+                        if (waitCoroutine == null)
+                        {
+                            waitCoroutine = StartCoroutine(Wait());
+                            head_rb.gravityScale = 1f;
+                        }
+                            
+                    }
+                    else
+                    {
+                        if (waitCoroutine != null)
+                        {
+                            StopCoroutine(waitCoroutine);
+                            head_rb.gravityScale = 0f;
+                            head_rb.totalForce = Vector2.zero;
+                            
+                            waitCoroutine = null;
+                        }
+                    }
+                    break;
+                }
+            case State.wait_tail:
+                {
+                    head_rb.gravityScale = 1f;
+                    if (input != Vector2.zero)
+                    {
+                        tail_rb.constraints = RigidbodyConstraints2D.None;
+                        tail.transform.rotation = Quaternion.identity;
+                        target = tail;
+                        target_rb = tail_rb;
+                        turn = State.tail;
+                        target_rb.gravityScale = 0f;
+                    }
+                    break;
+                }
+            case State.tail:
+                {
+                    Move();
+                    if (input == Vector2.zero)
+                    {
+                        if (waitCoroutine == null)
+                            waitCoroutine = StartCoroutine(Wait());
+                    }
+                    else
+                    {
+                        if (waitCoroutine != null)
+                        {
+                            StopCoroutine(waitCoroutine);
+                            waitCoroutine = null;
+                        }
+                    }
+                    break;
+                }
+            case State.end:
+                {
+                    turn = State.wait_head;
+                    break;
+                }
         }
-        else if (state == State.wait)
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(1f);
+
+        if (turn == State.head) fixHead = StartCoroutine(FixHead());
+        else if (turn == State.tail) fixTail = StartCoroutine(FixTail());
+        turn++;
+
+        waitCoroutine = null;
+    }
+
+    void Move()
+    {
+        // 사용자 입력으로부터 이동 방향을 계산 (예: 입력 처리 추가)
+        Vector2 move = input;
+        
+        if (Vector2.Distance(head.transform.position, tail.transform.position) >= 6f)
         {
-            if (isHeadCoroutineRun && isTailCoroutineRun) cameraCtrl.MoveCameraToMidPos();
+            Vector2 direction = (head.transform.position - tail.transform.position).normalized;
+            move *= 0.2f;
+            //if (Vector2.Distance(move, direction) < 1f) return;
         }
-        else if (state == State.head)
+
+        // 이동 벡터가 0이 아닌 경우에만 회전 및 이동 수행
+        if (move != Vector2.zero)
         {
-            //MoveHead_JoyStick();
-            MoveHead_KeyBoard();
-        }
-        else
-        {
-            //MoveTail_JoyStick();
-            MoveTail_KeyBoard();
+            // 목표 각도 계산
+            float angle = Mathf.Atan2(move.y, move.x) * Mathf.Rad2Deg;
+
+            // 현재 각도에서 목표 각도로 부드럽게 회전
+            head.transform.rotation = Quaternion.Euler(0, 0, angle); // Z축 회전 적용
+
+            // 타겟 오브젝트 회전 적용
+            target.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+            // 이동 거리 계산 및 이동 수행 (월드 좌표계 기준으로)
+            Vector2 moveDelta = move.normalized * speed_KeyBoard * Time.deltaTime;
+            target.transform.Translate(new Vector3(moveDelta.x, moveDelta.y, 0), Space.World);
         }
     }
 
@@ -110,7 +229,6 @@ public class CaterpillarCtrl : MonoBehaviour
 
     IEnumerator FixHead()
     {
-        isHeadCoroutineRun = true;
         _head = head.GetComponent<Head_Tail>();
         while (!_head.isAttach)
         {
@@ -118,92 +236,38 @@ public class CaterpillarCtrl : MonoBehaviour
             yield return null;
         }
         head_rb.constraints = RigidbodyConstraints2D.FreezeAll;
-
-        isHeadCoroutineRun = false;
-        isRunning_head = false;
+        fixHead = null;
     }
 
     IEnumerator FixTail()
     {
-        isTailCoroutineRun = true;
         _tail = tail.GetComponent<Head_Tail>();
         while (!_tail.isAttach)
         {
             tail.transform.rotation = Quaternion.identity;
             yield return null;
         }
-
         tail_rb.constraints = RigidbodyConstraints2D.FreezeAll;
-
-        isTailCoroutineRun = false;
-        isRunning_tail = false;
+        fixTail = null;
     }
 
     public void TurnStart()
     {
         if (isHeadTurn)
         {
-            state = State.head;
+            turn = State.head;
         }
-        else state = State.tail;
+        else turn = State.tail;
     }
 
-    public void TurnEnd()
-    {
-        state = State.none;
-        isHeadTurn = !isHeadTurn;
-        soundCtrl.StartMoveSound();
-    }
-
-    void MoveHead_KeyBoard()
-    {
-        isRunning_head = true;
-
-        head_rb.constraints = RigidbodyConstraints2D.None;
-        head.transform.rotation = Quaternion.identity;
-
-        Vector3 move = inputCtrl.GetMove();
-
-        //         
-        if (move != Vector3.zero)
-        {
-            //     ȭ                    
-            float targetAngle = Mathf.Atan2(move.y, move.x) * Mathf.Rad2Deg;
-
-            //      ȸ              ǥ        õõ   ȸ  
-            float angle = Mathf.MoveTowardsAngle(eye.transform.eulerAngles.z, targetAngle, rotationSpeed * Time.deltaTime);
-
-            //       Ʈ   ȸ  
-            eye.transform.rotation = Quaternion.Euler(0, 0, angle);
-        }
-
-        // Ű        ⿡       Ӹ     ̵ 
-        move = move * speed_KeyBoard * Time.deltaTime;
-        head.transform.Translate(move);
-        head_rb.AddForce(antiGravityForce); // ߷     
-    }
-
-    void MoveTail_KeyBoard()
-    {
-        isRunning_tail = true;
-
-        tail_rb.constraints = RigidbodyConstraints2D.None;
-        tail.transform.rotation = Quaternion.identity;
-
-        // Ű        ⿡              ̵ 
-        Vector3 move = inputCtrl.GetMove() * speed_KeyBoard * Time.deltaTime;
-        tail.transform.Translate(move);
-        tail_rb.AddForce(antiGravityForce); // ߷     
-    }
     void MoveHead_JoyStick()
     {
         head_rb.constraints = RigidbodyConstraints2D.None;
         head.transform.rotation = Quaternion.identity;
 
-        //    ̽ ƽ    ⿡       Ӹ     ̵ 
         Vector3 move = new Vector3(joyStick.Direction.x, joyStick.Direction.y, 0) * speed_JoyStick * Time.deltaTime;
         head.transform.Translate(move);
-        head_rb.AddForce(antiGravityForce); // ߷     
+        head_rb.AddForce(antiGravityForce);   
     }
 
     void MoveTail_JoyStick()
@@ -211,10 +275,9 @@ public class CaterpillarCtrl : MonoBehaviour
         tail_rb.constraints = RigidbodyConstraints2D.None;
         tail.transform.rotation = Quaternion.identity;
 
-        //    ̽ ƽ    ⿡              ̵ 
         Vector3 move = new Vector3(joyStick.Direction.x, joyStick.Direction.y, 0) * speed_JoyStick * Time.deltaTime;
         tail.transform.Translate(move);
-        tail_rb.AddForce(antiGravityForce); // ߷     
+        tail_rb.AddForce(antiGravityForce); 
     }
 
     public void Defeat()
