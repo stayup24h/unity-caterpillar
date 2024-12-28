@@ -51,7 +51,7 @@ public class CaterpillarCtrl : MonoBehaviour
     [SerializeField] private BestScoreManager bestScoreManager;
     void Awake()
     {
-        Application.targetFrameRate = 30;
+        Application.targetFrameRate = 60;
         isDefeat = false;
         isClear = false;
         rotationSpeed = 90f;
