@@ -5,12 +5,10 @@ using UnityEngine.EventSystems;
 
 public class FloatingJoystick : Joystick
 {
-    public CaterpillarCtrl caterpillarCtrl;
     protected override void Start()
     {
         base.Start();
         background.gameObject.SetActive(false);
-        caterpillarCtrl = FindAnyObjectByType<CaterpillarCtrl>();
     }
 
     public override void OnPointerDown(PointerEventData eventData)

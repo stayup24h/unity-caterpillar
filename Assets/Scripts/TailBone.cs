@@ -9,7 +9,7 @@ public class TailBone : Bone
 
     protected override void Update()
     {
-        Move();
+        
     }
 
     private void Move()

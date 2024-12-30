@@ -3,19 +3,21 @@ using NUnit.Framework.Interfaces;
 using System.Collections;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.InputSystem;
 
 public enum State : int { start, wait_head, head, wait_tail, tail, end }
 public class CaterpillarCtrl : MonoBehaviour
 {
     public static State turn;
-    
+
     public GameObject eye;
 
     public GameObject head, tail;
-    GameObject target;
+    public GameObject[] bone;
     Rigidbody2D head_rb, tail_rb;
-    Rigidbody2D target_rb;
+
+    public FollowTarget[] followTarget = new FollowTarget[9];
 
     public Joystick joyStick;
     public CameraCtrl cameraCtrl;
@@ -23,8 +25,9 @@ public class CaterpillarCtrl : MonoBehaviour
     public GameObject DefeatPanel;
     public GameObject ClearPanel;
     Head_Tail _head, _tail;
-    
-    
+
+
+    public float moveSpeed;
     private bool isHeadTurn;
 
     private bool isRunning_head;
@@ -38,6 +41,8 @@ public class CaterpillarCtrl : MonoBehaviour
     public float speed_KeyBoard = 1.0f;
     public float speed_JoyStick = 4.0f;       //  Ӹ          ̵   ӵ 
 
+    Vector3[] testVectors = new Vector3[9];
+    float error = 0.1f;
     Vector2 input;
     Vector2 antiGravityForce;
     public float rotationSpeed;
@@ -45,6 +50,7 @@ public class CaterpillarCtrl : MonoBehaviour
     bool isDefeat, isClear;
 
     Coroutine waitCoroutine;
+    Coroutine turnCoroutine;
     Coroutine fixHead, fixTail;
 
     [SerializeField] private SoundCtrl soundCtrl;
@@ -88,7 +94,7 @@ public class CaterpillarCtrl : MonoBehaviour
             case State.start:
                 {
                     tail_rb.constraints = RigidbodyConstraints2D.FreezeAll;
-                    waitCoroutine = null; fixHead = null; fixTail = null;
+                    waitCoroutine = null; turnCoroutine = null; fixHead = null; fixTail = null;
                     turn = State.wait_head;
                     break;
                 }
@@ -98,12 +104,9 @@ public class CaterpillarCtrl : MonoBehaviour
                     if (input != Vector2.zero)
                     {
                         head_rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-                        head.transform.rotation = Quaternion.identity;          
-                        turn = State.head;
                         head_rb.gravityScale = 0f;
-
-                        target = head;
-                        target_rb = head_rb;
+                        head.transform.rotation = Quaternion.identity;
+                        turn = State.head;
                     }
                     break;
                 }
@@ -112,22 +115,20 @@ public class CaterpillarCtrl : MonoBehaviour
                     Move();
                     if (input == Vector2.zero)
                     {
-                        if (waitCoroutine == null)
+                        if (turnCoroutine == null)
                         {
-                            waitCoroutine = StartCoroutine(Wait());
+                            turnCoroutine = StartCoroutine(TurnEnd());
                             head_rb.gravityScale = 1f;
                         }
-                            
                     }
                     else
                     {
-                        if (waitCoroutine != null)
+                        if (turnCoroutine != null)
                         {
-                            StopCoroutine(waitCoroutine);
+                            StopCoroutine(turnCoroutine);
+                            turnCoroutine = null;
                             head_rb.gravityScale = 0f;
                             head_rb.totalForce = Vector2.zero;
-                            
-                            waitCoroutine = null;
                         }
                     }
                     break;
@@ -138,11 +139,9 @@ public class CaterpillarCtrl : MonoBehaviour
                     if (input != Vector2.zero)
                     {
                         tail_rb.constraints = RigidbodyConstraints2D.None;
+                        tail_rb.gravityScale = 0f;
                         tail.transform.rotation = Quaternion.identity;
-                        target = tail;
-                        target_rb = tail_rb;
-                        turn = State.tail;
-                        target_rb.gravityScale = 0f;
+                        turn = State.tail;  
                     }
                     break;
                 }
@@ -151,15 +150,20 @@ public class CaterpillarCtrl : MonoBehaviour
                     Move();
                     if (input == Vector2.zero)
                     {
-                        if (waitCoroutine == null)
-                            waitCoroutine = StartCoroutine(Wait());
+                        if (turnCoroutine == null)
+                        {
+                            turnCoroutine = StartCoroutine(TurnEnd());
+                            tail_rb.gravityScale = 1f;
+                        }
                     }
                     else
                     {
-                        if (waitCoroutine != null)
+                        if (turnCoroutine != null)
                         {
-                            StopCoroutine(waitCoroutine);
-                            waitCoroutine = null;
+                            StopCoroutine(turnCoroutine);
+                            turnCoroutine = null;
+                            tail_rb.gravityScale = 0f;
+                            tail_rb.totalForce = Vector2.zero;
                         }
                     }
                     break;
@@ -171,48 +175,6 @@ public class CaterpillarCtrl : MonoBehaviour
                 }
         }
     }
-
-    IEnumerator Wait()
-    {
-        yield return new WaitForSeconds(1f);
-
-        if (turn == State.head) fixHead = StartCoroutine(FixHead());
-        else if (turn == State.tail) fixTail = StartCoroutine(FixTail());
-        turn++;
-        cameraCtrl.MoveCamera();
-        waitCoroutine = null;
-    }
-
-    void Move()
-    {
-        // 사용자 입력으로부터 이동 방향을 계산 (예: 입력 처리 추가)
-        Vector2 move = input;
-        
-        if (Vector2.Distance(head.transform.position, tail.transform.position) >= 6f)
-        {
-            Vector2 direction = (head.transform.position - tail.transform.position).normalized;
-            move *= 0.2f;
-            //if (Vector2.Distance(move, direction) < 1f) return;
-        }
-
-        // 이동 벡터가 0이 아닌 경우에만 회전 및 이동 수행
-        if (move != Vector2.zero)
-        {
-            // 목표 각도 계산
-            float angle = Mathf.Atan2(move.y, move.x) * Mathf.Rad2Deg;
-
-            // 현재 각도에서 목표 각도로 부드럽게 회전
-            head.transform.rotation = Quaternion.Euler(0, 0, angle); // Z축 회전 적용
-
-            // 타겟 오브젝트 회전 적용
-            target.transform.rotation = Quaternion.Euler(0, 0, angle);
-
-            // 이동 거리 계산 및 이동 수행 (월드 좌표계 기준으로)
-            Vector2 moveDelta = move.normalized * speed_KeyBoard * Time.deltaTime;
-            target.transform.Translate(new Vector3(moveDelta.x, moveDelta.y, 0), Space.World);
-        }
-    }
-
     private void LateUpdate()
     {
         if (isDefeat) return;
@@ -227,6 +189,125 @@ public class CaterpillarCtrl : MonoBehaviour
         }
     }
 
+    float Distance(int a, int b) { return Vector3.Distance(testVectors[a],testVectors[b]); }
+    void Move()
+    {
+        // 사용자 입력으로 이동 벡터를 계산 (예: 입력 처리 추가)
+        Vector3 moveVector = input * Time.deltaTime * moveSpeed;
+
+        if (turn == State.head || turn == State.wait_tail)
+        {
+            for(int i = 0; i < 9; i++)
+            {
+                testVectors[i] = bone[i].transform.position;
+            }
+
+            // head 이동
+            testVectors[0] += moveVector / Distance(0, 1);
+
+            // bone 간 이동 계산
+            for (int i = 1; i < 6; i++)
+            {
+                Vector3 direction = (testVectors[i-1] - testVectors[i]).normalized;
+                float distance = Distance(i, i - 1);
+                float degree = (Distance(i, i + 1) > 1f + error) ? 7f : 10f;
+                testVectors[i] += direction * (distance - 1f) * Time.deltaTime * degree;
+            }
+
+            // 모든 bone 간 거리가 조건에 부합하는지 확인
+            for (int i = 5; i > 0; i--) //5,4,3,2,1
+            {
+                if (Distance(i, i + 1) > 1f + error)
+                {
+                    testVectors[i] += (testVectors[i + 1] - testVectors[i]) * Time.deltaTime;
+                }
+            }
+
+            // 모든 bone 위치 업데이트
+            for (int i = 0; i < 6; i++)
+            {
+                bone[i].transform.position = testVectors[i];
+            }
+
+            // 이동 벡터가 0이 아닌 경우에만 회전 및 이동 수행
+            if (moveVector != Vector3.zero)
+            {
+                // 목표 각도 계산
+                float angle = Mathf.Atan2(moveVector.y, moveVector.x) * Mathf.Rad2Deg;
+
+                // 현재 각도에서 목표 각도로 부드럽게 회전
+                head.transform.rotation = Quaternion.Euler(0, 0, angle); // Z축 회전 적용
+            }
+        }
+
+        else if(turn == State.tail || turn == State.wait_head)
+        {
+            Vector3 directionVector = (head.transform.position - tail.transform.position);
+            Vector3 normalVector = new Vector3(-directionVector.y, directionVector.x, 0).normalized;
+            float dist = directionVector.magnitude;
+
+            for (int i = 0; i < 9; i++)
+            {
+                testVectors[i] = bone[i].transform.position;
+            }
+
+            // tail 이동
+            testVectors[6] += moveVector / Distance(6, 5);
+
+            // bone 간 이동 계산
+            for (int i = 5; i > 0; i--)
+            {
+                Vector3 direction = (testVectors[i + 1] - testVectors[i]).normalized;
+                float distance = Distance(i, i + 1);
+                float degree = (Distance(i, i - 1) > 1f + error) ? 5f : 10f;
+                testVectors[i] += direction * (distance - 1f) * Time.deltaTime * degree;
+                if (distance < 1f + error && Distance(i, i - 1) < 1f + error && dist < 5.5f && dist > 1.5f)
+                    testVectors[i] += normalVector * Time.deltaTime * Mathf.Sin(Mathf.PI * i / 6) * degree / dist;
+            }
+
+            
+
+            // 모든 bone 간 거리가 조건에 부합하는지 확인
+            for (int i = 1; i < 6; i++) //1,2,3,4,5
+            {
+                if (Distance(i, i - 1) > 1f + error)
+                {
+                    testVectors[i] += (testVectors[i - 1] - testVectors[i]) * Time.deltaTime * 2;
+                }
+            }
+
+            // 모든 bone 위치 업데이트
+            for (int i = 1; i < 9; i++)
+            {
+                bone[i].transform.position = testVectors[i];
+            }
+        }
+
+        for(int i = 7; i < 9; i++)
+        {
+            Vector3 direction = (testVectors[i - 1] - testVectors[i]).normalized;
+            float distance = Distance(i, i - 1);
+            testVectors[i] += direction * (distance - 1f) * Time.deltaTime * 10f;
+        }
+        bone[7].transform.position = testVectors[7];
+        bone[8].transform.position = testVectors[8];
+    }
+
+    IEnumerator TurnEnd()
+    {
+        yield return new WaitForSeconds(1f);
+        if (turn == State.head)
+        {
+            if(fixHead == null) fixHead = StartCoroutine(FixHead());
+        }
+        else
+        {
+            if (fixTail == null) fixTail = StartCoroutine(FixTail());
+        }
+        turn++;
+        cameraCtrl.MoveCamera();
+    }
+
     IEnumerator FixHead()
     {
         _head = head.GetComponent<Head_Tail>();
@@ -236,7 +317,6 @@ public class CaterpillarCtrl : MonoBehaviour
             yield return null;
         }
         head_rb.constraints = RigidbodyConstraints2D.FreezeAll;
-        fixHead = null;
     }
 
     IEnumerator FixTail()
@@ -248,7 +328,6 @@ public class CaterpillarCtrl : MonoBehaviour
             yield return null;
         }
         tail_rb.constraints = RigidbodyConstraints2D.FreezeAll;
-        fixTail = null;
     }
 
     public void TurnStart()
@@ -258,26 +337,6 @@ public class CaterpillarCtrl : MonoBehaviour
             turn = State.head;
         }
         else turn = State.tail;
-    }
-
-    void MoveHead_JoyStick()
-    {
-        head_rb.constraints = RigidbodyConstraints2D.None;
-        head.transform.rotation = Quaternion.identity;
-
-        Vector3 move = new Vector3(joyStick.Direction.x, joyStick.Direction.y, 0) * speed_JoyStick * Time.deltaTime;
-        head.transform.Translate(move);
-        head_rb.AddForce(antiGravityForce);   
-    }
-
-    void MoveTail_JoyStick()
-    {
-        tail_rb.constraints = RigidbodyConstraints2D.None;
-        tail.transform.rotation = Quaternion.identity;
-
-        Vector3 move = new Vector3(joyStick.Direction.x, joyStick.Direction.y, 0) * speed_JoyStick * Time.deltaTime;
-        tail.transform.Translate(move);
-        tail_rb.AddForce(antiGravityForce); 
     }
 
     public void Defeat()

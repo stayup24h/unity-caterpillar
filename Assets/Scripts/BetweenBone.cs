@@ -15,6 +15,7 @@ public class BetweenBone : Bone
 
     protected override void Update()
     {
+        /*
         base.Update();
 
         if (CaterpillarCtrl.turn == State.head || CaterpillarCtrl.turn == State.wait_tail)
@@ -25,6 +26,7 @@ public class BetweenBone : Bone
         {
             Move_tailTurn();
         }
+        */
     }
 
 

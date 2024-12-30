@@ -36,8 +36,10 @@ public class Bone : MonoBehaviour
 
     protected virtual void Update()
     {
+        /*
         if (input == Vector2.zero) rb.gravityScale = 0f;
         else rb.gravityScale = 0.01f;
+        */
     }
 
     public static void Calculate(Vector2 input)
