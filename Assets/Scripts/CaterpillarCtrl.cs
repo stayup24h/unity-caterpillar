@@ -51,7 +51,7 @@ public class CaterpillarCtrl : MonoBehaviour
     [SerializeField] private BestScoreManager bestScoreManager;
     void Awake()
     {
-        Application.targetFrameRate = 30;
+        Application.targetFrameRate = 60;
         isDefeat = false;
         isClear = false;
         rotationSpeed = 90f;
@@ -179,7 +179,7 @@ public class CaterpillarCtrl : MonoBehaviour
         if (turn == State.head) fixHead = StartCoroutine(FixHead());
         else if (turn == State.tail) fixTail = StartCoroutine(FixTail());
         turn++;
-
+        cameraCtrl.MoveCamera();
         waitCoroutine = null;
     }
 
