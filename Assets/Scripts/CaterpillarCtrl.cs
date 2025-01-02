@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using NUnit.Framework.Interfaces;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Analytics;
@@ -261,11 +262,7 @@ public class CaterpillarCtrl : MonoBehaviour
                 float distance = Distance(i, i + 1);
                 float degree = (Distance(i, i - 1) > 1f + error) ? 5f : 10f;
                 testVectors[i] += direction * (distance - 1f) * Time.deltaTime * degree;
-                if (distance < 1f + error && Distance(i, i - 1) < 1f + error && dist < 5.5f && dist > 1.5f)
-                    testVectors[i] += normalVector * Time.deltaTime * Mathf.Sin(Mathf.PI * i / 6) * degree / dist;
             }
-
-            
 
             // 모든 bone 간 거리가 조건에 부합하는지 확인
             for (int i = 1; i < 6; i++) //1,2,3,4,5
@@ -273,6 +270,11 @@ public class CaterpillarCtrl : MonoBehaviour
                 if (Distance(i, i - 1) > 1f + error)
                 {
                     testVectors[i] += (testVectors[i - 1] - testVectors[i]) * Time.deltaTime * 2;
+                }
+                else
+                {
+                    if (Distance(i,i+1) < 1f + error && Distance(i, i - 1) < 1f + error && dist < 5.5f && dist > 1.5f)
+                        testVectors[i] += normalVector * Time.deltaTime * Mathf.Sin(Mathf.PI * i / 6) * 5f / dist;
                 }
             }
 
