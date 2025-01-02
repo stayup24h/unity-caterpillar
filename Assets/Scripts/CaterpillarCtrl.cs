@@ -26,7 +26,7 @@ public class CaterpillarCtrl : MonoBehaviour
     public GameObject ClearPanel;
     Head_Tail _head, _tail;
 
-
+    public float stateChangeDelay = 0.2f ;
     public float moveSpeed;
     private bool isHeadTurn;
 
@@ -295,7 +295,7 @@ public class CaterpillarCtrl : MonoBehaviour
 
     IEnumerator TurnEnd()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(stateChangeDelay);
         if (turn == State.head)
         {
             if(fixHead == null) fixHead = StartCoroutine(FixHead());
