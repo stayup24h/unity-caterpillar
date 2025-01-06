@@ -44,7 +44,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2932162298361087838}
   m_Layer: 0
-  m_Name: EndPoint
+  m_Name: End Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -447,6 +447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property:
+    isUI: 0
     positionOffset: {x: 0.1, y: -0.1, z: 0}
     scaleOffset: 1
     color: {r: 0, g: 0, b: 0, a: 0.3}
@@ -771,6 +772,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property:
+    isUI: 0
     positionOffset: {x: 0.1, y: -0.1, z: 0}
     scaleOffset: 1
     color: {r: 0, g: 0, b: 0, a: 0.3}
@@ -784,7 +786,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3529226308898855744}
   m_Layer: 0
-  m_Name: StartPoint
+  m_Name: Start Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

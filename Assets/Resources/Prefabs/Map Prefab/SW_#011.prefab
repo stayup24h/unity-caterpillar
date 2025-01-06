@@ -44,7 +44,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7530604383271880449}
   m_Layer: 0
-  m_Name: EndPoint
+  m_Name: End Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -191,7 +191,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.98}
+    pivot: {x: 0.5, y: 0.18}
     oldSize: {x: 1.23, y: 6.81}
     newSize: {x: 1.23, y: 6.81}
     adaptiveTilingThreshold: 0.5
@@ -248,6 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property:
+    isUI: 0
     positionOffset: {x: 0.1, y: -0.1, z: 0}
     scaleOffset: 1
     color: {r: 0, g: 0, b: 0, a: 0.3}
@@ -261,7 +262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3729898753102335983}
   m_Layer: 0
-  m_Name: StartPoint
+  m_Name: Start Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -470,7 +471,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.98}
+    pivot: {x: 0.5, y: 0.18}
     oldSize: {x: 1.23, y: 6.81}
     newSize: {x: 1.23, y: 6.81}
     adaptiveTilingThreshold: 0.5
@@ -527,6 +528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property:
+    isUI: 0
     positionOffset: {x: 0.1, y: -0.1, z: 0}
     scaleOffset: 1
     color: {r: 0, g: 0, b: 0, a: 0.3}
@@ -656,7 +658,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.18}
     oldSize: {x: 1.11, y: 8.91}
     newSize: {x: 1.11, y: 8.91}
     adaptiveTilingThreshold: 0.5
@@ -729,6 +731,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property:
+    isUI: 0
     positionOffset: {x: 0.1, y: -0.1, z: 0}
     scaleOffset: 1
     color: {r: 0, g: 0, b: 0, a: 0.3}
