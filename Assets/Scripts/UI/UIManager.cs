@@ -36,6 +36,7 @@ public class UIManager : MonoBehaviour
         Retry();
     }
 
+    [ContextMenu("Reset Score")]
     public void ResetScore()
     {
         PlayerPrefs.DeleteAll();
