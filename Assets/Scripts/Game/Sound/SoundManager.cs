@@ -1,18 +1,22 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+[RequireComponent(typeof(AudioSource))]
+public class SoundManager : MonoBehaviour
 {
-    private static GameManager instance;
-    public static GameManager Instance { get => instance; }
-
-    public bool isHeadTurn { get; private set; }
+    private static SoundManager instance;
+    public static SoundManager Instance => instance;
 
     public List<AudioClip>[] moveSFXArr = new List<AudioClip>[3]; // 0->climb, 1->bubble, 2->jump
-    public List<AudioClip> bgmLst = new List<AudioClip>();
+    [HideInInspector] public List<AudioClip> bgmLst = new List<AudioClip>();
 
     private int prevSFXType = -1;
     private int prevBgmType = -1;
+
+    private AudioSource bgm;
 
     void Awake()
     {
@@ -22,8 +26,6 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else Destroy(gameObject);
-
-        isHeadTurn = true;
 
         for (int i = 0; i < moveSFXArr.Length; i++)
         {
@@ -43,6 +45,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        bgm = GetComponent<AudioSource>();
+        bgm.enabled = true;
+        bgm.playOnAwake = false;
+        bgm.loop = true;
+        ChangeBGMAndPlay();
+        bgm.Play();
+
+        ChangeSoundType();
+    }
+
     public void ChangeSoundType()
     {
         while (true)
@@ -56,14 +80,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ChangeAndGetBGM()
+    public void ChangeBGMAndPlay()
     {
         while (true)
         {
             int soundType = Random.Range(0, bgmLst.Count);
             if (soundType != prevBgmType)
             {
+                bgm.clip = bgmLst[soundType];
                 prevBgmType = soundType;
+                if (!bgm.isPlaying) bgm.Play();
                 break;
             }
         }
@@ -71,16 +97,7 @@ public class GameManager : MonoBehaviour
 
     public AudioClip GetMoveSFX()
     {
-        ChangeSoundType();//test¿ë
         List<AudioClip> clips = moveSFXArr[prevSFXType];
         return clips[Random.Range(0, clips.Count)];
-    }
-    
-
-    [ContextMenu("CCCCC")]
-    public void Change()
-    {
-        isHeadTurn = !isHeadTurn;
-        print("ÅÏ Change " + isHeadTurn);
     }
 }

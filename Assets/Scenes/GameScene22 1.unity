@@ -281,8 +281,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -36.835}
-<<<<<<< HEAD
-=======
 --- !u!1 &262220257
 GameObject:
   m_ObjectHideFlags: 0
@@ -803,7 +801,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8170153791668043268, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
   m_PrefabInstance: {fileID: 513793584}
   m_PrefabAsset: {fileID: 0}
->>>>>>> parent of 073e183 (애벌레 수정)
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1281,8 +1278,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -51.295}
-<<<<<<< HEAD
-=======
 --- !u!1 &834212411
 GameObject:
   m_ObjectHideFlags: 0
@@ -1666,7 +1661,6 @@ MonoBehaviour:
   fixRotation: 1
   front: {fileID: 902635587}
   back: {fileID: 1966445658}
->>>>>>> parent of 073e183 (애벌레 수정)
 --- !u!1 &868083358
 GameObject:
   m_ObjectHideFlags: 0
@@ -1829,8 +1823,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
-=======
 --- !u!1 &902635587
 GameObject:
   m_ObjectHideFlags: 0
@@ -2351,7 +2343,6 @@ MonoBehaviour:
   fixRotation: 1
   front: {fileID: 262220257}
   back: {fileID: 388434830}
->>>>>>> parent of 073e183 (애벌레 수정)
 --- !u!1 &1232864551
 GameObject:
   m_ObjectHideFlags: 0

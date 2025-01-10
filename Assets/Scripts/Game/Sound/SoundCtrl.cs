@@ -15,7 +15,7 @@ public class SoundCtrl : MonoBehaviour
 
     public void StartMoveSound()
     {
-        moveSound.clip = GameManager.Instance.GetMoveSFX();
+        moveSound.clip = SoundManager.Instance.GetMoveSFX();
         moveSound.Play();
     }
 

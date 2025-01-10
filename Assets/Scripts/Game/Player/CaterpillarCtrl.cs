@@ -1,3 +1,4 @@
+using eventChannel;
 using JetBrains.Annotations;
 using NUnit.Framework.Interfaces;
 using System.Collections;
@@ -23,8 +24,6 @@ public class CaterpillarCtrl : MonoBehaviour
     public Joystick joyStick;
     public CameraCtrl cameraCtrl;
 
-    public GameObject DefeatPanel;
-    public GameObject ClearPanel;
     Head_Tail _head, _tail;
 
     public float stateChangeDelay = 0.2f ;
@@ -55,7 +54,11 @@ public class CaterpillarCtrl : MonoBehaviour
     Coroutine fixHead, fixTail;
 
     [SerializeField] private SoundCtrl soundCtrl;
-    [SerializeField] private BestScoreManager bestScoreManager;
+
+    [Header("EventChannel")]
+    [SerializeField] private EventChannelSO clearEventChannel;
+    [SerializeField] private EventChannelSO endEventChannel;
+
     void Awake()
     {
         Application.targetFrameRate = 60;
@@ -345,15 +348,13 @@ public class CaterpillarCtrl : MonoBehaviour
     {
         isDefeat = true;
         soundCtrl.StartDefeatSound();
-        bestScoreManager.SetBestScore();
-        DefeatPanel.SetActive(true);
+        endEventChannel.RaiseEvent();
     }
 
     public void Clear()
     {
         isClear = true;
         soundCtrl.StartClearSound();
-        bestScoreManager.SetBestScore(true);
-        ClearPanel.SetActive(true);
+        clearEventChannel.RaiseEvent();
     }
 }
