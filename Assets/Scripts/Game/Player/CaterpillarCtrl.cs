@@ -1,4 +1,3 @@
-using eventChannel;
 using JetBrains.Annotations;
 using NUnit.Framework.Interfaces;
 using System.Collections;
@@ -18,15 +17,20 @@ public class CaterpillarCtrl : MonoBehaviour
     public GameObject head, tail;
     public GameObject[] bone;
     Rigidbody2D head_rb, tail_rb;
+    Rigidbody2D[] bone_rb;
+    DistanceJoint2D head_dj, tail_dj;
+    DistanceJoint2D[] bone_dj;
 
-    public FollowTarget[] followTarget = new FollowTarget[9];
+    public FollowTarget[] followTarget = new FollowTarget[7];
 
     public Joystick joyStick;
     public CameraCtrl cameraCtrl;
 
+    public GameObject DefeatPanel;
+    public GameObject ClearPanel;
     Head_Tail _head, _tail;
 
-    public float stateChangeDelay = 0.2f ;
+    public float stateChangeDelay = 0.2f;
     public float moveSpeed;
     private bool isHeadTurn;
 
@@ -42,9 +46,8 @@ public class CaterpillarCtrl : MonoBehaviour
     public float speed_JoyStick = 4.0f;       //  Ӹ          ̵   ӵ 
 
     Vector3[] testVectors = new Vector3[9];
-    float error = 0.1f;
+    Vector3[] moveTo = new Vector3[9];
     Vector2 input;
-    Vector2 antiGravityForce;
     public float rotationSpeed;
 
     bool isDefeat, isClear;
@@ -54,11 +57,7 @@ public class CaterpillarCtrl : MonoBehaviour
     Coroutine fixHead, fixTail;
 
     [SerializeField] private SoundCtrl soundCtrl;
-
-    [Header("EventChannel")]
-    [SerializeField] private EventChannelSO clearEventChannel;
-    [SerializeField] private EventChannelSO endEventChannel;
-
+    [SerializeField] private BestScoreManager bestScoreManager;
     void Awake()
     {
         Application.targetFrameRate = 60;
@@ -66,7 +65,6 @@ public class CaterpillarCtrl : MonoBehaviour
         isClear = false;
         rotationSpeed = 90f;
 
-        antiGravityForce = -Physics2D.gravity;
         isRunning_head = false;
         isRunning_tail = false;
         isHeadTurn = false;
@@ -75,9 +73,24 @@ public class CaterpillarCtrl : MonoBehaviour
         head_rb = head.GetComponent<Rigidbody2D>();
         tail_rb = tail.GetComponent<Rigidbody2D>();
 
+        head_dj = head.GetComponents<DistanceJoint2D>()[1];
+        tail_dj = tail.GetComponents<DistanceJoint2D>()[1];
+
         _head = head.GetComponent<Head_Tail>();
         _tail = tail.GetComponent<Head_Tail>();
 
+        bone_rb = new Rigidbody2D[bone.Length];
+        bone_dj = new DistanceJoint2D[bone.Length];
+        for (int i = 0; i < bone.Length; i++)
+        {
+            bone_rb[i] = bone[i].GetComponent<Rigidbody2D>();
+        }
+        for (int i = 0; i < 7; i++)
+        {
+            bone_dj[i] = bone[i].GetComponent<DistanceJoint2D>();
+        }
+
+        head_dj = bone_dj[0]; tail_dj = bone_dj[6];
         input = Vector2.zero;
 
 
@@ -111,6 +124,12 @@ public class CaterpillarCtrl : MonoBehaviour
                         head_rb.gravityScale = 0f;
                         head.transform.rotation = Quaternion.identity;
                         turn = State.head;
+
+                        for (int i = 1; i < 6; i++)
+                        {
+                            bone_dj[i].connectedBody = bone[i + 1].GetComponent<Rigidbody2D>();
+                            bone_rb[i].gravityScale = 0f;
+                        }
                     }
                     break;
                 }
@@ -145,7 +164,14 @@ public class CaterpillarCtrl : MonoBehaviour
                         tail_rb.constraints = RigidbodyConstraints2D.None;
                         tail_rb.gravityScale = 0f;
                         tail.transform.rotation = Quaternion.identity;
-                        turn = State.tail;  
+                        turn = State.tail;
+
+
+                        for (int i = 1; i < 6; i++)
+                        {
+                            bone_dj[i].connectedBody = bone[i - 1].GetComponent<Rigidbody2D>();
+                            bone_rb[i].gravityScale = 0.1f;
+                        }
                     }
                     break;
                 }
@@ -193,102 +219,102 @@ public class CaterpillarCtrl : MonoBehaviour
         }
     }
 
-    float Distance(int a, int b) { return Vector3.Distance(testVectors[a],testVectors[b]); }
+    float Distance(int a, int b) { return Vector3.Distance(testVectors[a], testVectors[b]); }
     void Move()
     {
-        // 사용자 입력으로 이동 벡터를 계산 (예: 입력 처리 추가)
+        // 사용자 입력으로 이동 벡터를 계산
         Vector3 moveVector = input * Time.deltaTime * moveSpeed;
 
-        if (turn == State.head || turn == State.wait_tail)
+        // 현재 위치 받아오기
+        for (int i = 0; i < 9; i++)
         {
-            for(int i = 0; i < 9; i++)
+            testVectors[i] = bone[i].transform.position;
+        }
+
+        if (turn == State.head) testVectors[0] += moveVector;
+        if (turn == State.tail) testVectors[6] += moveVector;
+
+
+        for (int i = 1; i < 6; i++)
+        {
+            moveTo[i] = moveVector;
+            if (Distance(i - 1, i) > 1f)
             {
-                testVectors[i] = bone[i].transform.position;
+                moveTo[i] += (testVectors[i - 1] - testVectors[i]).normalized * Time.deltaTime;
             }
-
-            // head 이동
-            testVectors[0] += moveVector / Distance(0, 1);
-
-            // bone 간 이동 계산
-            for (int i = 1; i < 6; i++)
+            if (Distance(i, i + 1) > 1f)
             {
-                Vector3 direction = (testVectors[i-1] - testVectors[i]).normalized;
-                float distance = Distance(i, i - 1);
-                float degree = (Distance(i, i + 1) > 1f + error) ? 7f : 10f;
-                testVectors[i] += direction * (distance - 1f) * Time.deltaTime * degree;
+                moveTo[i] += (testVectors[i + 1] - testVectors[i]).normalized * Time.deltaTime;
             }
-
-            // 모든 bone 간 거리가 조건에 부합하는지 확인
-            for (int i = 5; i > 0; i--) //5,4,3,2,1
+            if (Distance(0, i) > i)
             {
-                if (Distance(i, i + 1) > 1f + error)
-                {
-                    testVectors[i] += (testVectors[i + 1] - testVectors[i]) * Time.deltaTime;
-                }
+                moveTo[i] += (testVectors[0] - testVectors[i]).normalized * Time.deltaTime;
             }
-
-            // 모든 bone 위치 업데이트
-            for (int i = 0; i < 6; i++)
+            if (Distance(i, 6) > 6 - i)
             {
-                bone[i].transform.position = testVectors[i];
-            }
-
-            // 이동 벡터가 0이 아닌 경우에만 회전 및 이동 수행
-            if (moveVector != Vector3.zero)
-            {
-                // 목표 각도 계산
-                float angle = Mathf.Atan2(moveVector.y, moveVector.x) * Mathf.Rad2Deg;
-
-                // 현재 각도에서 목표 각도로 부드럽게 회전
-                head.transform.rotation = Quaternion.Euler(0, 0, angle); // Z축 회전 적용
+                moveTo[i] += (testVectors[6] - testVectors[i]).normalized * Time.deltaTime;
             }
         }
 
-        else if(turn == State.tail || turn == State.wait_head)
+
+        if (turn == State.head && moveVector != Vector3.zero)
+        {
+            // 목표 각도 계산
+            float angle = Mathf.Atan2(moveVector.y, moveVector.x) * Mathf.Rad2Deg;
+
+            // 현재 각도에서 목표 각도로 부드럽게 회전
+            head.transform.rotation = Quaternion.Euler(0, 0, angle); // Z축 회전 적용
+
+            //head_dj.enable = false;
+        }
+        else if (turn == State.head && moveVector == Vector3.zero)
+        {
+            //head_dj.enable.true;
+        }
+
+        else if (turn == State.tail)
         {
             Vector3 directionVector = (head.transform.position - tail.transform.position);
             Vector3 normalVector = new Vector3(-directionVector.y, directionVector.x, 0).normalized;
             float dist = directionVector.magnitude;
-
-            for (int i = 0; i < 9; i++)
-            {
-                testVectors[i] = bone[i].transform.position;
-            }
-
-            // tail 이동
-            testVectors[6] += moveVector / Distance(6, 5);
 
             // bone 간 이동 계산
             for (int i = 5; i > 0; i--)
             {
                 Vector3 direction = (testVectors[i + 1] - testVectors[i]).normalized;
                 float distance = Distance(i, i + 1);
-                float degree = (Distance(i, i - 1) > 1f + error) ? 5f : 10f;
+                float degree = (Distance(i, i - 1) > 1f) ? 5f : 10f;
                 testVectors[i] += direction * (distance - 1f) * Time.deltaTime * degree;
             }
 
             // 모든 bone 간 거리가 조건에 부합하는지 확인
             for (int i = 1; i < 6; i++) //1,2,3,4,5
             {
-                if (Distance(i, i - 1) > 1f + error)
+                if (Distance(i, i - 1) > 1f)
                 {
                     testVectors[i] += (testVectors[i - 1] - testVectors[i]) * Time.deltaTime * 2;
                 }
                 else
                 {
-                    if (Distance(i,i+1) < 1f + error && Distance(i, i - 1) < 1f + error && dist < 5.5f && dist > 1.5f)
-                        testVectors[i] += normalVector * Time.deltaTime * Mathf.Sin(Mathf.PI * i / 6) * 5f / dist;
+                    if (Distance(i, i + 1) < 1f && dist < 5.5f)
+                    {
+                        testVectors[i] += normalVector * Time.deltaTime * Mathf.Sin(Mathf.PI * i / 6) * 5f / dist * 2f;
+                        if (Distance(i, i + 1) > 1f && Distance(i, i - 1) > 1f)
+                            testVectors[i] -= normalVector * Time.deltaTime * Mathf.Sin(Mathf.PI * i / 6) * 5f / dist;
+                    }
                 }
             }
 
-            // 모든 bone 위치 업데이트
-            for (int i = 1; i < 9; i++)
-            {
-                bone[i].transform.position = testVectors[i];
-            }
+
         }
 
-        for(int i = 7; i < 9; i++)
+        // 모든 bone 위치 업데이트
+        for (int i = 0; i < 9; i++)
+        {
+            bone[i].transform.position = testVectors[i];
+        }
+
+        for (int i = 7; i < 9; i++)
         {
             Vector3 direction = (testVectors[i - 1] - testVectors[i]).normalized;
             float distance = Distance(i, i - 1);
@@ -303,7 +329,7 @@ public class CaterpillarCtrl : MonoBehaviour
         yield return new WaitForSeconds(stateChangeDelay);
         if (turn == State.head)
         {
-            if(fixHead == null) fixHead = StartCoroutine(FixHead());
+            if (fixHead == null) fixHead = StartCoroutine(FixHead());
         }
         else
         {
@@ -322,6 +348,10 @@ public class CaterpillarCtrl : MonoBehaviour
             yield return null;
         }
         head_rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        for (int i = 1; i < 6; i++)
+        {
+            bone_rb[i].gravityScale = 0.1f;
+        }
     }
 
     IEnumerator FixTail()
@@ -333,6 +363,10 @@ public class CaterpillarCtrl : MonoBehaviour
             yield return null;
         }
         tail_rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        for (int i = 1; i < 6; i++)
+        {
+            bone_rb[i].gravityScale = 0.1f;
+        }
     }
 
     public void TurnStart()
@@ -348,13 +382,15 @@ public class CaterpillarCtrl : MonoBehaviour
     {
         isDefeat = true;
         soundCtrl.StartDefeatSound();
-        endEventChannel.RaiseEvent();
+        bestScoreManager.SetBestScore();
+        DefeatPanel.SetActive(true);
     }
 
     public void Clear()
     {
         isClear = true;
         soundCtrl.StartClearSound();
-        clearEventChannel.RaiseEvent();
+        bestScoreManager.SetBestScore(true);
+        ClearPanel.SetActive(true);
     }
 }
