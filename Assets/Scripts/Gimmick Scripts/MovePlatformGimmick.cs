@@ -57,7 +57,7 @@ public class MovePlatformGimmick : MonoBehaviour
         }
         else if (headAttached || tailAttached)
         {
-            if (!caterpillarCtrl.IsRunning_head)
+            if (caterpillarCtrl.fixHead != null)
             {
                 if (headMoved)
                 {
@@ -77,7 +77,7 @@ public class MovePlatformGimmick : MonoBehaviour
                     }
                 }
             }
-            if (!caterpillarCtrl.IsRunning_tail)
+            if (caterpillarCtrl.fixTail != null)
             {
                 if (tailMoved)
                 {
@@ -99,10 +99,11 @@ public class MovePlatformGimmick : MonoBehaviour
             }
             cameraCtrl.MoveCameraToMidPos();
         }
+
         prevPosition = transform.position;
-        if (caterpillarCtrl.IsRunning_head) headMoved = true;
+        if (CaterpillarCtrl.turn == State.head && !caterpillarCtrl.onCtrl) headMoved = true;
         else headMoved = false;
-        if (caterpillarCtrl.IsRunning_tail) tailMoved = true;
+        if (CaterpillarCtrl.turn == State.tail && !caterpillarCtrl.onCtrl) tailMoved = true;
         else tailMoved = false;
     }
 

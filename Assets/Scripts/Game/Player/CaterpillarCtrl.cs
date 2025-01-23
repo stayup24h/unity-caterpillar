@@ -32,15 +32,11 @@ public class CaterpillarCtrl : MonoBehaviour
 
     public float stateChangeDelay = 0.2f;
     public float moveSpeed;
-    private bool isHeadTurn;
 
     private bool isRunning_head;
     public bool IsRunning_head { get => isRunning_head; }
     private bool isRunning_tail;
     public bool IsRunning_tail { get => isRunning_tail; }
-
-    private bool isHeadCoroutineRun = false;
-    private bool isTailCoroutineRun = false;
 
     public float speed_KeyBoard = 1.0f;
     public float speed_JoyStick = 4.0f;       //  Ӹ          ̵   ӵ 
@@ -48,13 +44,14 @@ public class CaterpillarCtrl : MonoBehaviour
     Vector3[] testVectors = new Vector3[9];
     Vector3[] moveTo = new Vector3[9];
     Vector2 input;
+    public bool onCtrl { get { return input != Vector2.zero; } private set {; } }
     public float rotationSpeed;
 
     bool isDefeat, isClear;
 
     Coroutine waitCoroutine;
     Coroutine turnCoroutine;
-    Coroutine fixHead, fixTail;
+    public Coroutine fixHead, fixTail;
 
     [SerializeField] private SoundCtrl soundCtrl;
     [SerializeField] private BestScoreManager bestScoreManager;
@@ -67,7 +64,6 @@ public class CaterpillarCtrl : MonoBehaviour
 
         isRunning_head = false;
         isRunning_tail = false;
-        isHeadTurn = false;
         turn = State.start;
 
         head_rb = head.GetComponent<Rigidbody2D>();
@@ -120,8 +116,6 @@ public class CaterpillarCtrl : MonoBehaviour
                     tail_rb.gravityScale = 1f;
                     if (input != Vector2.zero)
                     {
-                        head_rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-                        head_rb.gravityScale = 0f;
                         head.transform.rotation = Quaternion.identity;
                         turn = State.head;
 
@@ -150,8 +144,10 @@ public class CaterpillarCtrl : MonoBehaviour
                         {
                             StopCoroutine(turnCoroutine);
                             turnCoroutine = null;
-                            head_rb.gravityScale = 0f;
-                            head_rb.totalForce = Vector2.zero;
+                            for(int i = 1; i < 6; i++)
+                            {
+                                bone_rb[i].totalForce = Vector2.zero;
+                            }
                         }
                     }
                     break;
@@ -161,11 +157,8 @@ public class CaterpillarCtrl : MonoBehaviour
                     head_rb.gravityScale = 1f;
                     if (input != Vector2.zero)
                     {
-                        tail_rb.constraints = RigidbodyConstraints2D.None;
-                        tail_rb.gravityScale = 0f;
                         tail.transform.rotation = Quaternion.identity;
                         turn = State.tail;
-
 
                         for (int i = 1; i < 6; i++)
                         {
@@ -192,8 +185,10 @@ public class CaterpillarCtrl : MonoBehaviour
                         {
                             StopCoroutine(turnCoroutine);
                             turnCoroutine = null;
-                            tail_rb.gravityScale = 0f;
-                            tail_rb.totalForce = Vector2.zero;
+                            for (int i = 1; i < 6; i++)
+                            {
+                                bone_rb[i].totalForce = Vector2.zero;
+                            }
                         }
                     }
                     break;
@@ -367,15 +362,6 @@ public class CaterpillarCtrl : MonoBehaviour
         {
             bone_rb[i].gravityScale = 0.1f;
         }
-    }
-
-    public void TurnStart()
-    {
-        if (isHeadTurn)
-        {
-            turn = State.head;
-        }
-        else turn = State.tail;
     }
 
     public void Defeat()

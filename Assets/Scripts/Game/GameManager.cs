@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityFigmaBridge.Editor.FigmaApi.LayoutGrid;
 
 public class GameManager : MonoBehaviour
 {
