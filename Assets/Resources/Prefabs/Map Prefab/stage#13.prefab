@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3137619771220756092}
   m_Layer: 0
-  m_Name: stage #005
+  m_Name: stage#13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,11 +29,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2428892128522940969}
   - {fileID: 7975350363925679712}
   - {fileID: 8260500960684712859}
   - {fileID: 1871432260847398458}
   - {fileID: 3062767713546676284}
+  - {fileID: 2428892128522940969}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3236153081437833882

@@ -313,7 +313,7 @@ Transform:
   m_GameObject: {fileID: 3269981616920195809}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 39.21, y: 1.61, z: 0}
+  m_LocalPosition: {x: 40.51, y: 0.69, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -774,7 +774,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6111274570648819656}
   m_Layer: 0
-  m_Name: jgs #001
+  m_Name: stage#12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
