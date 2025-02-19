@@ -62,7 +62,10 @@ public class Head_Tail : MonoBehaviour
             if(CaterpillarCtrl.turn != State.head)
             {
                 rb.gravityScale = 1f;
-                if(isAttach) rb.constraints = RigidbodyConstraints2D.FreezeAll;
+                if (isAttach && CaterpillarCtrl.distance < 7f) 
+                    rb.constraints = RigidbodyConstraints2D.FreezeAll;
+                else 
+                    rb.constraints = RigidbodyConstraints2D.None;
             }
             else
             {
@@ -81,7 +84,10 @@ public class Head_Tail : MonoBehaviour
             if(CaterpillarCtrl.turn != State.tail)
             {
                 rb.gravityScale = 1f;
-                if (isAttach) rb.constraints = RigidbodyConstraints2D.FreezeAll;
+                if (isAttach && CaterpillarCtrl.distance < 7f)
+                    rb.constraints = RigidbodyConstraints2D.FreezeAll;
+                else 
+                    rb.constraints= RigidbodyConstraints2D.None;
             }
             else
             {
@@ -94,5 +100,6 @@ public class Head_Tail : MonoBehaviour
                 else rb.gravityScale = 1f;
             }
         }
+        print(CaterpillarCtrl.distance);
     }
 }

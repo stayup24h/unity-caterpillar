@@ -11,7 +11,7 @@ public enum State : int { start, wait_head, head, wait_tail, tail, end }
 public class CaterpillarCtrl : MonoBehaviour
 {
     public static State turn;
-
+    public static float distance;
     public GameObject eye;
 
     public GameObject head, tail;
@@ -52,6 +52,7 @@ public class CaterpillarCtrl : MonoBehaviour
     Coroutine waitCoroutine;
     Coroutine turnCoroutine;
     public Coroutine fixHead, fixTail;
+    bool isFixHead, isFixTail;
 
     [SerializeField] private SoundCtrl soundCtrl;
     [SerializeField] private BestScoreManager bestScoreManager;
@@ -60,6 +61,8 @@ public class CaterpillarCtrl : MonoBehaviour
         Application.targetFrameRate = 60;
         isDefeat = false;
         isClear = false;
+        isFixHead = false;
+        isFixTail = true;
         rotationSpeed = 90f;
 
         isRunning_head = false;
@@ -102,6 +105,12 @@ public class CaterpillarCtrl : MonoBehaviour
     void Update()
     {
         Bone.Calculate(input);
+        distance = Distance(0, 6);
+        // 현재 위치 받아오기
+        for (int i = 0; i < 9; i++)
+        {
+            testVectors[i] = bone[i].transform.position;
+        }
         switch (turn)
         {
             case State.start:
@@ -114,8 +123,10 @@ public class CaterpillarCtrl : MonoBehaviour
             case State.wait_head:
                 {
                     tail_rb.gravityScale = 1f;
+                    
                     if (input != Vector2.zero)
                     {
+                        isFixHead = false;
                         head.transform.rotation = Quaternion.identity;
                         turn = State.head;
 
@@ -125,6 +136,7 @@ public class CaterpillarCtrl : MonoBehaviour
                             bone_rb[i].gravityScale = 0f;
                         }
                     }
+
                     break;
                 }
             case State.head:
@@ -155,8 +167,10 @@ public class CaterpillarCtrl : MonoBehaviour
             case State.wait_tail:
                 {
                     head_rb.gravityScale = 1f;
+                    
                     if (input != Vector2.zero)
                     {
+                        isFixTail = false;
                         tail.transform.rotation = Quaternion.identity;
                         turn = State.tail;
 
@@ -166,6 +180,7 @@ public class CaterpillarCtrl : MonoBehaviour
                             bone_rb[i].gravityScale = 0.1f;
                         }
                     }
+
                     break;
                 }
             case State.tail:
@@ -199,6 +214,10 @@ public class CaterpillarCtrl : MonoBehaviour
                     break;
                 }
         }
+        if(Distance(0,6)>6 && isFixTail && isFixHead)
+        {
+            Debug.Log("asdf");
+        }
     }
     private void LateUpdate()
     {
@@ -220,11 +239,7 @@ public class CaterpillarCtrl : MonoBehaviour
         // 사용자 입력으로 이동 벡터를 계산
         Vector3 moveVector = input * Time.deltaTime * moveSpeed;
 
-        // 현재 위치 받아오기
-        for (int i = 0; i < 9; i++)
-        {
-            testVectors[i] = bone[i].transform.position;
-        }
+     
 
         if (turn == State.head) testVectors[0] += moveVector;
         if (turn == State.tail) testVectors[6] += moveVector;
@@ -317,6 +332,8 @@ public class CaterpillarCtrl : MonoBehaviour
         }
         bone[7].transform.position = testVectors[7];
         bone[8].transform.position = testVectors[8];
+
+        
     }
 
     IEnumerator TurnEnd()
@@ -342,7 +359,6 @@ public class CaterpillarCtrl : MonoBehaviour
             head.transform.rotation = Quaternion.identity;
             yield return null;
         }
-        head_rb.constraints = RigidbodyConstraints2D.FreezeAll;
         for (int i = 1; i < 6; i++)
         {
             bone_rb[i].gravityScale = 0.1f;
@@ -357,7 +373,6 @@ public class CaterpillarCtrl : MonoBehaviour
             tail.transform.rotation = Quaternion.identity;
             yield return null;
         }
-        tail_rb.constraints = RigidbodyConstraints2D.FreezeAll;
         for (int i = 1; i < 6; i++)
         {
             bone_rb[i].gravityScale = 0.1f;

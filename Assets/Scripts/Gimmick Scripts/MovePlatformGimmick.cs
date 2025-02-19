@@ -61,8 +61,6 @@ public class MovePlatformGimmick : MonoBehaviour
             {
                 if (headMoved)
                 {
-                    head_rb.constraints = RigidbodyConstraints2D.FreezeAll;
-                    tail_rb.constraints = RigidbodyConstraints2D.None;
                     tailAttached = false;
                     if (head.attachedObject == gameObject) headAttached = true;
                 }
@@ -71,8 +69,6 @@ public class MovePlatformGimmick : MonoBehaviour
                     head.transform.position += deltaMove;
                     if (!(headMoved || tailMoved))
                     {
-                        head_rb.constraints = RigidbodyConstraints2D.FreezeAll;
-                        tail_rb.constraints = RigidbodyConstraints2D.None;
                         tailAttached = false;
                     }
                 }
@@ -81,8 +77,6 @@ public class MovePlatformGimmick : MonoBehaviour
             {
                 if (tailMoved)
                 {
-                    head_rb.constraints = RigidbodyConstraints2D.None;
-                    tail_rb.constraints = RigidbodyConstraints2D.FreezeAll;
                     headAttached = false;
                     if (tail.attachedObject == gameObject) tailAttached = true;
                 }
@@ -91,8 +85,6 @@ public class MovePlatformGimmick : MonoBehaviour
                     tail.transform.position += deltaMove;
                     if (!headMoved)
                     {
-                        head_rb.constraints = RigidbodyConstraints2D.None;
-                        tail_rb.constraints = RigidbodyConstraints2D.FreezeAll;
                         headAttached = false;
                     }
                 }
@@ -111,14 +103,10 @@ public class MovePlatformGimmick : MonoBehaviour
     {
         if (collision.gameObject.name.Contains("Head") && (CaterpillarCtrl.turn != State.head || !caterpillarCtrl.IsRunning_head))
         {
-            head_rb.constraints = RigidbodyConstraints2D.FreezeAll;
-            tail_rb.constraints = RigidbodyConstraints2D.None;
             headAttached = true;
         }
         if (collision.gameObject.name.Contains("Tail") && (CaterpillarCtrl.turn != State.tail || !caterpillarCtrl.IsRunning_tail))
         {
-            head_rb.constraints = RigidbodyConstraints2D.None;
-            tail_rb.constraints = RigidbodyConstraints2D.FreezeAll;
             tailAttached = true;
         }
     }
