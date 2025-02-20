@@ -62,10 +62,20 @@ public class Head_Tail : MonoBehaviour
             if(CaterpillarCtrl.turn != State.head)
             {
                 rb.gravityScale = 1f;
+
+                //붙어있고 거리짧으면 그대로
                 if (isAttach && CaterpillarCtrl.distance < 7f) 
                     rb.constraints = RigidbodyConstraints2D.FreezeAll;
-                else 
-                    rb.constraints = RigidbodyConstraints2D.None;
+
+                //붙어있는데 거리가 멀어질때
+                if(isAttach && CaterpillarCtrl.distance > 7f)
+                {
+                    if (CaterpillarCtrl.turn == State.wait_tail) //꼬리턴일땐 헤드를 뗀다
+                        rb.constraints = RigidbodyConstraints2D.None;
+                }
+                
+                
+                if(!isAttach) rb.constraints = RigidbodyConstraints2D.None;
             }
             else
             {
@@ -84,10 +94,20 @@ public class Head_Tail : MonoBehaviour
             if(CaterpillarCtrl.turn != State.tail)
             {
                 rb.gravityScale = 1f;
+
+                //붙어있고 거리짧으면 그대로
                 if (isAttach && CaterpillarCtrl.distance < 7f)
                     rb.constraints = RigidbodyConstraints2D.FreezeAll;
-                else 
-                    rb.constraints= RigidbodyConstraints2D.None;
+
+                //붙어있는데 거리가 멀어질때
+                if (isAttach && CaterpillarCtrl.distance > 7f)
+                {
+                    if (CaterpillarCtrl.turn == State.wait_head) //헤드턴일땐 꼬리를 뗀다
+                        rb.constraints = RigidbodyConstraints2D.None;
+                }
+
+
+                if (!isAttach) rb.constraints = RigidbodyConstraints2D.None;
             }
             else
             {
@@ -100,6 +120,5 @@ public class Head_Tail : MonoBehaviour
                 else rb.gravityScale = 1f;
             }
         }
-        print(CaterpillarCtrl.distance);
     }
 }

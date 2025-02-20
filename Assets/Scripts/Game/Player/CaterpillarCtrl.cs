@@ -13,6 +13,7 @@ public class CaterpillarCtrl : MonoBehaviour
     public static State turn;
     public static float distance;
     public GameObject eye;
+    public FloatingJoystick floatingJoystick;
 
     public GameObject head, tail;
     public GameObject[] bone;
@@ -58,6 +59,7 @@ public class CaterpillarCtrl : MonoBehaviour
     [SerializeField] private BestScoreManager bestScoreManager;
     void Awake()
     {
+        floatingJoystick.Initialize(this);
         Application.targetFrameRate = 60;
         isDefeat = false;
         isClear = false;
@@ -100,6 +102,11 @@ public class CaterpillarCtrl : MonoBehaviour
     public void OnMove(InputValue value)
     {
         input = value.Get<Vector2>();
+    }
+
+    public void OnJoystickMove()
+    {
+        input = new Vector2(floatingJoystick.Horizontal, floatingJoystick.Vertical);
     }
 
     void Update()
