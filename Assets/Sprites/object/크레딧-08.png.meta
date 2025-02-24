@@ -73,13 +73,13 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 488}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -166,213 +166,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\uD06C\uB808\uB527-08_0"
-      rect:
-        serializedVersion: 2
-        x: 270
-        y: 1629
-        width: 248
-        height: 327
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 53ade22d765ce7b80800000000000000
-      internalID: -8395055605673436619
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\uD06C\uB808\uB527-08_1"
-      rect:
-        serializedVersion: 2
-        x: 518
-        y: 1567
-        width: 774
-        height: 405
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ea0289ed9eb2256e0800000000000000
-      internalID: -1850368213433966418
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\uD06C\uB808\uB527-08_2"
-      rect:
-        serializedVersion: 2
-        x: 258
-        y: 1139
-        width: 229
-        height: 352
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 332245e844ad09640800000000000000
-      internalID: 5084803967281799731
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\uD06C\uB808\uB527-08_3"
-      rect:
-        serializedVersion: 2
-        x: 497
-        y: 1087
-        width: 454
-        height: 394
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bbea103a3dabcf240800000000000000
-      internalID: 4826938318769991355
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\uD06C\uB808\uB527-08_4"
-      rect:
-        serializedVersion: 2
-        x: 859
-        y: 1198
-        width: 85
-        height: 292
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7d2839d54c11e9770800000000000000
-      internalID: 8619346271914918615
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\uD06C\uB808\uB527-08_5"
-      rect:
-        serializedVersion: 2
-        x: 952
-        y: 1135
-        width: 224
-        height: 332
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: de6d7768a38019160800000000000000
-      internalID: 7030409540759181037
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\uD06C\uB808\uB527-08_6"
-      rect:
-        serializedVersion: 2
-        x: 1202
-        y: 1093
-        width: 84
-        height: 390
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b77a9845b2d49aa90800000000000000
-      internalID: -7302220472307308677
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\uD06C\uB808\uB527-08_7"
-      rect:
-        serializedVersion: 2
-        x: 258
-        y: 611
-        width: 342
-        height: 407
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 35abc7b79d915ccb0800000000000000
-      internalID: -4844437402296731053
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\uD06C\uB808\uB527-08_8"
-      rect:
-        serializedVersion: 2
-        x: 608
-        y: 607
-        width: 711
-        height: 415
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 83cb224ffcd389c80800000000000000
-      internalID: -8315828748576179144
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: "\uD06C\uB808\uB527-08_9"
       rect:
         serializedVersion: 2
-        x: 270
+        x: 256
         y: 65
-        width: 2043
-        height: 462
+        width: 2051
+        height: 1480
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -390,7 +192,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
@@ -401,6 +203,7 @@ TextureImporter:
     nameFileIdTable:
       "\uD06C\uB808\uB527-08_0": -8395055605673436619
       "\uD06C\uB808\uB527-08_1": -1850368213433966418
+      "\uD06C\uB808\uB527-08_10": -1272117279
       "\uD06C\uB808\uB527-08_2": 5084803967281799731
       "\uD06C\uB808\uB527-08_3": 4826938318769991355
       "\uD06C\uB808\uB527-08_4": 8619346271914918615

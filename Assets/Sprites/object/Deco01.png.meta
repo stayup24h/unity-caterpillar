@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 1ee291d9d19ab3d46a85b15ea2478adf
+guid: 22f262d68fbff8c4c93872b40376b280
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -626469392533612312
-    second: Joystick_Button_0
+      213: -6384543559392213547
+    second: Deco01_0
+  - first:
+      213: -5888074790642191300
+    second: Deco01_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +49,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,12 +116,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Joystick_Button_0
+      name: Deco01_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 123
+        x: 17
+        y: 68
+        width: 102
         height: 123
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -128,8 +131,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8e8116b18655e47f0800000000000000
-      internalID: -626469392533612312
+      spriteID: 5d54b61a57b8567a0800000000000000
+      internalID: -6384543559392213547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Deco01_1
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 21
+        width: 57
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c34f6dc9c2b594ea0800000000000000
+      internalID: -5888074790642191300
       vertices: []
       indices: 
       edges: []
@@ -138,7 +163,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Joystick_Button_0: -626469392533612312
+      Deco01_0: -6384543559392213547
+      Deco01_1: -5888074790642191300
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

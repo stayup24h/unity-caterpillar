@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 1ee291d9d19ab3d46a85b15ea2478adf
+guid: a384b47b50c089b4a9bbf284d31ab23d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -626469392533612312
-    second: Joystick_Button_0
+      213: -9182699152172462730
+    second: Deco05_0
+  - first:
+      213: -5464217910616259465
+    second: Deco05_1
+  - first:
+      213: -4338106123133906507
+    second: Deco05_2
+  - first:
+      213: -866955275357353391
+    second: Deco05_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +55,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,13 +122,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Joystick_Button_0
+      name: Deco05_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 123
-        height: 123
+        x: 17
+        y: 56
+        width: 49
+        height: 80
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +137,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8e8116b18655e47f0800000000000000
-      internalID: -626469392533612312
+      spriteID: 67dca7be5cf709080800000000000000
+      internalID: -9182699152172462730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Deco05_1
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 41
+        width: 48
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 774046ec2c23b24b0800000000000000
+      internalID: -5464217910616259465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Deco05_2
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 23
+        width: 34
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b118ac1773fbc3c0800000000000000
+      internalID: -4338106123133906507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Deco05_3
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 3
+        width: 43
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15a8c2835c4f7f3f0800000000000000
+      internalID: -866955275357353391
       vertices: []
       indices: 
       edges: []
@@ -138,7 +213,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +223,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Joystick_Button_0: -626469392533612312
+      Deco05_0: -9182699152172462730
+      Deco05_1: -5464217910616259465
+      Deco05_2: -4338106123133906507
+      Deco05_3: -866955275357353391
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

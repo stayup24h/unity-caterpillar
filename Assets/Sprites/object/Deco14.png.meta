@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 1ee291d9d19ab3d46a85b15ea2478adf
+guid: 6b5f55bb46c1f5a4fabc4db128e67477
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -626469392533612312
-    second: Joystick_Button_0
+      213: 511125820119976446
+    second: Deco14_0
+  - first:
+      213: 2391593888706893497
+    second: Deco14_1
+  - first:
+      213: 6772410046313119114
+    second: Deco14_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +52,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,13 +119,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Joystick_Button_0
+      name: Deco14_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 123
-        height: 123
+        x: 26
+        y: 43
+        width: 127
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +134,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8e8116b18655e47f0800000000000000
-      internalID: -626469392533612312
+      spriteID: ef908cfa932e71700800000000000000
+      internalID: 511125820119976446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Deco14_1
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 26
+        width: 94
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b69e5778f5a03120800000000000000
+      internalID: 2391593888706893497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Deco14_2
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 64
+        width: 38
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8db7cb2e0f6cfd50800000000000000
+      internalID: 6772410046313119114
       vertices: []
       indices: 
       edges: []
@@ -138,7 +188,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +198,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Joystick_Button_0: -626469392533612312
+      Deco14_0: 511125820119976446
+      Deco14_1: 2391593888706893497
+      Deco14_2: 6772410046313119114
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
