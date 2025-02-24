@@ -14,6 +14,7 @@ public class CaterpillarCtrl : MonoBehaviour
     public static float distance;
     public GameObject eye;
     public FloatingJoystick floatingJoystick;
+    public GameObject JoystickObject;
 
     public GameObject head, tail;
     public GameObject[] bone;
@@ -59,6 +60,7 @@ public class CaterpillarCtrl : MonoBehaviour
     [SerializeField] private BestScoreManager bestScoreManager;
     void Awake()
     {
+        JoystickObject.SetActive(true);
         floatingJoystick.Initialize(this);
         Application.targetFrameRate = 60;
         isDefeat = false;
@@ -391,6 +393,7 @@ public class CaterpillarCtrl : MonoBehaviour
         isDefeat = true;
         soundCtrl.StartDefeatSound();
         bestScoreManager.SetBestScore();
+        JoystickObject.SetActive(false);
         DefeatPanel.SetActive(true);
     }
 
@@ -399,6 +402,7 @@ public class CaterpillarCtrl : MonoBehaviour
         isClear = true;
         soundCtrl.StartClearSound();
         bestScoreManager.SetBestScore(true);
+        JoystickObject.SetActive(false);
         ClearPanel.SetActive(true);
     }
 }
