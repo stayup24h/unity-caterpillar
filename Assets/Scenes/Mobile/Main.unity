@@ -133,7 +133,6 @@ GameObject:
   - component: {fileID: 114728319}
   - component: {fileID: 114728318}
   - component: {fileID: 114728320}
-  - component: {fileID: 114728321}
   m_Layer: 0
   m_Name: '@UIManager'
   m_TagString: Untagged
@@ -223,21 +222,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: b8ef59b9ea7a60f4f8bb944345d844a4, type: 2}
   volumeSlider: {fileID: 433856229}
---- !u!114 &114728321
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 114728314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b7669aef961ca14b9ec43aadda1924d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stageBestScore: {fileID: 1049642374}
-  remixBestScore: {fileID: 777112732}
-  scoreText: {fileID: 0}
 --- !u!1 &257802222 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1934580515283092634, guid: a51b943fa20e4be469ca29ca519845a6, type: 3}

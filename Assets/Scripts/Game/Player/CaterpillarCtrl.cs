@@ -29,6 +29,7 @@ public class CaterpillarCtrl : MonoBehaviour
     public CameraCtrl cameraCtrl;
 
     public GameObject DefeatPanel;
+    public GameObject RemixDefeatPanel;
     public GameObject ClearPanel;
     Head_Tail _head, _tail;
 
@@ -394,7 +395,14 @@ public class CaterpillarCtrl : MonoBehaviour
         soundCtrl.StartDefeatSound();
         bestScoreManager.SetBestScore();
         JoystickObject.SetActive(false);
-        DefeatPanel.SetActive(true);
+        if (GameManager.Instance.MapType == MapType.stage)
+        {
+            DefeatPanel.SetActive(true);
+        }
+        else if (GameManager.Instance.MapType == MapType.remix)
+        {
+            RemixDefeatPanel.SetActive(true);
+        }
     }
 
     public void Clear()

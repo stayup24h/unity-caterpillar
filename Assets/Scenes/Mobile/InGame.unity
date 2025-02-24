@@ -132,7 +132,6 @@ GameObject:
   - component: {fileID: 4171202}
   - component: {fileID: 4171203}
   - component: {fileID: 4171204}
-  - component: {fileID: 4171205}
   m_Layer: 0
   m_Name: '@UIManager'
   m_TagString: Untagged
@@ -210,21 +209,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: b8ef59b9ea7a60f4f8bb944345d844a4, type: 2}
   volumeSlider: {fileID: 1631252428}
---- !u!114 &4171205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4171199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b7669aef961ca14b9ec43aadda1924d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stageBestScore: {fileID: 0}
-  remixBestScore: {fileID: 337508489}
-  scoreText: {fileID: 1764458268}
 --- !u!1 &78458597
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,9 +1290,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: daef9af9077859c42bd2bc287f40198f, type: 2}
     - target: {fileID: 7272229259822426120, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
+      propertyPath: RemixDefeatPanel
+      value: 
+      objectReference: {fileID: 219633912}
+    - target: {fileID: 7272229259822426120, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
       propertyPath: bestScoreManager
       value: 
-      objectReference: {fileID: 4171205}
+      objectReference: {fileID: 0}
     - target: {fileID: 7272229259822426120, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
       propertyPath: floatingJoystick
       value: 
