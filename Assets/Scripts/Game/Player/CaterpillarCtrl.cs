@@ -373,6 +373,8 @@ public class CaterpillarCtrl : MonoBehaviour
         {
             bone_rb[i].gravityScale = 0.1f;
         }
+        fixHead = null;
+        soundCtrl.StartMoveSound();
     }
 
     IEnumerator FixTail()
@@ -387,6 +389,8 @@ public class CaterpillarCtrl : MonoBehaviour
         {
             bone_rb[i].gravityScale = 0.1f;
         }
+        fixTail = null;
+        soundCtrl.StartMoveSound();
     }
 
     public void Defeat()

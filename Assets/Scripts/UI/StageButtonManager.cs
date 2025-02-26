@@ -37,6 +37,7 @@ public class StageButtonManager : MonoBehaviour
 
     private void LoadStageScene(int stageNum)
     {
+        GameManager.Instance.MapType = MapType.stage;
         GameManager.Instance.StageNum = stageNum;
         SceneManager.LoadScene("InGame");
     }
