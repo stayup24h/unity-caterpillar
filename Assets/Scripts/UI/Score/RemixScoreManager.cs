@@ -58,21 +58,21 @@ public class RemixScoreManager : ScoreManager
         }
     }
 
-    private void SetScoreToText(TextMeshProUGUI text, int score)
+    private string GetScoreToText(int score)
     {
-        text.text = ((score / 100 == 0) ? "0" : "") + ((score / 10 == 0) ? "0" : "") + score.ToString();
+        return ((score / 100 == 0) ? "0" : "") + ((score / 10 == 0) ? "0" : "") + score.ToString();
     }
 
     private void SetScore()
     {
         int showScore = score % 1000;
-        SetScoreToText(scoreText, showScore);
+        scoreText.text = GetScoreToText(showScore);
     }
 
     private void SetEndScore()
     {
-        SetScoreToText(endScoreText, score);
-        SetScoreToText(endBestScoreText, PlayerPrefs.GetInt(key, 0));
+        endScoreText.text = GetScoreToText(score);
+        endBestScoreText.text = "Best" + GetScoreToText(PlayerPrefs.GetInt(key, 0));
         endPanel.SetActive(true);
     }
 }

@@ -1,10 +1,6 @@
-using JetBrains.Annotations;
-using NUnit.Framework.Interfaces;
+using eventChannel;
 using System.Collections;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.Analytics;
 using UnityEngine.InputSystem;
 
 public enum State : int { start, wait_head, head, wait_tail, tail, end }
@@ -58,7 +54,11 @@ public class CaterpillarCtrl : MonoBehaviour
     bool isFixHead, isFixTail;
 
     [SerializeField] private SoundCtrl soundCtrl;
-    [SerializeField] private BestScoreManager bestScoreManager;
+
+    [Header("EventChannel")]
+    [SerializeField] private EventChannelSO clearEventChannel;
+    [SerializeField] private EventChannelSO endEventChannel;
+
     void Awake()
     {
         JoystickObject.SetActive(true);
@@ -393,7 +393,7 @@ public class CaterpillarCtrl : MonoBehaviour
     {
         isDefeat = true;
         soundCtrl.StartDefeatSound();
-        bestScoreManager.SetBestScore();
+        endEventChannel.RaiseEvent();
         JoystickObject.SetActive(false);
         if (GameManager.Instance.MapType == MapType.stage)
         {
@@ -409,7 +409,7 @@ public class CaterpillarCtrl : MonoBehaviour
     {
         isClear = true;
         soundCtrl.StartClearSound();
-        bestScoreManager.SetBestScore(true);
+        clearEventChannel.RaiseEvent();
         JoystickObject.SetActive(false);
         ClearPanel.SetActive(true);
     }
