@@ -471,6 +471,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eye: {fileID: 7946354090852424345}
   floatingJoystick: {fileID: 0}
+  JoystickObject: {fileID: 0}
   head: {fileID: 1504296093621742658}
   tail: {fileID: 3768452547878894173}
   bone:
@@ -494,6 +495,7 @@ MonoBehaviour:
   joyStick: {fileID: 0}
   cameraCtrl: {fileID: 0}
   DefeatPanel: {fileID: 0}
+  RemixDefeatPanel: {fileID: 0}
   ClearPanel: {fileID: 0}
   stateChangeDelay: 0.2
   moveSpeed: 5
@@ -501,7 +503,8 @@ MonoBehaviour:
   speed_JoyStick: 4
   rotationSpeed: 0
   soundCtrl: {fileID: 8120027266392054319}
-  bestScoreManager: {fileID: 0}
+  clearEventChannel: {fileID: 11400000, guid: b7cbfe2fb1c4aef4ca87119cc79ba5b5, type: 2}
+  endEventChannel: {fileID: 11400000, guid: daef9af9077859c42bd2bc287f40198f, type: 2}
 --- !u!114 &8120027266392054319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -948,7 +951,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2925181308990988916, guid: a1267597e684b3541a21f8275d693ea0, type: 3}
+  m_Sprite: {fileID: 7293475426902532787, guid: f5377c367849b294d8973c39b7615877, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1161,7 +1164,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2925181308990988916, guid: a1267597e684b3541a21f8275d693ea0, type: 3}
+  m_Sprite: {fileID: 7293475426902532787, guid: f5377c367849b294d8973c39b7615877, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
