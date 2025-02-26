@@ -1265,10 +1265,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7272229259822426120, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
-      propertyPath: joyStick
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7272229259822426120, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
       propertyPath: ClearPanel
       value: 
       objectReference: {fileID: 1106920940}
@@ -1285,25 +1281,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1019082704}
     - target: {fileID: 7272229259822426120, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
-      propertyPath: endEventChannel
-      value: 
-      objectReference: {fileID: 11400000, guid: daef9af9077859c42bd2bc287f40198f, type: 2}
-    - target: {fileID: 7272229259822426120, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
       propertyPath: RemixDefeatPanel
       value: 
       objectReference: {fileID: 219633912}
     - target: {fileID: 7272229259822426120, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
-      propertyPath: bestScoreManager
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7272229259822426120, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
       propertyPath: floatingJoystick
       value: 
       objectReference: {fileID: 373769282}
-    - target: {fileID: 7272229259822426120, guid: 62fc4d96e531e4648a2101b548be5d9e, type: 3}
-      propertyPath: clearEventChannel
-      value: 
-      objectReference: {fileID: 11400000, guid: b7cbfe2fb1c4aef4ca87119cc79ba5b5, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
