@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Resources;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Head_Tail : MonoBehaviour
@@ -70,7 +66,7 @@ public class Head_Tail : MonoBehaviour
                 //붙어있는데 거리가 멀어질때
                 if(isAttach && CaterpillarCtrl.distance > 7f)
                 {
-                    if (CaterpillarCtrl.turn == State.wait_tail) //꼬리턴일땐 헤드를 뗀다
+                    if (CaterpillarCtrl.turn == State.wait_head) //머리턴일땐 머리를 뗀다
                         rb.constraints = RigidbodyConstraints2D.None;
                 }
                 
@@ -102,7 +98,7 @@ public class Head_Tail : MonoBehaviour
                 //붙어있는데 거리가 멀어질때
                 if (isAttach && CaterpillarCtrl.distance > 7f)
                 {
-                    if (CaterpillarCtrl.turn == State.wait_head) //헤드턴일땐 꼬리를 뗀다
+                    if (CaterpillarCtrl.turn == State.wait_tail) //꼬리턴일땐 꼬리를 뗀다
                         rb.constraints = RigidbodyConstraints2D.None;
                 }
 

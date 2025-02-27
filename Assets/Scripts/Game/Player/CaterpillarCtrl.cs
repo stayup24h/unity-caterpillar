@@ -16,7 +16,6 @@ public class CaterpillarCtrl : MonoBehaviour
     public GameObject[] bone;
     Rigidbody2D head_rb, tail_rb;
     Rigidbody2D[] bone_rb;
-    DistanceJoint2D head_dj, tail_dj;
     DistanceJoint2D[] bone_dj;
 
     public FollowTarget[] followTarget = new FollowTarget[7];
@@ -48,7 +47,6 @@ public class CaterpillarCtrl : MonoBehaviour
 
     bool isDefeat, isClear;
 
-    Coroutine waitCoroutine;
     Coroutine turnCoroutine;
     public Coroutine fixHead, fixTail;
     bool isFixHead, isFixTail;
@@ -77,9 +75,6 @@ public class CaterpillarCtrl : MonoBehaviour
         head_rb = head.GetComponent<Rigidbody2D>();
         tail_rb = tail.GetComponent<Rigidbody2D>();
 
-        head_dj = head.GetComponents<DistanceJoint2D>()[1];
-        tail_dj = tail.GetComponents<DistanceJoint2D>()[1];
-
         _head = head.GetComponent<Head_Tail>();
         _tail = tail.GetComponent<Head_Tail>();
 
@@ -94,7 +89,6 @@ public class CaterpillarCtrl : MonoBehaviour
             bone_dj[i] = bone[i].GetComponent<DistanceJoint2D>();
         }
 
-        head_dj = bone_dj[0]; tail_dj = bone_dj[6];
         input = Vector2.zero;
 
 
@@ -126,7 +120,7 @@ public class CaterpillarCtrl : MonoBehaviour
             case State.start:
                 {
                     tail_rb.constraints = RigidbodyConstraints2D.FreezeAll;
-                    waitCoroutine = null; turnCoroutine = null; fixHead = null; fixTail = null;
+                    turnCoroutine = null; fixHead = null; fixTail = null;
                     turn = State.wait_head;
                     break;
                 }
