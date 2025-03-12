@@ -106,6 +106,6 @@ public class InfiniteScroll : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 
     private Vector2 GetOffset(int index)
     {
-        return new Vector2(0, -(((index - currentIndex + scrollElements.Length + 1) % scrollElements.Length) - 1) * canvasSize);
+        return new Vector2(0, -(((index - currentIndex + scrollElements.Length + 1) % scrollElements.Length) - 1) * Screen.height);
     }
 }

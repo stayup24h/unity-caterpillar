@@ -648,7 +648,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5718063783920603652, guid: fc778fa68da7b9f4fa81486f217aba21, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.003479004
+      value: -0.0034179688
       objectReference: {fileID: 0}
     - target: {fileID: 5822952470965466555, guid: fc778fa68da7b9f4fa81486f217aba21, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1210,7 +1210,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1080, y: 1920}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
